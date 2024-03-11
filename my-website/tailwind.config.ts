@@ -26,13 +26,13 @@ const config: Config = {
         "18px": '18px',
         "2.3v": '2.1vh',
         "1.1e": '4.3rem',
-        "1.2e": '4.8rem'
+        "1.2e": '8rem'
       },
       animation: {
         "intro-bounce": "bounce 2s 2",
-        "slide-left": "slide_left 2s 1",
-        "slide-right": "slide_right 2s 1",
-        "intro-unhide": "unhide 4.5s 1",
+        "slide-left": "slide_left 3s 1",
+        "slide-right": "slide_right 3s 1",
+        "intro-unhide": "unhide 4s 1",
         text: "text 5s ease infinite",
         pop: "pop 0.5s 1"
       },
@@ -48,11 +48,11 @@ const config: Config = {
           },
         },
         slide_right: {
-          "0%": { transform: "translateX(-200%)" },
+          "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(0%)" },
         },
         slide_left: {
-          "0%": { transform: "translateX(200%)" },
+          "0%": { transform: "translateX(100%)" },
           "100%": { transform: "translateX(0%)" },
         },
         unhide: {

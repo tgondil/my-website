@@ -50,7 +50,7 @@ body {
 .gradient {
   background: linear-gradient(
       to right,
-      rgba(0,212,255,1)0%, #B8B5FF 35%, #41AEA9 100%
+      rgba(0,212,255,1)0%, #B8B5FF 35%, #6FD9D6 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
