@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       spacing: {
-        '20p': '4%',
+        '18p': '9.2%',
+        '20p': '12%',
       },
       lineHeight: {
         'hero': '1.2',
@@ -18,16 +19,19 @@ const config: Config = {
       },
       fontFamily: {
         "nexa": ["NexaH", "sans-serif"],
-        "invis": ["InvisibleEB", "sans-serif"]
+        "invis": ["InvisibleEB", "sans-serif"],
+        "roboto": ["Roboto", "sans-serif"]
       },
       fontSize: {
-        "2.3v": '2.3vh',
+        "18px": '18px',
+        "2.3v": '2.1vh',
         "1.1e": '4.3rem',
         "1.2e": '4.8rem'
       },
       animation: {
         "intro-bounce": "bounce 2s 2",
-        "intro-slide": "slide_up 3s 1",
+        "slide-left": "slide_left 2s 1",
+        "slide-right": "slide_right 2s 1",
         "intro-unhide": "unhide 4.5s 1",
         text: "text 5s ease infinite",
         pop: "pop 0.5s 1"
@@ -43,9 +47,13 @@ const config: Config = {
             "background-position": "right center",
           },
         },
-        slide_up: {
-          "0%": { transform: "translateY(250%)" },
-          "100%": { transform: "translateY(0%)" },
+        slide_right: {
+          "0%": { transform: "translateX(-200%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+        slide_left: {
+          "0%": { transform: "translateX(200%)" },
+          "100%": { transform: "translateX(0%)" },
         },
         unhide: {
           "0%, 75%": { opacity: "0" },
