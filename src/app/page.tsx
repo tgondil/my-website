@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithubSquare } from "react-icons/fa";
@@ -103,10 +104,10 @@ export default function Home() {
     <div className="flex pt-8 mx-10 flex-col w-3/5 tracking-wide gap-4 text-zanah font-bold leading-extra-loose text-xl font-cv justify-center items-center">
 
     <h1>
-    I'm a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science.
+    I&aposm a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science.
     </h1>
     <h1>
-I'm also the President of <span className="text-my-green">Hack the Future</span>, a web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
+I&aposm also the President of <span className="text-my-green">Hack the Future</span>, a web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
     </h1>
     <h1>
     Feel free to reach out to me through Email, or Linkedin.
