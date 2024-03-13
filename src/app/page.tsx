@@ -109,7 +109,7 @@ export default function Home() {
     I&#39;m a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science.
     </h1>
     <h1>
-I&#39;m also the President of <span className="text-my-green">Hack the Future</span>, a web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
+I&#39;m also the President of <span className="text-my-green">Hack the Future</span>, Purdue's biggest web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
     </h1>
     <h1>
     Feel free to reach out to me through Email, or Linkedin.
