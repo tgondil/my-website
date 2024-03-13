@@ -7,6 +7,7 @@ import { useState } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import Projects from "./components/projects";
 
+
 export default function Home() {
   const [visible, setVisible] = useState(true);
   const hide = () => setVisible(false);
@@ -80,18 +81,27 @@ export default function Home() {
         </div>
         <Projects></Projects>
 
-        <div id="after" className="h-screen bg-[url('/calvin.jpg')] bg-cover bg-center "></div>
-        {/*<div className="flex pt-20 flex-col w-2/5 tracking-wide gap-10 text-zanah font-medium leading-extra-loose text-3xl font-invis justify-center items-center">
-    A sophomore at Purdue University
-  </div>
-    <div className="flex pt-20 mx-10 flex-col w-3/5 tracking-wide gap-10 text-zanah font-medium leading-extra-loose text-2.3v font-invis justify-center items-center">
+        <div id="after" className="h-screen flex flex-col items-center bg-[url('/calvin.jpg')] bg-cover bg-center ">
+          <div className="text-1.1e gradient  tracking-wide text-zanah leading-hero font-invis pt-20">
+            <h1>
+              About Me
+            </h1>
+          </div>
+    <div className="flex pt-8 mx-10 flex-col w-3/5 tracking-wide gap-10 text-zanah font-medium leading-extra-loose text-2.3v font-invis justify-center items-center">
+
     <h1>
-    When I initially made the decision to attend college in the US, I was uncertain about which major to pursue. Eventually, I chose to explore Computer Science, and as time passed, my passion for the subject grew immensely. During my freshman year, I took part in my first hackathon, and even though I had limited coding experience, my team and I secured the 2nd position. With the burst of motivation I got through placing at this hackathon, I decided to explore the subject beyond the bounds of the syllabus.
+    I'm a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science. In my free time, I love to read crime novels, hit the gym, and watch the UFC.
     </h1>
     <h1>
-    Looking ahead to the present day, I am an aspiring full-stack developer and currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science. In my free time, I love to read, code, hit the gym, and watch the UFC.
+I'm also the President of <span className="text-my-green">Hack the Future</span>, a web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
     </h1>
-      </div>*/}
+    <div className="flex w-full gap-5  text-zanah justify-center text-6xl">
+              <FaInstagram className="hover:animate-pop hover:text-6xl cursor-pointer"></FaInstagram>
+              <FaLinkedin className="hover:animate-pop hover:text-6xl cursor-pointer"></FaLinkedin>
+              <FaGithubSquare className="hover:animate-pop hover:text-6xl cursor-pointer" />
+            </div>
+      </div>
+      </div>
       </main>
     </NextUIProvider>
   );
