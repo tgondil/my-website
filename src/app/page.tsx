@@ -91,9 +91,11 @@ export default function Home() {
             <div className="field pt-16 animate-intro-unhide">
               <div className="scroll cursor-pointer" onClick={scrollProject}></div>
             </div>
+            
           </div>
         </div>
         <Projects></Projects>
+              
 
         <div id="after" className="h-screen flex flex-col items-center bg-[url('/calvin.jpg')] bg-cover bg-center ">
           <div className="text-1.3e gradient tracking-wide text-zanah leading-hero font-cs pt-6">
@@ -101,13 +103,13 @@ export default function Home() {
               About Me
             </h1>
           </div>
-    <div className="flex pt-8 mx-10 flex-col w-3/5 tracking-wide gap-4 text-zanah font-bold leading-extra-loose text-xl font-cv justify-center items-center">
+    <div className="flex text-center pt-8 mx-10 flex-col w-3/5 tracking-wide gap-4 text-zanah font-bold leading-extra-loose text-xl font-cv justify-center items-center">
 
     <h1>
-    I&aposm a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science.
+    I&#39;m a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science.
     </h1>
     <h1>
-I&aposm also the President of <span className="text-my-green">Hack the Future</span>, a web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
+I&#39;m also the President of <span className="text-my-green">Hack the Future</span>, a web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
     </h1>
     <h1>
     Feel free to reach out to me through Email, or Linkedin.

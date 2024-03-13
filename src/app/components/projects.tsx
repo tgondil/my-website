@@ -13,9 +13,12 @@ export default function Projects() {
   const scrollProject = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+  const scrollContact = () => {
+    window.scrollTo({ top: 2*window.innerHeight, behavior: "smooth" });
+  }
   return (
     <div id='projects' className="w-full h-screen flex flex-col bg-[url('/stars.jpg')] pt-10">
-          <div className="h-screen w-full bg-contain bg-center flex flex-col gap-14 items-center ">
+          <div className="h-screen w-full bg-contain bg-center flex flex-col gap-8 items-center ">
             <div className="w-full flex text-1e tracking-wide text-zanah leading-hero items-center justify-center font-invis">
             <h1 >
               Take a look at some of my 
@@ -253,9 +256,19 @@ export default function Projects() {
                   </Link>
                 </CardFooter>
               </Card>
+              
             </div>
+            
+            </div>
+            <div className="flex justify-center items-center">
+              <div className="scroll2 cursor-pointer" onClick={scrollContact}></div>
             </div>
           </div>
+          
+          <div>
+          
+          </div>
+          
         </div>
   )
 }
