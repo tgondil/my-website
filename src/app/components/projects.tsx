@@ -8,6 +8,7 @@ import {
     Link,
     Image,
   } from "@nextui-org/react";
+import toast from 'react-hot-toast';
 
 export default function Projects() {
   const scrollProject = () => {
@@ -36,6 +37,10 @@ export default function Projects() {
               <Card
                 className="w-[400px] h-full hover:animate-minipop bg-my-grey bg-cover bg-center"
                 isPressable
+                onClick={()=>{
+                  toast.error("This code repository is currently private.");
+                  //window.open('https://github.com/tgondil/Investagram')
+                }}
               >
                 <CardHeader className="flex gap-3">
                   <Image
@@ -73,6 +78,9 @@ export default function Projects() {
               <Card
                 className="w-[400px] h-full bg-my-grey hover:animate-minipop bg-cover bg-center "
                 isPressable
+                onClick={()=>{
+                  window.open('https://github.com/tgondil/BoilerMap')
+                }}
               >
                 <CardHeader className="flex gap-3">
                   <Image
@@ -108,6 +116,10 @@ export default function Projects() {
             </div>
             <div className="h-full w-3/6 flex hover:animate-minipop justify-center items-center">
               <Card
+              onClick={()=>{
+                toast.error("This code repository is currently private.");
+                //window.open('https://github.com/tgondil/Investagram')
+              }}
                 className="w-[400px] h-full bg-my-grey bg-cover bg-center"
                 isPressable
               >
@@ -149,6 +161,9 @@ export default function Projects() {
               <Card
                 className="w-[400px] h-full bg-my-grey hover:animate-minipop bg-cover bg-center"
                 isPressable
+                onClick={()=>{
+                  window.open('https://github.com/AashiAgarw/StaySafePurdue')
+                }}
               >
                 <CardHeader className="flex gap-3">
                   <Image
@@ -187,6 +202,9 @@ export default function Projects() {
               <Card
                 className="w-[400px] h-full hover:animate-minipop bg-my-grey bg-cover bg-center "
                 isPressable
+                onClick={()=>{
+                  window.open('https://github.com/tgondil/realer.app')
+                }}
               >
                 <CardHeader className="flex gap-3">
                   <Image
@@ -195,6 +213,7 @@ export default function Projects() {
                     radius="sm"
                     src="./realer.png"
                     width={40}
+                    
                   />
                   <div className="flex flex-col">
                     <p className="text-md text-zanah gradient font-bold">
@@ -224,6 +243,7 @@ export default function Projects() {
               <Card
                 className="w-[400px] h-full bg-my-grey hover:animate-minipop bg-cover bg-center"
                 isPressable
+                onClick={scrollProject}
               >
                 <CardHeader className="flex gap-3">
                   <Image
