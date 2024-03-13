@@ -10,6 +10,9 @@ import {
   } from "@nextui-org/react";
 
 export default function Projects() {
+  const scrollProject = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
   return (
     <div id='projects' className="w-full h-screen flex flex-col bg-[url('/stars.jpg')] pt-10">
           <div className="h-screen w-full bg-contain bg-center flex flex-col gap-14 items-center ">
@@ -36,7 +39,7 @@ export default function Projects() {
                     alt="nextui logo"
                     height={40}
                     radius="sm"
-                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                    src="./invest.png"
                     width={40}
                   />
                   <div className="flex flex-col">
@@ -48,25 +51,24 @@ export default function Projects() {
                 <Divider />
                 <CardBody>
                   <p className="text-zanah">
-                    Make beautiful websites regardless of your design
-                    experience.
+                    A full-stack social media app for investors, aiming to cover existing gaps in investing social media apps. Built using Next.js, Tailwind, Node.js, and MongoDB. Set to release May 15th, 2024.
                   </p>
                 </CardBody>
                 <Divider />
                 <CardFooter>
                   <Link
                     isExternal
-                    showAnchorIcon
-                    href="https://github.com/nextui-org/nextui"
+                    
+                    /*href="https://github.com/tgondil/Investagram"*/
                   >
-                    Visit source code on GitHub.
+                    This code repository is currently private.
                   </Link>
                 </CardFooter>
               </Card>
             </div>
             <div className="h-full w-3/6 flex justify-center items-center">
               <Card
-                className="w-[400px] h-full hover:animate-minipop bg-my-grey bg-cover bg-center "
+                className="w-[400px] h-full bg-my-grey hover:animate-minipop bg-cover bg-center "
                 isPressable
               >
                 <CardHeader className="flex gap-3">
@@ -74,20 +76,19 @@ export default function Projects() {
                     alt="nextui logo"
                     height={40}
                     radius="sm"
-                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                    src="./boilermap.png"
                     width={40}
                   />
                   <div className="flex flex-col">
                     <p className="text-md text-zanah gradient font-bold">
-                      realer.app
+                      BoilerMaps
                     </p>
                   </div>
                 </CardHeader>
                 <Divider />
                 <CardBody>
                   <p className="text-zanah">
-                    Make beautiful websites regardless of your design
-                    experience.
+                    A map that showcases high-level trends with respect to pollution, project for the Boilermake 2023 hackathon. Built using Python, HTML, and CSS.
                   </p>
                 </CardBody>
                 <Divider />
@@ -95,7 +96,7 @@ export default function Projects() {
                   <Link
                     isExternal
                     showAnchorIcon
-                    href="https://github.com/nextui-org/nextui"
+                    href="https://github.com/tgondil/BoilerMap"
                   >
                     Visit source code on GitHub.
                   </Link>
@@ -112,7 +113,7 @@ export default function Projects() {
                     alt="nextui logo"
                     height={40}
                     radius="sm"
-                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                    src="./ywca.png"
                     width={40}
                   />
                   <div className="flex flex-col">
@@ -124,18 +125,17 @@ export default function Projects() {
                 <Divider />
                 <CardBody>
                   <p className="text-zanah">
-                    Make beautiful websites regardless of your design
-                    experience.
+                    A billing app for the YWCA non profit, in collaboration with the <span className='text-my-green'>Hack the Future</span>  club at Purdue.
                   </p>
                 </CardBody>
                 <Divider />
                 <CardFooter>
                   <Link
                     isExternal
-                    showAnchorIcon
-                    href="https://github.com/nextui-org/nextui"
+
+                    /*href="https://github.com/Hack-the-Future/ywca-billing"*/
                   >
-                    Visit source code on GitHub.
+                    This code repository is currently private.
                   </Link>
                 </CardFooter>
               </Card>
@@ -152,7 +152,7 @@ export default function Projects() {
                     alt="nextui logo"
                     height={40}
                     radius="sm"
-                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                    src="./safe.png"
                     width={40}
                   />
                   <div className="flex flex-col">
@@ -164,8 +164,7 @@ export default function Projects() {
                 <Divider />
                 <CardBody>
                   <p className="text-zanah">
-                    Make beautiful websites regardless of your design
-                    experience.
+                    A safety application for Purdue students, that scrapes data from the Purdue Police department archives to showcase the safest routes to a destination. Built using Python.
                   </p>
                 </CardBody>
                 <Divider />
@@ -173,16 +172,17 @@ export default function Projects() {
                   <Link
                     isExternal
                     showAnchorIcon
-                    href="https://github.com/nextui-org/nextui"
+                    href="https://github.com/AashiAgarw/StaySafePurdue"
                   >
                     Visit source code on GitHub.
                   </Link>
                 </CardFooter>
               </Card>
             </div>
+            
             <div className="h-full w-3/6 flex justify-center items-center">
               <Card
-                className="w-[400px] h-full bg-my-grey hover:animate-minipop bg-cover bg-center "
+                className="w-[400px] h-full hover:animate-minipop bg-my-grey bg-cover bg-center "
                 isPressable
               >
                 <CardHeader className="flex gap-3">
@@ -190,20 +190,19 @@ export default function Projects() {
                     alt="nextui logo"
                     height={40}
                     radius="sm"
-                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                    src="./realer.png"
                     width={40}
                   />
                   <div className="flex flex-col">
                     <p className="text-md text-zanah gradient font-bold">
-                      BoilerMaps
+                      realer.app
                     </p>
                   </div>
                 </CardHeader>
                 <Divider />
                 <CardBody>
                   <p className="text-zanah">
-                    Make beautiful websites regardless of your design
-                    experience.
+                    A messaging app that uses facial recognition to bridge the gap between messaging and video calling. Built using React, Golang, and Redis, hosted on an AWS EC2 instance. 
                   </p>
                 </CardBody>
                 <Divider />
@@ -211,7 +210,7 @@ export default function Projects() {
                   <Link
                     isExternal
                     showAnchorIcon
-                    href="https://github.com/nextui-org/nextui"
+                    href="https://github.com/tgondil/realer.app"
                   >
                     Visit source code on GitHub.
                   </Link>
@@ -228,7 +227,7 @@ export default function Projects() {
                     alt="nextui logo"
                     height={40}
                     radius="sm"
-                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                    src="./angry.png"
                     width={40}
                   />
                   <div className="flex flex-col">
@@ -240,8 +239,7 @@ export default function Projects() {
                 <Divider />
                 <CardBody>
                   <p className="text-zanah">
-                    Make beautiful websites regardless of your design
-                    experience.
+                    This website, built using Next.js, NextUI, and Tailwind.
                   </p>
                 </CardBody>
                 <Divider />
@@ -249,9 +247,9 @@ export default function Projects() {
                   <Link
                     isExternal
                     showAnchorIcon
-                    href="https://github.com/nextui-org/nextui"
+                    onClick={scrollProject}
                   >
-                    Visit source code on GitHub.
+                    Go to top
                   </Link>
                 </CardFooter>
               </Card>

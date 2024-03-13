@@ -6,7 +6,11 @@ import { ReactTyped } from "react-typed";
 import { useState } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import Projects from "./components/projects";
-
+import { BiLogoGmail } from "react-icons/bi";
+import { SiMicrosoftoutlook } from "react-icons/si";
+import { MdEmail } from "react-icons/md";
+import { SiDevpost } from "react-icons/si";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Home() {
   const [visible, setVisible] = useState(true);
@@ -26,6 +30,15 @@ export default function Home() {
     window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
   }
 
+  const scrollContact = () => {
+    window.scrollTo({ top: 2*window.innerHeight, behavior: "smooth" });
+  }
+
+  const copy = () => {
+    navigator.clipboard.writeText("gondil.tanay@gmail.com");
+    toast.success("Email copied to clipboard!");
+  }
+
   
 
   return (
@@ -39,8 +52,8 @@ export default function Home() {
             <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} onClick={scrollProject} className=" cursor-pointer text-zanah nav-link hover:gradient font-roboto">
               {"<"}projects{">"}
             </h1>
-            <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className=" mr-10 text-zanah cursor-pointer hover:gradient font-roboto">
-              {"<"}contact{">"}
+            <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} onClick={scrollContact} className=" mr-10 text-zanah cursor-pointer hover:gradient font-roboto">
+              {"<"}about{">"}
             </h1>
           </div>
           <div className="flex mt-44 min-h-screen flex-col items-center animate-slide-right ">
@@ -70,9 +83,9 @@ export default function Home() {
             ) : null}
 
             <div className="flex w-full gap-5 pt-10 text-zanah justify-center text-6xl">
-              <FaInstagram className="hover:animate-pop hover:text-6xl cursor-pointer"></FaInstagram>
-              <FaLinkedin className="hover:animate-pop hover:text-6xl cursor-pointer"></FaLinkedin>
-              <FaGithubSquare className="hover:animate-pop hover:text-6xl cursor-pointer" />
+              <a target="_blank" href="https://devpost.com/tgondil?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav"><SiDevpost className="hover:animate-pop hover:text-6xl cursor-pointer"></SiDevpost></a>
+              <a target="_blank" href="https://www.linkedin.com/in/tgondil/"><FaLinkedin className="hover:animate-pop hover:text-6xl cursor-pointer"></FaLinkedin></a>
+              <a target="blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop hover:text-6xl cursor-pointer" /></a>
             </div>
             <div className="field pt-16 animate-intro-unhide">
               <div className="scroll cursor-pointer" onClick={scrollProject}></div>
@@ -82,24 +95,31 @@ export default function Home() {
         <Projects></Projects>
 
         <div id="after" className="h-screen flex flex-col items-center bg-[url('/calvin.jpg')] bg-cover bg-center ">
-          <div className="text-1.1e gradient  tracking-wide text-zanah leading-hero font-invis pt-20">
+          <div className="text-1.3e gradient tracking-wide text-zanah leading-hero font-cs pt-6">
             <h1>
               About Me
             </h1>
           </div>
-    <div className="flex pt-8 mx-10 flex-col w-3/5 tracking-wide gap-10 text-zanah font-medium leading-extra-loose text-2.3v font-invis justify-center items-center">
+    <div className="flex pt-8 mx-10 flex-col w-3/5 tracking-wide gap-4 text-zanah font-bold leading-extra-loose text-xl font-cv justify-center items-center">
 
     <h1>
-    I'm a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science. In my free time, I love to read crime novels, hit the gym, and watch the UFC.
+    I'm a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science.
     </h1>
     <h1>
 I'm also the President of <span className="text-my-green">Hack the Future</span>, a web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
     </h1>
-    <div className="flex w-full gap-5  text-zanah justify-center text-6xl">
-              <FaInstagram className="hover:animate-pop hover:text-6xl cursor-pointer"></FaInstagram>
-              <FaLinkedin className="hover:animate-pop hover:text-6xl cursor-pointer"></FaLinkedin>
-              <FaGithubSquare className="hover:animate-pop hover:text-6xl cursor-pointer" />
+    <h1>
+    Feel free to reach out to me through Email, or Linkedin.
+    </h1>
+    <div className="flex w-full gap-5 pt-2 text-zanah justify-center text-6xl">
+              <a onClick={copy}><MdEmail className="hover:animate-pop hover:text-6xl cursor-pointer"/></a>
+              <a href="https://www.linkedin.com/in/tgondil/" target="blank"><FaLinkedin  className="hover:animate-pop hover:text-6xl cursor-pointer"></FaLinkedin></a>
+
             </div>
+            <Toaster
+  position="bottom-center"
+  reverseOrder={false}
+/>
       </div>
       </div>
       </main>

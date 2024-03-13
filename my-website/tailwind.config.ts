@@ -23,13 +23,17 @@ const config: Config = {
         "nexa": ["NexaH", "sans-serif"],
         "invis": ["InvisibleEB", "sans-serif"],
         "roboto": ["Roboto", "sans-serif"],
-        "scp": ["Source Code Pro", "monospace"]
+        "scp": ["Source Code Pro", "monospace"],
+        "nexaEL": ["NexaEL", "sans-serif"],
+        "cs": ["CS", "cursive"],
+        "cv": ["CV", "sans-serif"],
       },
       fontSize: {
         "18px": '18px',
         "2.3v": '2.1vh',
         "1.1e": '4.3rem',
         "1.2e": '8rem',
+        "1.3e": '8.5rem',
         "1e": "3.8rem"
       },
       animation: {

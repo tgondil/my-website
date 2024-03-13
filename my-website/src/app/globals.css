@@ -11,6 +11,21 @@
 }
 
 @font-face {
+	font-family: "CV";
+	src: url(./fonts/coolvetica.otf);
+  }
+
+@font-face {
+  font-family: "NexaEL";
+  src: url(./fonts/Nexa-ExtraLight.ttf);
+}
+
+@font-face {
+	font-family: "CS";
+	src: url(./fonts/CampanaScript.otf);
+  }
+
+@font-face {
   font-family: "InvisibleEB";
   src: url(./fonts/Invisible-ExtraBold.otf);
 }
