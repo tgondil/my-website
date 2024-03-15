@@ -103,7 +103,7 @@ export default function Home() {
               
 
         <div id="after" className="h-screen flex flex-col items-center bg-[url('/real6.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-center ">
-          <div className="text-7xl  sm:text-1.1e gradient tracking-wide text-zanah leading-hero font-invis pt-6 sm:pt-20">
+          <div className="text-5xl  sm:text-1.1e gradient tracking-wide text-zanah leading-hero font-invis pt-12 sm:pt-20">
             <h1>
               About Me
             </h1>
