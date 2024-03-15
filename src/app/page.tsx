@@ -44,9 +44,9 @@ export default function Home() {
 
   return (
     <NextUIProvider>
-      <main className="flex overscroll-none flex-col  w-full  min-h-screen ">
+      <main className="flex overscroll-none flex-col min-h-screen ">
         <div className="flex flex-col h-screen bg-[url('/calvin2.jpg')] bg-cover bg-center">
-          <div className=" flex  justify-end gap-12 text-xl animate-intro-unhide font-semibold pt-8 w-full mb-8">
+          <div className="pl-14 sm:pl-0 flex justify-center sm:justify-end gap-12 sm:text-xl animate-intro-unhide font-semibold pt-8 w-full mb-8">
             <h1 id="home" className=" gradient text-zanah font-roboto cursor-pointer">
               {"<"}home{">"}
             </h1>
@@ -57,16 +57,16 @@ export default function Home() {
               {"<"}about{">"}
             </h1>
           </div>
-          <div className="flex mt-44 min-h-screen flex-col items-center animate-slide-right ">
-            <h1 className="text-1.1e  animate-slide-right tracking-wide text-zanah leading-hero font-invis">
+          <div className="flex mt-32 sm:mt-44 min-h-screen flex-col items-center animate-slide-right ">
+            <h1 className="sm:text-1.1e  animate-slide-right tracking-wide text-zanah leading-hero font-invis">
               Hey, my name is
             </h1>
-            <h1 className="text-1.2e gradient tracking-wide text-zanah leading-hero font-invis">
+            <h1 className="text-6xl pt-5 sm:pt-0 sm:text-1.2e gradient tracking-wide text-zanah leading-hero font-invis">
               Tanay Gondil
             </h1>
 
             {visible ? (
-              <div className="font-scp pt-5 gradient text-xl animate-intro-unhide">
+              <div className="font-scp pt-5 gradient sm:text-xl animate-intro-unhide">
                 <ReactTyped
                   strings={[
                     "I'm a developer",
@@ -98,12 +98,12 @@ export default function Home() {
               
 
         <div id="after" className="h-screen flex flex-col items-center bg-[url('/calvin.jpg')] bg-cover bg-center ">
-          <div className="text-1.3e gradient tracking-wide text-zanah leading-hero font-cs pt-6">
+          <div className="text-6xl sm:text-1.3e gradient tracking-wide text-zanah leading-hero font-cs pt-10 sm:pt-6">
             <h1>
               About Me
             </h1>
           </div>
-    <div className="flex text-center pt-8 mx-10 flex-col w-3/5 tracking-wide gap-4 text-zanah font-bold leading-extra-loose text-xl font-cv justify-center items-center">
+    <div className="flex text-center pt-4 sm:pt-8 mx-10 flex-col sm:w-3/5 tracking-wide gap-4 text-zanah sm:font-bold sm:leading-extra-loose  font-cv justify-center text-s items-center sm:text-xl">
 
     <h1>
     I&#39;m a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science.
