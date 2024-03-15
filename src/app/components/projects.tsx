@@ -10,7 +10,7 @@ import {
   } from "@nextui-org/react";
 import toast from 'react-hot-toast';
 
-export default function Projects(about) {
+export default function Projects(about:any) {
   const scrollProject = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
