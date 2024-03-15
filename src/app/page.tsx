@@ -63,7 +63,7 @@ export default function Home() {
             <h1 className="sm:text-1.1e  animate-slide-right tracking-wide text-zanah leading-hero font-invis">
               Hey, my name is
             </h1>
-            <h1 className="text-6xl pt-5 sm:pt-0 sm:text-1.2e gradient tracking-wide text-zanah leading-hero font-invis">
+            <h1 className="text-2.3w pt-5 sm:pt-0 sm:text-1.2e gradient tracking-wide text-zanah leading-hero font-invis">
               Tanay Gondil
             </h1>
 
