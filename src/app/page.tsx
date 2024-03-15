@@ -117,7 +117,7 @@ export default function Home() {
 I&#39;m also the new President of <span className="text-my-green">Hack the Future</span>, Purdue&#39;s biggest web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
     </h1>
     <h1>
-    Feel free to reach out to me through Email, or Linkedin.
+    Feel free to reach out to me through Email or Linkedin.
     </h1>
     <div className="flex w-full gap-5 pt-2 text-zanah justify-center text-6xl">
               <a onClick={copy}><MdEmail className="hover:animate-pop hover:text-6xl cursor-pointer"/></a>
