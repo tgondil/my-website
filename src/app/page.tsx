@@ -45,8 +45,8 @@ export default function Home() {
   return (
     <NextUIProvider>
       <main className="flex overscroll-none flex-col min-h-screen ">
-        <div className="flex flex-col h-screen bg-[url('/calvin2.jpg')] bg-cover bg-center">
-          <div className="pl-14 sm:pl-0 flex justify-center sm:justify-end gap-12 sm:text-xl animate-intro-unhide font-semibold pt-8 w-full mb-8">
+        <div className="flex flex-col h-screen bg-[url('/real2.png')] sm:bg-[url('/calvin2.jpg')] bg-cover bg-center">
+          <div className=" pl-6 invisible sm:visible sm:pl-0 text-sm flex gap-3 sm:justify-end sm:gap-12 sm:text-xl animate-intro-unhide font-semibold  sm:pt-8 w-full mb-8">
             <h1 id="home" className=" gradient text-zanah font-roboto cursor-pointer">
               {"<"}home{">"}
             </h1>
@@ -57,7 +57,7 @@ export default function Home() {
               {"<"}about{">"}
             </h1>
           </div>
-          <div className="flex mt-32 sm:mt-44 min-h-screen flex-col items-center animate-slide-right ">
+          <div className="flex mt-44 min-h-screen flex-col items-center animate-slide-right ">
             <h1 className="sm:text-1.1e  animate-slide-right tracking-wide text-zanah leading-hero font-invis">
               Hey, my name is
             </h1>
@@ -97,7 +97,7 @@ export default function Home() {
         <Projects></Projects>
               
 
-        <div id="after" className="h-screen flex flex-col items-center bg-[url('/calvin.jpg')] bg-cover bg-center ">
+        <div id="after" className="h-screen flex flex-col items-center bg-[url('/real.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-center ">
           <div className="text-6xl sm:text-1.3e gradient tracking-wide text-zanah leading-hero font-cs pt-10 sm:pt-6">
             <h1>
               About Me
