@@ -10,16 +10,17 @@ import {
   } from "@nextui-org/react";
 import toast from 'react-hot-toast';
 
-export default function Projects() {
+export default function Projects(about) {
   const scrollProject = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
   const scrollContact = () => {
-    window.scrollTo({ top: 2*window.innerHeight, behavior: "smooth" });
+    document.getElementById("after")?.scrollIntoView({behavior: 'smooth'});
   }
+  
   return (
     <div id='projects' className="w-full sm:h-screen flex flex-col bg-[url('/mobilestars.png')] sm:bg-[url('/stars.jpg')] bg-contain sm:bg-cover sm:bg-contain sm:pt-10">
-          <div className="sm:h-screen w-full bg-contain bg-center flex flex-col gap-8 items-center ">
+          <div className="sm:h-screen w-full bg-contain bg-center flex flex-col gap-8 sm:pt-0 pt-8 items-center ">
             <div className="w-full text-xl flex sm:text-1e tracking-wide text-zanah leading-hero sm:items-center justify-center font-invis">
             <h1 >
               Take a look at some of my 
@@ -74,7 +75,7 @@ export default function Projects() {
                 </CardFooter>
               </Card>
             </div>
-            <div className="h-full w-full h-1/2 w-3/6 sm:w-1/3 flex justify-center items-center">
+            <div className="h-full w-full sm:h-1/2 w-3/6 sm:w-1/3 flex justify-center items-center">
               <Card
                 className="w-4/5 h-full bg-my-grey hover:animate-minipop bg-cover bg-center "
                 isPressable

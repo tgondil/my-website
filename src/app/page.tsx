@@ -12,8 +12,10 @@ import { SiMicrosoftoutlook } from "react-icons/si";
 import { MdEmail } from "react-icons/md";
 import { SiDevpost } from "react-icons/si";
 import toast, { Toaster } from 'react-hot-toast';
+import { useRef } from "react";
 
 export default function Home() {
+  const myRef = useRef();
   const [visible, setVisible] = useState(true);
   const hide = () => setVisible(false);
   const [hovered, setHovered] = useState(true);
@@ -28,11 +30,12 @@ export default function Home() {
   };
 
   const scrollProject = () => {
-    window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+    document.getElementById("projects")!.scrollIntoView({behavior: 'smooth'});
+    
   }
 
   const scrollContact = () => {
-    window.scrollTo({ top: 2*window.innerHeight, behavior: "smooth" });
+    document.getElementById("after")!.scrollIntoView({behavior: 'smooth'});
   }
 
   const copy = () => {
@@ -40,7 +43,6 @@ export default function Home() {
     toast.success("Email copied to clipboard!");
   }
 
-  
 
   return (
     <NextUIProvider>
@@ -93,12 +95,15 @@ export default function Home() {
             </div>
             
           </div>
+          
         </div>
-        <Projects></Projects>
+        <div id="projects">
+        <Projects about={'after'}></Projects>
+        </div>
               
 
         <div id="after" className="h-screen flex flex-col items-center bg-[url('/real6.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-center ">
-          <div className="text-7xl sm:text-1.3e gradient tracking-wide text-zanah leading-hero font-cs pt-10 sm:pt-6">
+          <div className="text-7xl  sm:text-1.3e gradient tracking-wide text-zanah leading-hero font-cs pt-10 sm:pt-6">
             <h1>
               About Me
             </h1>
