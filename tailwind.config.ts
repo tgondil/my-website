@@ -30,6 +30,7 @@ const config: Config = {
       },
       fontSize: {
         "18px": '18px',
+        "1.5w": "5.3vw",
         "2.3v": '2.1vh',
         "2.3w": '15.1vw',
         "1.1e": '4.3rem',
