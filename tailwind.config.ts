@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      height: {
+        'mobile': '96vh'
+      },
       spacing: {
         '18p': '9.2%',
         '20p': '12%',

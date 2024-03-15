@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <NextUIProvider>
       <main className="flex overscroll-none flex-col min-h-screen ">
-        <div className="flex flex-col h-screen bg-[url('/real2.png')] sm:bg-[url('/calvin2.jpg')] bg-cover bg-center">
+        <div className="flex flex-col h-mobile sm:h-screen bg-[url('/real2.png')] sm:bg-[url('/calvin2.jpg')] bg-cover bg-center">
           <div className=" pl-6 invisible sm:visible sm:pl-0 text-sm flex gap-3 sm:justify-end sm:gap-12 sm:text-xl animate-intro-unhide font-semibold  sm:pt-8 w-full mb-8">
             <h1 id="home" className=" gradient text-zanah font-roboto cursor-pointer">
               {"<"}home{">"}
