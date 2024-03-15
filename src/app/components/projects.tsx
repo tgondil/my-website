@@ -254,7 +254,7 @@ export default function Projects(about:any) {
                   />
                   <div className="flex flex-col">
                     <p className="text-md text-zanah gradient font-bold">
-                      tanaygondil.me
+                      tanaygondil.com
                     </p>
                   </div>
                 </CardHeader>
