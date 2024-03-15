@@ -97,13 +97,13 @@ export default function Home() {
         <Projects></Projects>
               
 
-        <div id="after" className="h-screen flex flex-col items-center bg-[url('/real.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-center ">
-          <div className="text-6xl sm:text-1.3e gradient tracking-wide text-zanah leading-hero font-cs pt-10 sm:pt-6">
+        <div id="after" className="h-screen flex flex-col items-center bg-[url('/real6.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-center ">
+          <div className="text-7xl sm:text-1.3e gradient tracking-wide text-zanah leading-hero font-cs pt-10 sm:pt-6">
             <h1>
               About Me
             </h1>
           </div>
-    <div className="flex text-center pt-4 sm:pt-8 mx-10 flex-col sm:w-3/5 tracking-wide gap-4 text-zanah sm:font-bold sm:leading-extra-loose  font-cv justify-center text-s items-center sm:text-xl">
+    <div className="flex text-sm text-center pt-8 sm:pt-8 mx-10 flex-col sm:w-3/5 tracking-wide gap-4 text-zanah sm:font-bold leading-relaxed sm:leading-extra-loose  font-cv justify-center text-s items-center sm:text-xl">
 
     <h1>
     I&#39;m a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science.

@@ -18,9 +18,9 @@ export default function Projects() {
     window.scrollTo({ top: 2*window.innerHeight, behavior: "smooth" });
   }
   return (
-    <div id='projects' className="w-full sm:h-screen flex flex-col bg-[url('/stars.jpg')] bg-contain sm:bg-cover sm:bg-contain sm:pt-10">
+    <div id='projects' className="w-full sm:h-screen flex flex-col bg-[url('/mobilestars.png')] sm:bg-[url('/stars.jpg')] bg-contain sm:bg-cover sm:bg-contain sm:pt-10">
           <div className="sm:h-screen w-full bg-contain bg-center flex flex-col gap-8 items-center ">
-            <div className="w-full text-xl flex sm:text-1e tracking-wide text-zanah leading-hero items-center justify-center font-invis">
+            <div className="w-full text-xl flex sm:text-1e tracking-wide text-zanah leading-hero sm:items-center justify-center font-invis">
             <h1 >
               Take a look at some of my 
             </h1>
