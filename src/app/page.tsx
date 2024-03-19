@@ -13,6 +13,7 @@ import { MdEmail } from "react-icons/md";
 import { SiDevpost } from "react-icons/si";
 import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from "react";
+import Head from "next/head";
 
 export default function Home() {
   const myRef = useRef();
@@ -45,6 +46,12 @@ export default function Home() {
 
 
   return (
+    <>
+    <Head>
+    <title>Tanay Gondil | Full Stack Developer and ML/AI Engineer</title>
+    <meta name="description" content="Hi, I'm Tanay. I make specialized tools that make life easier for people, and I really enjoy it." />
+    <link rel="icon" type="image/png" href="./icon.png"></link>
+    </Head>
     <NextUIProvider>
       <main className="flex overscroll-none flex-col min-h-screen ">
         <div className="flex flex-col h-mobile sm:h-screen bg-[url('/real2.png')] sm:bg-[url('/calvin2.jpg')] bg-cover bg-center">
@@ -132,5 +139,6 @@ I&#39;m also the new President of <span className="text-my-green">Hack the Futur
       </div>
       </main>
     </NextUIProvider>
+    </>
   );
 }
