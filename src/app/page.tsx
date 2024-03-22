@@ -14,9 +14,10 @@ import { SiDevpost } from "react-icons/si";
 import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from "react";
 import Head from "next/head";
-
+import {Link} from 'react-scroll';
 export default function Home() {
-  const myRef = useRef();
+  
+  const myRef = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(true);
   const hide = () => setVisible(false);
   const [hovered, setHovered] = useState(true);
@@ -31,8 +32,11 @@ export default function Home() {
   };
 
   const scrollProject = () => {
-    document.getElementById("projects")!.scrollIntoView({behavior: 'smooth'});
+    //document.getElementById("projects")!.scrollIntoView({behavior: 'smooth'});
     
+    myRef.current?.scrollIntoView({
+      behavior: 'smooth'
+    })
   }
 
   const scrollContact = () => {
@@ -47,6 +51,7 @@ export default function Home() {
 
   return (
     <>
+    <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script> 
     <Head>
     <title>Tanay Gondil | Full Stack Developer and ML/AI Engineer</title>
     <meta name="description" content="Hi, I'm Tanay. I make specialized tools that make life easier for people, and I really enjoy it." />
@@ -59,12 +64,24 @@ export default function Home() {
             <h1 id="home" className=" gradient text-zanah font-roboto cursor-pointer">
               {"<"}home{">"}
             </h1>
-            <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} onClick={scrollProject} className=" cursor-pointer text-zanah nav-link hover:gradient font-roboto">
+            <Link to="projects" 
+      spy={true} 
+      smooth={true} 
+      duration={500}>
+            <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className=" cursor-pointer text-zanah nav-link hover:gradient font-roboto">
               {"<"}projects{">"}
             </h1>
-            <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} onClick={scrollContact} className=" mr-10 text-zanah cursor-pointer hover:gradient font-roboto">
+            </Link>
+            <Link to="after" 
+      spy={true} 
+      smooth={true} 
+      duration={500}>
+            
+            
+            <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className=" mr-10 text-zanah cursor-pointer hover:gradient font-roboto">
               {"<"}about{">"}
             </h1>
+            </Link>
           </div>
           <div className="flex mt-44 min-h-screen flex-col items-center animate-slide-right ">
             <h1 className="sm:text-1.1e  animate-slide-right tracking-wide text-zanah leading-hero font-invis">
@@ -98,13 +115,18 @@ export default function Home() {
               <a target="blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop hover:text-6xl cursor-pointer" /></a>
             </div>
             <div className="field pt-16 animate-intro-unhide">
-              <div className="scroll cursor-pointer" onClick={scrollProject}></div>
+              <Link to="projects" 
+      spy={true} 
+      smooth={true} 
+      duration={500}>
+              <div className="scroll cursor-pointer"></div>
+              </Link>
             </div>
             
           </div>
           
         </div>
-        <div id="projects">
+        <div ref = {myRef} id="projects">
         <Projects about={'after'}></Projects>
         </div>
               
