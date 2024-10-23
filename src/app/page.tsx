@@ -140,7 +140,7 @@ export default function Home() {
     <div className="flex text-sm text-center pt-8 sm:pt-8 mx-10 flex-col sm:w-3/5 tracking-wide gap-4 text-zanah sm:font-bold leading-relaxed sm:leading-extra-loose  font-cv justify-center text-s items-center sm:text-xl">
 
     <h1>
-    I&#39;m a full-stack developer and ML/AI engineer, currently a sophomore at Purdue University, dedicated to obtaining a degree in Computer Science.
+    I&#39;m a full-stack developer and ML/AI engineer, currently a junior at Purdue University, dedicated to obtaining a degree in Computer Science.
     </h1>
     <h1>
 I&#39;m also the new President of <span className="text-my-green">Hack the Future</span>, Purdue&#39;s biggest web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
