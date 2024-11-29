@@ -143,7 +143,7 @@ export default function Home() {
     I&#39;m a full-stack developer and ML/AI engineer, currently a junior at Purdue University, dedicated to obtaining a degree in Computer Science.
     </h1>
     <h1>
-I&#39;m the President of <span className="text-my-green">Hack the Future</span>, Purdue&#39;s biggest web development club, where we build websites for non-profits across the US.
+I&#39;m the President of <span className="text-my-green">Hack the Future</span>, Purdue&#39;s biggest software development club, where we build software for non-profits across the US.
     </h1>
     <h1>
 I&#39;m also the President of <span className="text-my-yellow">Hello World</span>, Purdue&#39;s biggest freshman-only hackathon, where over 400 freshmen build projects, expanding their horizons beyond what&#39;s taught in class :)
