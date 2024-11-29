@@ -132,21 +132,21 @@ export default function Home() {
               
 
         <div id="after" className="h-screen flex flex-col items-center bg-[url('/real6.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-center ">
-          <div className="text-5xl  sm:text-1.1e gradient tracking-wide text-zanah leading-hero font-invis pt-12 sm:pt-20">
+          <div className="text-5xl  sm:text-1.1e gradient tracking-wide text-zanah leading-hero font-invis sm:pt-20 pt-12">
             <h1>
               About Me
             </h1>
           </div>
-    <div className="flex text-sm text-center pt-8 sm:pt-8 mx-10 flex-col sm:w-3/5 tracking-wide gap-4 text-zanah sm:font-bold leading-relaxed sm:leading-extra-loose  font-cv justify-center text-s items-center sm:text-xl">
+    <div className="flex text-sm text-center sm:pt-8 mx-10 flex-col sm:w-3/5 tracking-wide gap-8 text-zanah sm:font-bold leading-relaxed sm:leading-extra-loose pt-6  font-cv justify-center text-s items-center sm:text-xl">
 
     <h1>
     I&#39;m a full-stack developer and ML/AI engineer, currently a junior at Purdue University, dedicated to obtaining a degree in Computer Science.
     </h1>
     <h1>
-I&#39;m also the new President of <span className="text-my-green">Hack the Future</span>, Purdue&#39;s biggest web development club, where we build websites for local non-profits. Before becoming president, I led a team of 10 to build a billing website for the YWCA, a non-profit based in West Lafayette.
+I&#39;m the President of <span className="text-my-green">Hack the Future</span>, Purdue&#39;s biggest web development club, where we build websites for non-profits across the US.
     </h1>
     <h1>
-    Feel free to reach out to me through Email or Linkedin.
+I&#39;m also the President of <span className="text-my-yellow">Hello World</span>, Purdue&#39;s biggest freshman-only hackathon, where over 400 freshmen build projects, expanding their horizons beyond what&#39;s taught in class :)
     </h1>
     <div className="flex w-full gap-5 pt-2 text-zanah justify-center text-6xl">
               <a onClick={copy}><MdEmail className="hover:animate-pop hover:text-6xl cursor-pointer"/></a>

@@ -60,7 +60,7 @@ export default function Projects(about:any) {
                 <Divider />
                 <CardBody>
                   <p className="text-zanah">
-                    A full-stack social media app for investors, aiming to cover existing gaps in investing social media apps. Built using Next.js, Tailwind, Node.js, and MongoDB. Set to release May 15th, 2024.
+                    A full-stack social media app for investors, aiming to cover existing gaps in investing social media apps. Being built using Next.js, Tailwind, Node.js, and MongoDB.
                   </p>
                 </CardBody>
                 <Divider />
@@ -141,7 +141,7 @@ export default function Projects(about:any) {
                 <Divider />
                 <CardBody>
                   <p className="text-zanah">
-                    A billing app for the YWCA non profit, in collaboration with the <span className='text-my-green'>Hack the Future</span>  club at Purdue.
+                    A billing app for the YWCA non-profit, in collaboration with the <span className='text-my-green'>Hack the Future</span>  club at Purdue.
                   </p>
                 </CardBody>
                 <Divider />
@@ -181,7 +181,7 @@ export default function Projects(about:any) {
                 <Divider />
                 <CardBody>
                   <p className="text-zanah">
-                    A safety application for Purdue students, that scrapes data from the Purdue Police department archives to showcase the safest routes to a destination. Built using Python.
+                    A safety application for Purdue students, that scrapes data from the Purdue Police department archives to showcase the safest routes to a destination. Built using Python. Placed 2nd @ Hello World 2022!
                   </p>
                 </CardBody>
                 <Divider />

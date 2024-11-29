@@ -100,7 +100,8 @@ const config: Config = {
         'my-pink': '#B8B5FF',
         'my-blue': 'rgba(0,212,255,1)',
         'my-grey': '#161A30',
-        'my-green': '#4CCD99'
+        'my-green': '#4CCD99',
+        'my-yellow': '#ebc41c'
       }
     },
   },
