@@ -70,7 +70,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 <Divider />
                 <CardBody className="py-3">
                   <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A cognitive-state monitoring & workspace orchestration tool using eye-tracking, browser telemetry, and environment control. Won 1st Place on the biggest track at DubHacks '25.
+                    A cognitive-state monitoring & workspace orchestration tool using eye-tracking, browser telemetry, and environment control. Won 1st Place on the biggest track at DubHacks &apos;25.
                   </p>
                 </CardBody>
                 <Divider />
@@ -111,7 +111,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 <Divider />
                 <CardBody className="py-3">
                   <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A hands-free web-interface system with real-time eye tracking, voice commands, and AI agent control. Built for users with paralysis or in hands-free situations, won 2nd Place on the Crater Track at CalHacks '25.
+                    A hands-free web-interface system with real-time eye tracking, voice commands, and AI agent control. Built for users with paralysis or in hands-free situations, won 2nd Place on the Crater Track at CalHacks &apos;25.
                   </p>
                 </CardBody>
                 <Divider />
@@ -235,7 +235,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 <Divider />
                 <CardBody className="py-3">
                   <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    An AI-powered system translating American Sign Language (ASL) into text and speech in real time, with lip-syncing and personalized voice generation. Won "Best Use of Auth0" at BoilerMake XII.
+                    An AI-powered system translating American Sign Language (ASL) into text and speech in real time, with lip-syncing and personalized voice generation. Won &quot;Best Use of Auth0&quot; at BoilerMake XII.
                   </p>
                 </CardBody>
                 <Divider />
