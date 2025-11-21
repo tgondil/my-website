@@ -71,9 +71,8 @@ export default function Home() {
       <main className="flex overscroll-none flex-col min-h-screen ">
         <div className="relative flex flex-col h-mobile sm:h-screen overflow-hidden">
           <div 
-            className="absolute inset-0 bg-[url('/real2.png')] sm:bg-[url('/calvin2.jpg')] bg-cover bg-center"
+            className="absolute inset-0 bg-[url('/real2.png')] sm:bg-[url('/calvin2.jpg')] bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundSize: 'max(100%, 100vh)',
               transform: `translateY(${scrollY * 0.5}px)`,
               willChange: 'transform'
             }}
@@ -103,16 +102,16 @@ export default function Home() {
             </Link>
           </div>
           <div className="relative z-20 pt-20 flex h-[calc(100vh-6rem)] sm:h-[calc(100vh-8rem)] flex-col items-center justify-center animate-slide-right py-8">
-            <div className="flex flex-col items-center justify-center flex-grow scale-90">
-              <h1 className="text-responsive-2xl sm:text-1.1e animate-slide-right tracking-wide text-zanah leading-hero font-invis">
+            <div className="flex flex-col items-center justify-center flex-grow">
+              <h1 className="text-4xl sm:text-1.1e animate-slide-right tracking-wide text-zanah leading-hero font-invis">
                 Hey, my name is
               </h1>
-              <h1 className="text-responsive-5xl pt-3 sm:pt-2 sm:text-1.2e gradient tracking-wide text-zanah leading-hero font-invis">
+              <h1 className="text-6xl pt-3 sm:pt-2 sm:text-1.2e gradient tracking-wide text-zanah leading-hero font-invis">
                 Tanay Gondil
               </h1>
 
               {visible ? (
-                <div className="font-scp pt-4 sm:pt-5 gradient text-responsive-xl sm:text-responsive-2xl animate-intro-unhide">
+                <div className="font-scp pt-4 sm:pt-5 gradient text-2xl sm:text-responsive-2xl animate-intro-unhide">
                   <ReactTyped
                     strings={[
                       "I'm a developer",
@@ -129,7 +128,7 @@ export default function Home() {
                 </div>
               ) : null}
 
-              <div className="flex w-full gap-4 sm:gap-5 pt-6 sm:pt-8 text-zanah justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+              <div className="flex w-full gap-4 sm:gap-5 pt-6 sm:pt-8 text-zanah justify-center text-5xl sm:text-4xl md:text-5xl lg:text-6xl">
                 <a target="_blank" href="https://devpost.com/tgondil?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav"><SiDevpost className="hover:animate-pop cursor-pointer transition-all"></SiDevpost></a>
                 <a target="_blank" href="https://www.linkedin.com/in/tgondil/"><FaLinkedin className="hover:animate-pop cursor-pointer transition-all"></FaLinkedin></a>
                 <a target="blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop cursor-pointer transition-all" /></a>
@@ -148,9 +147,8 @@ export default function Home() {
 
         <div id="after" className="relative h-screen flex flex-col items-center overflow-hidden">
           <div 
-            className="absolute inset-0 bg-[url('/real6.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-center"
+            className="absolute inset-0 bg-[url('/real6.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundSize: 'max(100%, 100vh)',
               transform: `translateY(${(scrollY - (typeof window !== 'undefined' ? document.getElementById('after')?.offsetTop || 0 : 0)) * 0.5}px)`,
               willChange: 'transform'
             }}

@@ -23,7 +23,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
   return (
     <div id='projects' className="relative w-full sm:h-screen flex flex-col overflow-hidden sm:pt-10">
           <div 
-            className="absolute inset-0 bg-[url('/mobilestars.png')] sm:bg-[url('/stars.jpg')] bg-contain sm:bg-cover"
+            className="absolute inset-0 bg-[url('/mobilestars.png')] sm:bg-[url('/stars.jpg')] bg-cover bg-center bg-no-repeat"
             style={{
               transform: `translateY(${(scrollY - projectsOffset) * 0.5}px)`,
               willChange: 'transform'
