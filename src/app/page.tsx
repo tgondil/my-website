@@ -154,32 +154,45 @@ export default function Home() {
             }}
           ></div>
           <div className="absolute top-0 left-0 right-0 h-72 bg-gradient-to-t from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
-          <div className="relative z-20 text-responsive-5xl sm:text-1.1e gradient tracking-wide text-zanah leading-hero font-invis sm:pt-16 pt-12">
-            <h1>
-              About Me
-            </h1>
-          </div>
-    <div className="relative z-20 flex text-sm text-center sm:pt-8 mx-10 flex-col sm:w-3/5 tracking-wide gap-8 text-zanah sm:font-bold leading-relaxed sm:leading-extra-loose pt-6  font-cv justify-center text-s items-center sm:text-base md:text-lg lg:text-xl">
-
-    <h1>
-    I&#39;m a full-stack developer and ML/AI engineer, currently a junior at Purdue University, dedicated to obtaining a degree in Computer Science.
-    </h1>
-    <h1>
-I&#39;m the President of <span className="text-my-green">Hack the Future</span>, Purdue&#39;s biggest software development club, where we build software for non-profits across the US.
-    </h1>
-    <h1>
-I&#39;m also the President of <span className="text-my-yellow">Hello World</span>, Purdue&#39;s biggest freshman-only hackathon, where over 400 freshmen build projects, expanding their horizons beyond what&#39;s taught in class :)
-    </h1>
-    <div className="flex w-full gap-5 pt-2 text-zanah justify-center text-4xl sm:text-5xl lg:text-6xl">
-              <a onClick={copy}><MdEmail className="hover:animate-pop cursor-pointer transition-all"/></a>
-              <a href="https://www.linkedin.com/in/tgondil/" target="blank"><FaLinkedin  className="hover:animate-pop cursor-pointer transition-all"></FaLinkedin></a>
-
-            </div>
-            <Toaster
-  position="bottom-center"
-  reverseOrder={false}
-/>
-      </div>
+          
+    <div className="relative z-20 flex flex-col w-full px-8 sm:px-16 lg:px-24 pt-12 sm:pt-16">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold gradient text-center mb-10 sm:mb-12 leading-tight font-invis">
+        I build systems that help people grow, and I try to raise the ceiling for what students can do.
+      </h1>
+      
+       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 text-base sm:text-lg md:text-xl text-left text-zanah leading-loose font-cv max-w-7xl mx-auto">
+         <div className="flex-1 flex flex-col gap-5">
+           <p>
+             At Purdue, I teach <span className="text-my-green font-bold">CS390</span> as the sole instructor of record, designing a full-stack curriculum from the ground up and guiding students through building production-grade apps.
+           </p>
+           
+           <p>
+             I lead <span className="text-my-green font-bold">Hack the Future</span>, Purdue&#39;s competitive software development club, where we doubled our applicant pool and shipped more real-world software than any year before. I turned <span className="text-my-yellow font-bold">Hello World</span>, the smallest hackathon at Purdue into the biggest hackathon in Purdue history, bringing hundreds of students together around building, learning, and ambition.
+           </p>
+         </div>
+         
+         <div className="flex-1 flex flex-col gap-5">
+           <p>
+             I&#39;m a founding engineer at <span className="text-my-blue font-bold">Crater</span>, helping shape the product and engineering foundation of the company.
+           </p>
+           
+           <p>
+             I&#39;ve won top prizes at Berkeley, UW and Purdue hackathons, and I&#39;m presenting this year at <span className="text-my-pink font-bold">NeurIPS</span>, the largest AI conference in the world.
+           </p>
+           
+           <p className="italic">
+             Across everything I do, the goal is the same: build things that matter, create environments where people can grow fast, and push the limits of what&#39;s possible as a student engineer.
+           </p>
+         </div>
+       </div>
+      
+    
+      
+      <Toaster
+        position="bottom-center"
+        reverseOrder={false}
+      />
+    </div>
       </div>
       </main>
     </NextUIProvider>
