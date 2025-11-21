@@ -50,7 +50,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 className="w-4/5 h-full hover:animate-minipop bg-my-grey bg-cover bg-center"
                 isPressable
                 onClick={()=>{
-                  window.open('https://devpost.com/software/artemis-hd0xvk')
+                  window.open('https://www.youtube.com/watch?v=9Qgm1yPk9os')
                 }}
               >
                 <CardHeader className="flex gap-3 py-2">
@@ -79,9 +79,9 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                     isExternal
                     showAnchorIcon
                     className="text-xs sm:text-sm"
-                    href="https://devpost.com/software/artemis-hd0xvk"
+                    href="https://www.youtube.com/watch?v=9Qgm1yPk9os"
                   >
-                    View on Devpost
+                    View Demo
                   </Link>
                 </CardFooter>
               </Card>
@@ -91,7 +91,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 className="w-4/5 h-full bg-my-grey hover:animate-minipop bg-cover bg-center "
                 isPressable
                 onClick={()=>{
-                  window.open('https://devpost.com/software/iris-zj8yt1')
+                  window.open('https://www.youtube.com/watch?v=T3Psh8Hm7so')
                 }}
               >
                 <CardHeader className="flex gap-2 py-2 items-center">
@@ -120,9 +120,9 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                     isExternal
                     showAnchorIcon
                     className="text-xs sm:text-sm"
-                    href="https://devpost.com/software/iris-zj8yt1"
+                    href="https://www.youtube.com/watch?v=T3Psh8Hm7so"
                   >
-                    View on Devpost
+                    View Demo
                   </Link>
                 </CardFooter>
               </Card>
