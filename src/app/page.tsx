@@ -167,7 +167,7 @@ export default function Home() {
            </p>
            
            <p>
-             I lead <span className="text-my-green font-bold">Hack the Future</span>, Purdue&#39;s competitive software development club, where we doubled our applicant pool and shipped more real-world software than any year before. I turned <span className="text-my-yellow font-bold">Hello World</span>, the smallest hackathon at Purdue into the biggest hackathon in Purdue history, bringing hundreds of students together around building, learning, and ambition.
+             I lead <span className="text-my-green font-bold">Hack the Future</span>, a club that builds software for non-profits across the world, where we doubled our applicant pool and shipped more real-world software than any year before. I turned <span className="text-my-yellow font-bold">Hello World</span>, the smallest hackathon at Purdue into the biggest hackathon in Purdue history, bringing hundreds of students together around building, learning, and ambition.
            </p>
          </div>
          
