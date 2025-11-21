@@ -36,10 +36,15 @@ const config: Config = {
         "1.5w": "5.3vw",
         "2.3v": '2.1vh',
         "2.3w": '15.1vw',
-        "1.1e": '4.3rem',
-        "1.2e": '8rem',
-        "1.3e": '8.5rem',
-        "1e": "3.8rem"
+        "1.1e": 'clamp(2rem, 5vw, 4.3rem)',
+        "1.2e": 'clamp(3rem, 10vw, 8rem)',
+        "1.3e": 'clamp(3.5rem, 11vw, 8.5rem)',
+        "1e": "clamp(1.8rem, 4.5vw, 3.8rem)",
+        "responsive-xl": "clamp(1rem, 2vw, 1.25rem)",
+        "responsive-2xl": "1.5rem",
+        "responsive-3xl": "clamp(1.5rem, 3vw, 1.875rem)",
+        "responsive-4xl": "1.6rem",
+        "responsive-5xl": "1.6rem"
       },
       animation: {
         "intro-bounce": "bounce 2s 2",
