@@ -94,7 +94,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                   window.open('https://devpost.com/software/iris-zj8yt1')
                 }}
               >
-                <CardHeader className="flex gap-3 py-2">
+                <CardHeader className="flex gap-2 py-2 items-center">
                   <Image
                     alt="iris logo"
                     height={20}
@@ -130,40 +130,40 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
             <div className="h-1/2 w-full sm:w-1/3 sm:h-1/2 w-3/6 flex hover:animate-minipop justify-center items-center">
               <Card
               onClick={()=>{
-                toast.error("This code repository is currently private.");
-                //window.open('https://github.com/tgondil/Investagram')
+                window.open('https://github.com/tgondil/cs390-wap')
               }}
                 className="w-4/5  h-full bg-my-grey bg-cover bg-center"
                 isPressable
               >
-                <CardHeader className="flex gap-3">
+                <CardHeader className="flex gap-2 py-2 items-center">
                   <Image
-                    alt="nextui logo"
-                    height={40}
+                    alt="cs390 logo"
+                    height={10}
                     radius="sm"
-                    src="./ywca.png"
-                    width={40}
+                    src="./cs390.png"
+                    width={60}
                   />
                   <div className="flex flex-col">
                     <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      YWCA Billing
+                      CS390 Course Platform
                     </p>
                   </div>
                 </CardHeader>
                 <Divider />
-                <CardBody>
+                <CardBody className="py-2">
                   <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A billing app for the YWCA non-profit, in collaboration with the <span className='text-my-green'>Hack the Future</span>  club at Purdue.
+                    A fully custom course platform built from scratch for the class I teach at Purdue. Features interactive assignments, real-time grading, and student progress tracking.
                   </p>
                 </CardBody>
                 <Divider />
                 <CardFooter>
                   <Link
                     isExternal
+                    showAnchorIcon
                     className="text-xs sm:text-sm"
-                    /*href="https://github.com/Hack-the-Future/ywca-billing"*/
+                    href="https://github.com/tgondil/cs390-wap"
                   >
-                    This code repository is currently private.
+                    View on GitHub
                   </Link>
                 </CardFooter>
               </Card>
@@ -176,7 +176,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                   window.open('https://github.com/AashiAgarw/StaySafePurdue')
                 }}
               >
-                <CardHeader className="flex gap-3">
+                <CardHeader className="flex gap-3 py-2">
                   <Image
                     alt="nextui logo"
                     height={40}
@@ -191,9 +191,9 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                   </div>
                 </CardHeader>
                 <Divider />
-                <CardBody>
+                <CardBody className="py-3">
                   <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A safety application for Purdue students, that scrapes data from the Purdue Police department archives to showcase the safest routes to a destination. Built using Python. Placed 2nd @ Hello World 2022!
+                    A safety application for Purdue students, that scrapes data from the Purdue Police department archives to showcase the safest routes to a destination. Built using Python. Placed 2nd at Hello World 2022!
                   </p>
                 </CardBody>
                 <Divider />
@@ -257,7 +257,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 isPressable
                 onClick={scrollProject}
               >
-                <CardHeader className="flex gap-3">
+                <CardHeader className="flex gap-3 py-2">
                   <Image
                     alt="nextui logo"
                     height={40}
@@ -272,7 +272,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                   </div>
                 </CardHeader>
                 <Divider />
-                <CardBody>
+                <CardBody className="py-3">
                   <p className="text-zanah text-xs sm:text-sm lg:text-base">
                     This website, built using Next.js, NextUI, and Tailwind.
                   </p>
