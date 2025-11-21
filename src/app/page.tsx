@@ -160,7 +160,7 @@ export default function Home() {
         I build systems that help people grow, and I try to raise the ceiling for what students can do.
       </h1>
       
-       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 text-base sm:text-lg md:text-xl text-left text-zanah leading-loose font-cv max-w-7xl mx-auto">
+       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 text-lg sm:text-xl md:text-2xl text-left text-zanah leading-loose font-cv max-w-7xl mx-auto">
          <div className="flex-1 flex flex-col gap-5">
            <p>
              At Purdue, I teach <span className="text-my-green font-bold">CS390</span> as the sole instructor of record, designing a full-stack curriculum from the ground up and guiding students through building production-grade apps.
