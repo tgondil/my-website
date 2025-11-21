@@ -50,38 +50,38 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 className="w-4/5 h-full hover:animate-minipop bg-my-grey bg-cover bg-center"
                 isPressable
                 onClick={()=>{
-                  toast.error("This code repository is currently private.");
-                  //window.open('https://github.com/tgondil/Investagram')
+                  window.open('https://devpost.com/software/artemis-hd0xvk')
                 }}
               >
-                <CardHeader className="flex gap-3">
+                <CardHeader className="flex gap-3 py-2">
                   <Image
-                    alt="nextui logo"
+                    alt="artemis logo"
                     height={40}
                     radius="sm"
-                    src="./invest.png"
+                    src="./artemis.png"
                     width={40}
                   />
                   <div className="flex flex-col">
                     <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      Investagram
+                      Artemis
                     </p>
                   </div>
                 </CardHeader>
                 <Divider />
-                <CardBody>
+                <CardBody className="py-3">
                   <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A full-stack social media app for investors, aiming to cover existing gaps in investing social media apps. Being built using Next.js, Tailwind, Node.js, and MongoDB.
+                    A cognitive-state monitoring & workspace orchestration tool using eye-tracking, browser telemetry, and environment control. Won 1st Place on the biggest track at DubHacks '25.
                   </p>
                 </CardBody>
                 <Divider />
                 <CardFooter>
                   <Link
                     isExternal
+                    showAnchorIcon
                     className="text-xs sm:text-sm"
-                    /*href="https://github.com/tgondil/Investagram"*/
+                    href="https://devpost.com/software/artemis-hd0xvk"
                   >
-                    This code repository is currently private.
+                    View on Devpost
                   </Link>
                 </CardFooter>
               </Card>
@@ -91,27 +91,27 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 className="w-4/5 h-full bg-my-grey hover:animate-minipop bg-cover bg-center "
                 isPressable
                 onClick={()=>{
-                  window.open('https://github.com/tgondil/BoilerMap')
+                  window.open('https://devpost.com/software/iris-zj8yt1')
                 }}
               >
-                <CardHeader className="flex gap-3">
+                <CardHeader className="flex gap-3 py-2">
                   <Image
-                    alt="nextui logo"
-                    height={40}
+                    alt="iris logo"
+                    height={20}
                     radius="sm"
-                    src="./boilermap.png"
-                    width={40}
+                    src="./iris.png"
+                    width={30}
                   />
                   <div className="flex flex-col">
                     <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      BoilerMaps
+                      Iris
                     </p>
                   </div>
                 </CardHeader>
                 <Divider />
-                <CardBody>
+                <CardBody className="py-3">
                   <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A map that showcases high-level trends with respect to pollution, project for the Boilermake 2023 hackathon. Built using Python, HTML, and CSS.
+                    A hands-free web-interface system with real-time eye tracking, voice commands, and AI agent control. Built for users with paralysis or in hands-free situations, won 2nd Place on the Crater Track at CalHacks '25.
                   </p>
                 </CardBody>
                 <Divider />
@@ -120,9 +120,9 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                     isExternal
                     showAnchorIcon
                     className="text-xs sm:text-sm"
-                    href="https://github.com/tgondil/BoilerMap"
+                    href="https://devpost.com/software/iris-zj8yt1"
                   >
-                    Visit source code on GitHub.
+                    View on Devpost
                   </Link>
                 </CardFooter>
               </Card>
@@ -215,28 +215,27 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 className="w-4/5 h-full hover:animate-minipop bg-my-grey bg-cover bg-center "
                 isPressable
                 onClick={()=>{
-                  window.open('https://github.com/tgondil/realer.app')
+                  window.open('https://devpost.com/software/signbridge')
                 }}
               >
-                <CardHeader className="flex gap-3">
+                <CardHeader className="flex gap-3 py-2">
                   <Image
-                    alt="nextui logo"
+                    alt="signbridge logo"
                     height={40}
                     radius="sm"
-                    src="./realer.png"
+                    src="./signbridge.png"
                     width={40}
-                    
                   />
                   <div className="flex flex-col">
                     <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      realer.app
+                      SignBridge
                     </p>
                   </div>
                 </CardHeader>
                 <Divider />
-                <CardBody>
+                <CardBody className="py-3">
                   <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A messaging app that uses facial recognition to bridge the gap between messaging and video calling. Built using React, Golang, and Redis, hosted on an AWS EC2 instance. 
+                    An AI-powered system translating American Sign Language (ASL) into text and speech in real time, with lip-syncing and personalized voice generation. Won "Best Use of Auth0" at BoilerMake XII.
                   </p>
                 </CardBody>
                 <Divider />
@@ -245,9 +244,9 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                     isExternal
                     showAnchorIcon
                     className="text-xs sm:text-sm"
-                    href="https://github.com/tgondil/realer.app"
+                    href="https://devpost.com/software/signbridge"
                   >
-                    Visit source code on GitHub.
+                    View on Devpost
                   </Link>
                 </CardFooter>
               </Card>
