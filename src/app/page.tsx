@@ -173,7 +173,7 @@ export default function Home() {
          
          <div className="flex-1 flex flex-col gap-5">
            <p>
-             I&#39;m a founding engineer at <span className="text-my-blue font-bold">Crater</span>, helping shape the product and engineering foundation of the company.
+             I&#39;m a part of the founding team at <span className="text-my-blue font-bold">Crater</span>, helping shape the product and engineering foundation of the company.
            </p>
            
            <p>
