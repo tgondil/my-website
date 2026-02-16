@@ -54,7 +54,9 @@ const config: Config = {
         "intro-unhide": "unhide 4s 1",
         text: "text 5s ease infinite",
         pop: "pop 0.5s 1",
-        minipop: "mini_pop 0.5s 1"
+        minipop: "mini_pop 0.5s 1",
+        "fade-in": "fade_in 0.5s ease-out forwards",
+        "fade-to-black": "fade_to_black 0.4s ease-in forwards"
       },
       keyframes: {
         text: {
@@ -93,6 +95,14 @@ const config: Config = {
           "0%": { transform: "translateY(0%)" },
           "50%": { transform: "translateY(-10%)" },
           "100%": { transform: "translateY(0%)" },
+        },
+        fade_in: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fade_to_black: {
+          "0%": { filter: "brightness(1)" },
+          "100%": { filter: "brightness(0)" },
         }
       },
       backgroundImage: {

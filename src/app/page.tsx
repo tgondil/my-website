@@ -7,6 +7,7 @@ import { ReactTyped } from "react-typed";
 import { useState, useEffect } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import Projects from "./components/projects";
+import NextLink from "next/link";
 import { BiLogoGmail } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
 import { SiDevpost } from "react-icons/si";
@@ -14,13 +15,16 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from "react";
 import Head from "next/head";
 import {Link} from 'react-scroll';
+import { useRouter } from "next/navigation";
+
 export default function Home() {
-  
+  const router = useRouter();
   const myRef = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(true);
   const hide = () => setVisible(false);
   const [hovered, setHovered] = useState(true);
   const [scrollY, setScrollY] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +34,14 @@ export default function Home() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleBlogClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsTransitioning(true);
+    setTimeout(() => {
+      router.push('/blog');
+    }, 400);
+  };
 
   const isHovered = (event:any) => {
     (event.target as Element).classList.add("gradient");
@@ -68,7 +80,7 @@ export default function Home() {
     <link rel="icon" type="image/png" href="./icon.png"></link>
     </Head>
     <NextUIProvider>
-      <main className="flex overscroll-none flex-col min-h-screen ">
+      <main className={`flex overscroll-none flex-col min-h-screen ${isTransitioning ? 'animate-fade-to-black' : ''}`}>
         <div className="relative flex flex-col h-mobile sm:h-screen overflow-hidden">
           <div 
             className="absolute inset-0 bg-[url('/real2.png')] sm:bg-[url('/calvin2.jpg')] bg-cover bg-center bg-no-repeat"
@@ -90,12 +102,17 @@ export default function Home() {
               {"<"}projects{">"}
             </h1>
             </Link>
-            <Link to="after" 
-      spy={true} 
-      smooth={true} 
+            <a onClick={handleBlogClick} href="/blog">
+            <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className=" cursor-pointer text-zanah nav-link hover:gradient font-roboto">
+              {"<"}blog{">"}
+            </h1>
+            </a>
+            <Link to="after"
+      spy={true}
+      smooth={true}
       duration={500}>
-            
-            
+
+
             <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className=" mr-10 text-zanah cursor-pointer hover:gradient font-roboto">
               {"<"}about{">"}
             </h1>
@@ -143,7 +160,6 @@ export default function Home() {
         <div ref = {myRef} id="projects">
         <Projects about={'after'} scrollY={scrollY}></Projects>
         </div>
-              
 
         <div id="after" className="relative h-screen flex flex-col items-center overflow-hidden">
           <div 
