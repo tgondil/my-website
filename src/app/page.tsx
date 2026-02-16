@@ -194,7 +194,7 @@ export default function Home() {
              I&#39;ve won top prizes at Berkeley, UW and Purdue hackathons, and presented at <span className="text-my-pink font-bold">NeurIPS</span>, the largest AI conference in the world.
            </p>
 
-           <p className="text-zanah/70 italic text-xs sm:text-base">
+           <p className="text-zanah/70 italic">
              Build things that matter, create environments where people can grow fast, and push the limits of what&#39;s possible.
            </p>
          </div>
@@ -207,7 +207,20 @@ export default function Home() {
         reverseOrder={false}
       />
     </div>
+
+          {/* Footer */}
+          <div className="absolute bottom-0 left-0 right-0 z-20 py-6 px-8 sm:px-16">
+            <div className="max-w-6xl mx-auto flex justify-between items-center">
+              <p className="text-zanah/30 font-scp text-xs">
+                Tanay Gondil
+              </p>
+              <a href="https://www.linkedin.com/in/tgondil/" target="_blank" className="text-zanah/30 hover:text-zanah font-scp text-xs transition-all">
+                linkedin
+              </a>
+            </div>
+          </div>
       </div>
+
       </main>
     </NextUIProvider>
     </>

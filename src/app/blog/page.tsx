@@ -49,6 +49,18 @@ export default function Blog() {
 
         </div>
 
+        {/* Footer */}
+        <div className="fixed bottom-0 left-0 right-0 py-6 px-8">
+          <div className="max-w-2xl mx-auto flex justify-between items-center">
+            <p className="text-zanah/30 font-scp text-xs">
+              Tanay Gondil
+            </p>
+            <a href="https://www.linkedin.com/in/tgondil/" target="_blank" className="text-zanah/30 hover:text-zanah font-scp text-xs transition-all">
+              linkedin
+            </a>
+          </div>
+        </div>
+
       </main>
     </NextUIProvider>
   );

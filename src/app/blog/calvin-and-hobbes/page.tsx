@@ -119,13 +119,13 @@ export default function CalvinAndHobbes() {
         </div>
 
         {/* Footer */}
-        <div className="border-t border-zanah/10 py-10 px-8 sm:px-16 mt-auto">
+        <div className="fixed bottom-0 left-0 right-0 py-6 px-8 sm:px-16 z-30">
           <div className="max-w-2xl mx-auto flex justify-between items-center">
             <p className="text-zanah/30 font-scp text-xs">
               Tanay Gondil
             </p>
-            <a onClick={handleBackClick} href="/blog" className="cursor-pointer text-zanah/30 hover:text-zanah font-scp text-xs transition-all">
-              all posts
+            <a href="https://www.linkedin.com/in/tgondil/" target="_blank" className="text-zanah/30 hover:text-zanah font-scp text-xs transition-all">
+              linkedin
             </a>
           </div>
         </div>
