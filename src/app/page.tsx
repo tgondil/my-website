@@ -19,7 +19,6 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   const myRef = useRef<HTMLDivElement | null>(null);
-  const [hovered, setHovered] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -40,12 +39,12 @@ export default function Home() {
     }, 300);
   };
 
-  const isHovered = (event:any) => {
+  const isHovered = (event: any) => {
     (event.target as Element).classList.add("gradient");
     document.getElementById("home")?.classList.remove("gradient");
   };
 
-  const unHovered = (event:any) => {
+  const unHovered = (event: any) => {
     (event.target as Element).classList.remove("gradient");
     document.getElementById("home")?.classList.add("gradient");
   };
@@ -87,22 +86,41 @@ export default function Home() {
             }}
           ></div>
           <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
-          <div className="relative z-20 pl-6 invisible sm:visible sm:pl-0 text-xs flex gap-3 sm:justify-end sm:gap-10 sm:text-sm lg:text-base animate-intro-unhide font-medium sm:pt-8 w-full mb-8">
-            <h1 id="home" className="gradient text-zanah font-roboto cursor-pointer">
-              {"<"}home{">"}
-            </h1>
+          {/* Mobile Nav */}
+          <div className="relative z-20 sm:hidden px-6 text-xs flex justify-center gap-4 font-medium pt-6 w-full mb-8">
             <Link to="projects" spy={true} smooth={true} duration={500}>
-              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="cursor-pointer text-zanah nav-link hover:gradient font-roboto">
-                {"<"}things I&apos;ve built{">"}
+              <h1 className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
+                {"<"}work{">"}
               </h1>
             </Link>
             <a onClick={handleBlogClick} href="/blog">
-              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="cursor-pointer text-zanah nav-link hover:gradient font-roboto">
+              <h1 className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
                 {"<"}blog{">"}
               </h1>
             </a>
             <Link to="after" spy={true} smooth={true} duration={500}>
-              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="mr-10 text-zanah cursor-pointer hover:gradient font-roboto">
+              <h1 className="text-zanah cursor-pointer hover:gradient font-roboto transition-all">
+                {"<"}about{">"}
+              </h1>
+            </Link>
+          </div>
+          {/* Desktop Nav */}
+          <div className="relative z-20 hidden sm:flex justify-end gap-10 text-sm lg:text-base animate-intro-unhide font-medium pt-8 w-full mb-8">
+            <h1 id="home" className="gradient text-zanah font-roboto cursor-pointer">
+              {"<"}home{">"}
+            </h1>
+            <Link to="projects" spy={true} smooth={true} duration={500}>
+              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
+                {"<"}things I&apos;ve built{">"}
+              </h1>
+            </Link>
+            <a onClick={handleBlogClick} href="/blog">
+              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
+                {"<"}blog{">"}
+              </h1>
+            </a>
+            <Link to="after" spy={true} smooth={true} duration={500}>
+              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="mr-10 text-zanah cursor-pointer hover:gradient font-roboto transition-all">
                 {"<"}about{">"}
               </h1>
             </Link>
@@ -151,13 +169,13 @@ export default function Home() {
           ></div>
           <div className="absolute top-0 left-0 right-0 h-72 bg-gradient-to-t from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
           
-    <div className="relative z-20 flex flex-col w-full px-8 sm:px-16 lg:px-24 pt-12 sm:pt-16">
-      <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold gradient text-center mb-8 sm:mb-10 leading-tight font-invis">
+    <div className="relative z-20 flex flex-col w-full px-6 sm:px-16 lg:px-24 pt-10 sm:pt-16">
+      <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold gradient text-center mb-6 sm:mb-10 leading-snug font-invis">
         I build systems that help people grow, and I try to raise the ceiling for what students can do.
       </h1>
 
-       <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 text-base sm:text-lg md:text-xl text-left text-zanah leading-relaxed font-cv max-w-6xl mx-auto">
-         <div className="flex-1 flex flex-col gap-4">
+       <div className="flex flex-col lg:flex-row gap-4 lg:gap-10 text-sm sm:text-lg md:text-xl text-left text-zanah leading-relaxed font-cv max-w-6xl mx-auto">
+         <div className="flex-1 flex flex-col gap-3 sm:gap-5">
            <p>
              At Purdue, I teach <span className="text-my-green font-bold">CS390</span> as the sole instructor of record, designing a full-stack curriculum from the ground up and guiding students through building production-grade apps.
            </p>
@@ -167,7 +185,7 @@ export default function Home() {
            </p>
          </div>
 
-         <div className="flex-1 flex flex-col gap-4">
+         <div className="flex-1 flex flex-col gap-3 sm:gap-5">
            <p>
              Previously, I was on the founding team at <span className="text-my-blue font-bold">Crater</span>, and before that I interned at <span className="text-my-blue font-bold">Capital One</span>.
            </p>
@@ -176,7 +194,7 @@ export default function Home() {
              I&#39;ve won top prizes at Berkeley, UW and Purdue hackathons, and presented at <span className="text-my-pink font-bold">NeurIPS</span>, the largest AI conference in the world.
            </p>
 
-           <p className="text-zanah/70 italic">
+           <p className="text-zanah/70 italic text-xs sm:text-base">
              Build things that matter, create environments where people can grow fast, and push the limits of what&#39;s possible.
            </p>
          </div>
