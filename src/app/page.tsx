@@ -3,7 +3,6 @@ import React from "react";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithubSquare } from "react-icons/fa";
-import { ReactTyped } from "react-typed";
 import { useState, useEffect } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import Projects from "./components/projects";
@@ -20,8 +19,6 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   const myRef = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(true);
-  const hide = () => setVisible(false);
   const [hovered, setHovered] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -90,65 +87,48 @@ export default function Home() {
             }}
           ></div>
           <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
-          <div className="relative z-20 pl-6 invisible sm:visible sm:pl-0 text-sm flex gap-3 sm:justify-end sm:gap-12 sm:text-responsive-xl lg:text-responsive-2xl animate-intro-unhide font-semibold  sm:pt-8 w-full mb-8">
-            <h1 id="home" className=" gradient text-zanah font-roboto cursor-pointer">
+          <div className="relative z-20 pl-6 invisible sm:visible sm:pl-0 text-xs flex gap-3 sm:justify-end sm:gap-10 sm:text-sm lg:text-base animate-intro-unhide font-medium sm:pt-8 w-full mb-8">
+            <h1 id="home" className="gradient text-zanah font-roboto cursor-pointer">
               {"<"}home{">"}
             </h1>
-            <Link to="projects" 
-      spy={true} 
-      smooth={true} 
-      duration={500}>
-            <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className=" cursor-pointer text-zanah nav-link hover:gradient font-roboto">
-              {"<"}projects{">"}
-            </h1>
+            <Link to="projects" spy={true} smooth={true} duration={500}>
+              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="cursor-pointer text-zanah nav-link hover:gradient font-roboto">
+                {"<"}things I&apos;ve built{">"}
+              </h1>
             </Link>
             <a onClick={handleBlogClick} href="/blog">
-            <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className=" cursor-pointer text-zanah nav-link hover:gradient font-roboto">
-              {"<"}blog{">"}
-            </h1>
+              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="cursor-pointer text-zanah nav-link hover:gradient font-roboto">
+                {"<"}blog{">"}
+              </h1>
             </a>
-            <Link to="after"
-      spy={true}
-      smooth={true}
-      duration={500}>
-
-
-            <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className=" mr-10 text-zanah cursor-pointer hover:gradient font-roboto">
-              {"<"}about{">"}
-            </h1>
+            <Link to="after" spy={true} smooth={true} duration={500}>
+              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="mr-10 text-zanah cursor-pointer hover:gradient font-roboto">
+                {"<"}about{">"}
+              </h1>
             </Link>
           </div>
           <div className="relative z-20 pt-20 flex h-[calc(100vh-6rem)] sm:h-[calc(100vh-8rem)] flex-col items-center justify-center animate-slide-right py-8">
             <div className="flex flex-col items-center justify-center flex-grow">
-              <h1 className="text-4xl sm:text-1.1e animate-slide-right tracking-wide text-zanah leading-hero font-invis">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl animate-slide-right tracking-wide text-zanah leading-hero font-invis">
                 Hey, my name is
               </h1>
-              <h1 className="text-6xl pt-3 sm:pt-2 sm:text-1.2e gradient tracking-wide text-zanah leading-hero font-invis">
+              <h1 className="text-5xl pt-3 sm:pt-2 sm:text-6xl lg:text-7xl gradient tracking-wide text-zanah leading-hero font-invis">
                 Tanay Gondil
               </h1>
 
-              {visible ? (
-                <div className="font-scp pt-4 sm:pt-5 gradient text-2xl sm:text-responsive-2xl animate-intro-unhide">
-                  <ReactTyped
-                    strings={[
-                      "I'm a developer",
-                      "I'm an innovator",
-                      "I'm a learner",
-                      "I'm a creator",
-                      "I can't wait for what's next!",
-                    ]}
-                    typeSpeed={100}
-                    backSpeed={70}
-                    showCursor={false}
-                    //onComplete={hide}
-                  />{" "}
-                </div>
-              ) : null}
+              <div className="pt-4 sm:pt-5 animate-intro-unhide text-center">
+                <p className="font-scp text-zanah/60 text-base sm:text-lg italic">
+                  &quot;There&apos;s never enough time to do all the nothing you want.&quot;
+                </p>
+                <p className="font-scp text-zanah/40 text-sm mt-2">
+                  — Bill Watterson
+                </p>
+              </div>
 
-              <div className="flex w-full gap-4 sm:gap-5 pt-6 sm:pt-8 text-zanah justify-center text-5xl sm:text-4xl md:text-5xl lg:text-6xl">
+              <div className="flex w-full gap-4 sm:gap-5 pt-6 sm:pt-8 text-zanah justify-center text-4xl sm:text-4xl lg:text-5xl">
                 <a target="_blank" href="https://devpost.com/tgondil?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav"><SiDevpost className="hover:animate-pop cursor-pointer transition-all"></SiDevpost></a>
                 <a target="_blank" href="https://www.linkedin.com/in/tgondil/"><FaLinkedin className="hover:animate-pop cursor-pointer transition-all"></FaLinkedin></a>
-                <a target="blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop cursor-pointer transition-all" /></a>
+                <a target="_blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop cursor-pointer transition-all" /></a>
               </div>
             </div>
             
@@ -172,32 +152,32 @@ export default function Home() {
           <div className="absolute top-0 left-0 right-0 h-72 bg-gradient-to-t from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
           
     <div className="relative z-20 flex flex-col w-full px-8 sm:px-16 lg:px-24 pt-12 sm:pt-16">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold gradient text-center mb-10 sm:mb-12 leading-tight font-invis">
+      <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold gradient text-center mb-8 sm:mb-10 leading-tight font-invis">
         I build systems that help people grow, and I try to raise the ceiling for what students can do.
       </h1>
-      
-       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 text-lg sm:text-xl md:text-2xl text-left text-zanah leading-loose font-cv max-w-7xl mx-auto">
-         <div className="flex-1 flex flex-col gap-5">
+
+       <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 text-base sm:text-lg md:text-xl text-left text-zanah leading-relaxed font-cv max-w-6xl mx-auto">
+         <div className="flex-1 flex flex-col gap-4">
            <p>
              At Purdue, I teach <span className="text-my-green font-bold">CS390</span> as the sole instructor of record, designing a full-stack curriculum from the ground up and guiding students through building production-grade apps.
            </p>
-           
+
            <p>
-             I lead <span className="text-my-green font-bold">Hack the Future</span>, a club that builds software for non-profits across the world, where we doubled our applicant pool and shipped more real-world software than any year before. I turned <span className="text-my-yellow font-bold">Hello World</span>, the smallest hackathon at Purdue into the biggest hackathon in Purdue history, bringing hundreds of students together around building, learning, and ambition.
+             I lead <span className="text-my-green font-bold">Hack the Future</span>, a club that builds software for non-profits across the world. I turned <span className="text-my-yellow font-bold">Hello World</span>, the smallest hackathon at Purdue, into the biggest hackathon in Purdue history.
            </p>
          </div>
-         
-         <div className="flex-1 flex flex-col gap-5">
+
+         <div className="flex-1 flex flex-col gap-4">
            <p>
-             I&#39;m a part of the founding team at <span className="text-my-blue font-bold">Crater</span>, helping shape the product and engineering foundation of the company.
+             Previously, I was on the founding team at <span className="text-my-blue font-bold">Crater</span>, and before that I interned at <span className="text-my-blue font-bold">Capital One</span>.
            </p>
-           
+
            <p>
-             I&#39;ve won top prizes at Berkeley, UW and Purdue hackathons, and I&#39;m presenting this year at <span className="text-my-pink font-bold">NeurIPS</span>, the largest AI conference in the world.
+             I&#39;ve won top prizes at Berkeley, UW and Purdue hackathons, and presented at <span className="text-my-pink font-bold">NeurIPS</span>, the largest AI conference in the world.
            </p>
-           
-           <p className="italic">
-             Across everything I do, the goal is the same: build things that matter, create environments where people can grow fast, and push the limits of what&#39;s possible as a student engineer.
+
+           <p className="text-zanah/70 italic">
+             Build things that matter, create environments where people can grow fast, and push the limits of what&#39;s possible.
            </p>
          </div>
        </div>

@@ -32,10 +32,13 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
           <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-t from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
           <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
           <div className="relative z-20 sm:h-screen w-full bg-contain bg-center flex flex-col gap-8 sm:pt-0 pt-8 items-center ">
-            <div className="w-full text-responsive-4xl flex sm:text-1e tracking-wide text-zanah leading-hero sm:items-center justify-center font-invis">
-            <h1 className="gradient">
-              Here&apos;s some of my past work
-            </h1>
+            <div className="w-full flex flex-col items-center justify-center gap-3">
+              <p className="text-zanah/40 font-scp text-xs sm:text-sm tracking-widest uppercase">
+                some of my favorite
+              </p>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl gradient tracking-tight font-invis">
+                Things I&apos;ve built
+              </h1>
             </div>
             
             <div className="h-5/6 sm:h-4/6 w-full flex flex-wrap gap-y-8">
