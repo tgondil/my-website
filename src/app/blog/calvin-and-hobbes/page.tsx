@@ -23,7 +23,7 @@ export default function CalvinAndHobbes() {
     setIsTransitioning(true);
     setTimeout(() => {
       router.push('/blog');
-    }, 400);
+    }, 300);
   };
 
   return (

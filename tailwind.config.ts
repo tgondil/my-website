@@ -55,8 +55,8 @@ const config: Config = {
         text: "text 5s ease infinite",
         pop: "pop 0.5s 1",
         minipop: "mini_pop 0.5s 1",
-        "fade-in": "fade_in 0.5s ease-out forwards",
-        "fade-to-black": "fade_to_black 0.4s ease-in forwards"
+        "fade-in": "fade_in 0.3s ease-out forwards",
+        "fade-to-black": "fade_to_black 0.3s ease-in forwards"
       },
       keyframes: {
         text: {

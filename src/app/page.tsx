@@ -40,7 +40,7 @@ export default function Home() {
     setIsTransitioning(true);
     setTimeout(() => {
       router.push('/blog');
-    }, 400);
+    }, 300);
   };
 
   const isHovered = (event:any) => {

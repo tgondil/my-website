@@ -14,7 +14,7 @@ export default function Blog() {
     setIsTransitioning(true);
     setTimeout(() => {
       router.push('/');
-    }, 400);
+    }, 300);
   };
 
   return (
@@ -40,7 +40,7 @@ export default function Blog() {
                   What Calvin and Hobbes taught me about saying goodbye before learning to say hello
                 </h2>
                 <p className="text-zanah/40 font-scp text-xs mt-3">
-                  dec 24, 2024
+                  thoughts · dec 24, 2024
                 </p>
               </article>
             </Link>

@@ -44,7 +44,8 @@
   }
 }
 
-body {
+html, body {
+  background-color: #000;
   overscroll-behavior: none;
 }
 
