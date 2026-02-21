@@ -47,13 +47,17 @@
 html, body {
   background-color: #000;
   overscroll-behavior: none;
-}
-
-*, *::before, *::after {
   cursor: none !important;
 }
 
-a, button, [role="button"], input, select, textarea, label, [onclick], .cursor-pointer {
+html *, html *::before, html *::after {
+  cursor: none !important;
+}
+
+a, button, [role="button"], input, select, textarea, label, [onclick], .cursor-pointer,
+a:hover, a:focus, a:active,
+button:hover, button:focus, button:active,
+*:focus, *:active {
   cursor: none !important;
 }
 

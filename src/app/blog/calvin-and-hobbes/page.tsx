@@ -65,7 +65,7 @@ export default function CalvinAndHobbes() {
 
           {/* Pretext */}
           <p className="text-base sm:text-lg text-zanah/50 font-scp leading-relaxed py-16 sm:py-20">
-            I grew up reading Calvin and Hobbes. My grandad got my mom the entire collection from Germany, and she passed them down to me when I was younger. So much of how I&apos;ve navigated my childhood and early adulthood has come from the lessons I learned from these strips.
+            I grew up reading Calvin and Hobbes. My grandmother won the entire collection through bets with her friends—the prize was always a Calvin and Hobbes book. She gave them to my mom, who passed them down to me when I was a kid. So much of how I&apos;ve navigated my childhood and early adulthood has come from the lessons I learned from these strips.
           </p>
 
           {/* Point 1 */}
