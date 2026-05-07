@@ -78,8 +78,8 @@ export default function Home() {
     <NextUIProvider>
       <main className={`flex overscroll-none flex-col min-h-screen ${isTransitioning ? 'animate-fade-to-black' : ''}`}>
         <div className="relative flex flex-col h-mobile sm:h-screen overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-[url('/real2.png')] sm:bg-[url('/calvin2.jpg')] bg-cover bg-center bg-no-repeat"
+          <div
+            className="absolute inset-0 bg-[url('/real2.png')] sm:bg-[url('/calvin2.jpg')] bg-cover bg-top sm:bg-center bg-no-repeat"
             style={{
               transform: `translateY(${scrollY * 0.5}px)`,
               willChange: 'transform'
@@ -87,7 +87,7 @@ export default function Home() {
           ></div>
           <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
           {/* Mobile Nav */}
-          <div className="relative z-20 sm:hidden px-6 text-xs flex justify-center gap-4 font-medium pt-6 w-full mb-8">
+          <div className="relative z-20 sm:hidden px-6 pt-6 pb-2 text-sm flex justify-center gap-7 font-medium w-full">
             <Link to="projects" spy={true} smooth={true} duration={500}>
               <h1 className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
                 {"<"}work{">"}
@@ -125,88 +125,84 @@ export default function Home() {
               </h1>
             </Link>
           </div>
-          <div className="relative z-20 pt-20 flex h-[calc(100vh-6rem)] sm:h-[calc(100vh-8rem)] flex-col items-center justify-center animate-slide-right py-8">
-            <div className="flex flex-col items-center justify-center flex-grow">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl animate-slide-right tracking-wide text-zanah leading-hero font-invis">
-                Hey, my name is
-              </h1>
-              <h1 className="text-5xl pt-3 sm:pt-2 sm:text-6xl lg:text-7xl gradient tracking-wide text-zanah leading-hero font-invis">
-                Tanay Gondil
-              </h1>
+          <div className="relative z-20 flex-1 flex flex-col items-center justify-center animate-slide-right px-6 pb-12 sm:pb-16">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl animate-slide-right tracking-wide text-zanah leading-hero font-invis text-center">
+              Hey, my name is
+            </h1>
+            <h1 className="text-5xl pt-3 sm:pt-2 sm:text-6xl lg:text-7xl gradient tracking-wide text-zanah leading-hero font-invis text-center">
+              Tanay Gondil
+            </h1>
 
-              <div className="pt-4 sm:pt-5 animate-intro-unhide text-center">
-                <p className="font-scp text-zanah/60 text-base sm:text-lg italic">
-                  &quot;There&apos;s never enough time to do all the nothing you want.&quot;
-                </p>
-                <p className="font-scp text-zanah/40 text-sm mt-2">
-                  — Bill Watterson
-                </p>
-              </div>
-
-              <div className="flex w-full gap-4 sm:gap-5 pt-6 sm:pt-8 text-zanah justify-center text-4xl sm:text-4xl lg:text-5xl">
-                <a target="_blank" href="https://devpost.com/tgondil?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav"><SiDevpost className="hover:animate-pop cursor-pointer transition-all"></SiDevpost></a>
-                <a target="_blank" href="https://www.linkedin.com/in/tgondil/"><FaLinkedin className="hover:animate-pop cursor-pointer transition-all"></FaLinkedin></a>
-                <a target="_blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop cursor-pointer transition-all" /></a>
-              </div>
+            <div className="pt-5 sm:pt-5 animate-intro-unhide text-center max-w-md">
+              <p className="font-scp text-zanah/60 text-sm sm:text-lg italic leading-relaxed">
+                &quot;There&apos;s never enough time to do all the nothing you want.&quot;
+              </p>
+              <p className="font-scp text-zanah/40 text-xs sm:text-sm mt-2">
+                — Bill Watterson
+              </p>
             </div>
-            
 
-            
+            <div className="flex w-full gap-5 sm:gap-5 pt-7 sm:pt-8 text-zanah justify-center text-4xl sm:text-4xl lg:text-5xl">
+              <a target="_blank" href="https://devpost.com/tgondil?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav"><SiDevpost className="hover:animate-pop cursor-pointer transition-all"></SiDevpost></a>
+              <a target="_blank" href="https://www.linkedin.com/in/tgondil/"><FaLinkedin className="hover:animate-pop cursor-pointer transition-all"></FaLinkedin></a>
+              <a target="_blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop cursor-pointer transition-all" /></a>
+            </div>
           </div>
-          
+
         </div>
         <div ref = {myRef} id="projects">
         <Projects about={'after'} scrollY={scrollY}></Projects>
         </div>
 
-        <div id="after" className="relative h-screen flex flex-col items-center overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-[url('/real6.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-center bg-no-repeat"
+        <div id="after" className="relative h-mobile sm:h-screen flex flex-col overflow-hidden">
+          <div
+            className="absolute inset-0 bg-[url('/real6.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-bottom sm:bg-center bg-no-repeat"
             style={{
               transform: `translateY(${(scrollY - (typeof window !== 'undefined' ? document.getElementById('after')?.offsetTop || 0 : 0)) * 0.5}px)`,
               willChange: 'transform'
             }}
           ></div>
           <div className="absolute top-0 left-0 right-0 h-72 bg-gradient-to-t from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
-          
-    <div className="relative z-20 flex flex-col w-full px-6 sm:px-16 lg:px-24 pt-10 sm:pt-16">
-      <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold gradient text-center mb-6 sm:mb-10 leading-snug font-invis">
-        I build systems that help people grow, and I try to raise the ceiling for what students can do.
-      </h1>
 
-       <div className="flex flex-col lg:flex-row gap-4 lg:gap-10 text-sm sm:text-lg md:text-xl text-left text-zanah leading-relaxed font-cv max-w-6xl mx-auto">
-         <div className="flex-1 flex flex-col gap-3 sm:gap-5">
-           <p>
-             At Purdue, I teach <span className="text-my-green font-bold">CS390</span> as the sole instructor of record, designing a full-stack curriculum from the ground up and guiding students through building production-grade apps.
-           </p>
+          <div className="relative z-20 flex flex-col w-full px-6 sm:px-16 lg:px-24 pt-10 sm:pt-16 flex-shrink-0">
+            <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold gradient text-center mb-6 sm:mb-10 leading-snug font-invis">
+              I build systems that help people grow, and I try to raise the ceiling for what students can do.
+            </h1>
 
-           <p>
-             I lead <span className="text-my-green font-bold">Hack the Future</span>, a club that builds software for non-profits across the world. I turned <span className="text-my-yellow font-bold">Hello World</span>, the smallest hackathon at Purdue, into the biggest hackathon in Purdue history.
-           </p>
-         </div>
+            <div className="flex flex-col lg:flex-row gap-4 lg:gap-10 text-sm sm:text-lg md:text-xl text-left text-zanah leading-relaxed font-cv max-w-6xl mx-auto">
+              <div className="flex-1 flex flex-col gap-3 sm:gap-5">
+                <p>
+                  At Purdue, I teach <span className="text-my-green font-bold">CS390</span> as the sole instructor of record, designing a full-stack curriculum from the ground up and guiding students through building production-grade apps.
+                </p>
 
-         <div className="flex-1 flex flex-col gap-3 sm:gap-5">
-           <p>
-             Previously, I was on the founding team at <span className="text-my-blue font-bold">Crater</span>, and before that I interned at <span className="text-my-blue font-bold">Capital One</span>.
-           </p>
+                <p>
+                  I lead <span className="text-my-green font-bold">Hack the Future</span>, a club that builds software for non-profits across the world. I turned <span className="text-my-yellow font-bold">Hello World</span>, the smallest hackathon at Purdue, into the biggest hackathon in Purdue history.
+                </p>
+              </div>
 
-           <p>
-             I&#39;ve won top prizes at Berkeley, UW and Purdue hackathons, and presented at <span className="text-my-pink font-bold">NeurIPS</span>, the largest AI conference in the world.
-           </p>
+              <div className="flex-1 flex flex-col gap-3 sm:gap-5">
+                <p>
+                  Previously, I was on the founding team at <span className="text-my-blue font-bold">Crater</span>, and before that I interned at <span className="text-my-blue font-bold">Capital One</span>.
+                </p>
 
-           <p className="text-zanah/70 italic">
-             Build things that matter, create environments where people can grow fast, and push the limits of what&#39;s possible.
-           </p>
-         </div>
-       </div>
-      
-    
-      
-      <Toaster
-        position="bottom-center"
-        reverseOrder={false}
-      />
-    </div>
+                <p>
+                  I&#39;ve won top prizes at Berkeley, UW and Purdue hackathons, and presented at <span className="text-my-pink font-bold">NeurIPS</span>, the largest AI conference in the world.
+                </p>
+
+                <p className="text-zanah/70 italic">
+                  Build things that matter, create environments where people can grow fast, and push the limits of what&#39;s possible.
+                </p>
+              </div>
+            </div>
+
+            <Toaster
+              position="bottom-center"
+              reverseOrder={false}
+            />
+          </div>
+
+          {/* Spacer fills remaining height so Calvin (via bg-bottom) sits below the text */}
+          <div className="relative z-20 flex-1" />
 
           {/* Footer */}
           <div className="absolute bottom-0 left-0 right-0 z-20 py-6 px-8 sm:px-16">

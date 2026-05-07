@@ -13,6 +13,9 @@ const config: Config = {
       height: {
         'mobile': '96vh'
       },
+      minHeight: {
+        'mobile': '96vh'
+      },
       spacing: {
         '18p': '9.2%',
         '20p': '12%',
