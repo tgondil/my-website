@@ -112,9 +112,6 @@ export default function OptimizingForReality() {
               The fast feedback is efficient. The real feedback is truth. But the problem is that efficient feedback can drift away from reality. You can look beautiful on pads and still lose actual fights.
             </p>
             <p className={pClass}>
-              That&apos;s basically the entire essay.
-            </p>
-            <p className={pClass}>
               Gwern describes this as an &ldquo;inner optimization&rdquo; constrained by an &ldquo;outer optimization.&rdquo;
             </p>
             <p className={pClass}>
@@ -203,10 +200,7 @@ export default function OptimizingForReality() {
               <li>keep what survives</li>
             </ul>
             <p className={pClass}>
-              for millions of years. Brutal. Wasteful. But real.
-            </p>
-            <p className="text-base sm:text-lg text-zanah/80 font-cv leading-relaxed">
-              And that grounding matters.
+              for millions of years. Brutal and wasteful, but real.
             </p>
           </section>
 
