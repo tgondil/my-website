@@ -6,6 +6,7 @@ import { FaGithubSquare } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import Projects from "./components/projects";
+import GithubActivity from "./components/github-activity";
 import NextLink from "next/link";
 import { BiLogoGmail } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
@@ -145,7 +146,9 @@ export default function Home() {
             <div className="flex w-full gap-5 sm:gap-5 pt-7 sm:pt-8 text-zanah justify-center text-4xl sm:text-4xl lg:text-5xl">
               <a target="_blank" href="https://devpost.com/tgondil?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav"><SiDevpost className="hover:animate-pop cursor-pointer transition-all"></SiDevpost></a>
               <a target="_blank" href="https://www.linkedin.com/in/tgondil/"><FaLinkedin className="hover:animate-pop cursor-pointer transition-all"></FaLinkedin></a>
-              <a target="_blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop cursor-pointer transition-all" /></a>
+              <GithubActivity>
+                <a target="_blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop cursor-pointer transition-all" /></a>
+              </GithubActivity>
             </div>
           </div>
 
