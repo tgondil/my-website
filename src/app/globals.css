@@ -115,6 +115,24 @@ button:hover, button:focus, button:active,
   }
 }
 
+.github-heatmap-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 236, 221, 0.25) transparent;
+}
+.github-heatmap-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.github-heatmap-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.github-heatmap-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(212, 236, 221, 0.2);
+  border-radius: 3px;
+}
+.github-heatmap-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(212, 236, 221, 0.4);
+}
+
 
 
 
