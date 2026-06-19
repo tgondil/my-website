@@ -11,6 +11,7 @@ import NextLink from "next/link";
 import { BiLogoGmail } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
 import { SiDevpost, SiGooglescholar } from "react-icons/si";
+import { FaXTwitter } from "react-icons/fa6";
 import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from "react";
 import Head from "next/head";
@@ -150,6 +151,7 @@ export default function Home() {
                 <a target="_blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop cursor-pointer transition-all" /></a>
               </GithubActivity>
               <a target="_blank" href="https://scholar.google.com/citations?user=a9sDq0gAAAAJ&hl=en"><SiGooglescholar className="hover:animate-pop cursor-pointer transition-all" /></a>
+              <a target="_blank" href="https://x.com/tanaygondil"><FaXTwitter className="hover:animate-pop cursor-pointer transition-all" /></a>
             </div>
           </div>
 
