@@ -1,29 +1,130 @@
 import React from 'react'
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Divider,
-    Link,
-    Image,
-  } from "@nextui-org/react";
-import toast from 'react-hot-toast';
+
+type Project = {
+  name: string;
+  logo: string;
+  logoAlt: string;
+  desc: string;
+  href: string;
+  linkText: string;
+  award: string;
+  art: string;
+  artColor: string;
+};
+
+const TTERM_ART = String.raw`┌────────────────────┐
+│ ~ $ tterm          │
+│                    │
+│ > row: my-website  │
+│ > claude: working  │
+│ > browser: open    │
+│ █                  │
+└────────────────────┘`;
+
+const ARTEMIS_ART = String.raw`  _/\_      _/\_
+_/    \_/\_/    \_
+ focus [#####---]`;
+
+const IRIS_ART = String.raw`   .--"""--.
+  /  .---.  \
+ |  ( (o) )  |
+  \  '---'  /
+   '--...--'`;
+
+const CS390_ART = String.raw` ________________
+| $ teach(cs390) |
+| > no slides    |
+| > all code     |
+|________________|`;
+
+const SIGNBRIDGE_ART = String.raw`      __________
+ ____/          \____
+ |  |  |  |  |  |  |
+~~~~~~~~~~~~~~~~~~~~~`;
+
+const STAYSAFE_ART = String.raw` [A]--.
+       \
+    .---'
+    |
+    '--> [B] safe`;
+
+const featured: Project = {
+  name: "tterm",
+  logo: "./tterm.png",
+  logoAlt: "tterm logo",
+  desc: "A terminal built for working with AI agents. Every project gets a row with its own Claude Code session, file explorer, and a real embedded browser.",
+  href: "https://tterm.sh",
+  linkText: "tterm.sh",
+  award: "#11 on product hunt",
+  art: TTERM_ART,
+  artColor: "text-my-green/30",
+};
+
+const projects: Project[] = [
+  {
+    name: "Artemis",
+    logo: "./artemis.png",
+    logoAlt: "artemis logo",
+    desc: "A cognitive-state monitoring & workspace orchestration tool using eye-tracking, browser telemetry, and environment control.",
+    href: "https://www.youtube.com/watch?v=9Qgm1yPk9os",
+    linkText: "watch demo",
+    award: "1st place · dubhacks '25",
+    art: ARTEMIS_ART,
+    artColor: "text-my-green/25",
+  },
+  {
+    name: "Iris",
+    logo: "./iris.png",
+    logoAlt: "iris logo",
+    desc: "A hands-free web-interface system with real-time eye tracking, voice commands, and AI agent control, built for users with paralysis or anyone in hands-free situations.",
+    href: "https://www.youtube.com/watch?v=T3Psh8Hm7so",
+    linkText: "watch demo",
+    award: "2nd place · calhacks '25",
+    art: IRIS_ART,
+    artColor: "text-my-blue/25",
+  },
+  {
+    name: "CS390 Course Platform",
+    logo: "./cs390.png",
+    logoAlt: "cs390 logo",
+    desc: "A fully custom course platform built from scratch for the class I teach at Purdue. Interactive assignments, real-time grading, and student progress tracking.",
+    href: "https://github.com/tgondil/cs390-wap",
+    linkText: "github",
+    award: "sole instructor · purdue",
+    art: CS390_ART,
+    artColor: "text-my-pink/25",
+  },
+  {
+    name: "SignBridge",
+    logo: "./signbridge.png",
+    logoAlt: "signbridge logo",
+    desc: "An AI-powered system translating American Sign Language into text and speech in real time, with lip-syncing and personalized voice generation.",
+    href: "https://devpost.com/software/signbridge",
+    linkText: "devpost",
+    award: "best use of auth0 · boilermake xii",
+    art: SIGNBRIDGE_ART,
+    artColor: "text-my-yellow/25",
+  },
+  {
+    name: "StaySafePurdue",
+    logo: "./safe.png",
+    logoAlt: "staysafepurdue logo",
+    desc: "A safety app for Purdue students that scrapes Purdue Police archives to find the safest walking routes to a destination.",
+    href: "https://github.com/AashiAgarw/StaySafePurdue",
+    linkText: "github",
+    award: "2nd place · hello world '22",
+    art: STAYSAFE_ART,
+    artColor: "text-my-green/25",
+  },
+];
 
 export default function Projects({about, scrollY}: {about: any, scrollY: number}) {
-  const scrollProject = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-  const scrollContact = () => {
-    document.getElementById("after")?.scrollIntoView({behavior: 'smooth'});
-  }
-
   const projectsOffset = typeof window !== 'undefined' ? document.getElementById('projects')?.offsetTop || 0 : 0;
 
   return (
-    <div id='projects' className="relative w-full sm:h-screen flex flex-col overflow-hidden sm:pt-10">
+    <div id='projects' className="relative w-full overflow-hidden">
           <div
-            className="absolute inset-0 bg-[url('/mobilestars.webp')] sm:bg-[url('/stars.webp')] bg-cover bg-center bg-no-repeat"
+            className="absolute -top-40 -bottom-40 left-0 right-0 bg-[url('/mobilestars.webp')] sm:bg-[url('/stars.webp')] bg-cover bg-center bg-no-repeat"
             style={{
               transform: `translateY(${(scrollY - projectsOffset) * 0.5}px)`,
               willChange: 'transform'
@@ -31,273 +132,78 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
           ></div>
           <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-t from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
           <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
-          <div className="relative z-20 sm:h-screen w-full bg-contain bg-center flex flex-col gap-8 sm:pt-0 pt-8 items-center ">
-            <div className="w-full flex flex-col items-center justify-center gap-3">
-              <p className="text-zanah/40 font-scp text-xs sm:text-sm tracking-widest uppercase">
-                some of my favorite
+
+          <div className="relative z-20 max-w-6xl mx-auto px-6 sm:px-10 py-20 sm:py-24 flex flex-col gap-8">
+
+            <div className="w-full flex flex-col items-center justify-center gap-3 mb-2">
+              <p className="text-zanah/40 font-scp text-xs sm:text-sm tracking-widest">
+                ~ $ ls some-of-my-favorites/
               </p>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl gradient tracking-tight font-invis">
                 Things I&apos;ve built
               </h1>
             </div>
 
-            <div className="h-5/6 sm:h-4/6 w-full flex flex-wrap gap-y-8">
-            <div className="sm:h-1/2 sm:w-1/3 flex justify-center items-center">
-              <Card
-                className="w-4/5 h-full hover:animate-minipop bg-my-grey bg-cover bg-center"
-                isPressable
-                onClick={()=>{
-                  window.open('https://tterm.sh')
-                }}
-              >
-                <CardHeader className="flex gap-3 py-2 items-center">
-                  <Image
-                    alt="tterm logo"
-                    height={40}
-                    radius="sm"
-                    src="./tterm.png"
-                    width={40}
-                  />
-                  <div className="flex flex-col">
-                    <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      tterm
+            {/* Featured: tterm */}
+            <div
+              onClick={() => window.open(featured.href)}
+              className="group relative cursor-pointer overflow-hidden rounded-xl bg-my-grey border border-zanah/10 px-6 py-6 sm:px-8 sm:py-7 transition-all duration-300 hover:-translate-y-1 hover:border-zanah/25"
+            >
+              <div className="flex items-center gap-6">
+                <div className="flex-1 relative">
+                  <div className="flex items-center gap-3 mb-2">
+                    <img src={featured.logo} alt={featured.logoAlt} className="w-10 h-10 rounded-lg shrink-0" />
+                    <h3 className="text-xl sm:text-2xl gradient font-bold">{featured.name}</h3>
+                  </div>
+                  <p className="text-zanah/80 text-sm sm:text-base leading-relaxed max-w-2xl mb-4">
+                    {featured.desc}
+                  </p>
+                  <div className="flex items-center justify-between gap-3 max-w-2xl">
+                    <p className="font-scp text-[10px] sm:text-xs text-zanah/35">{featured.award}</p>
+                    <p className="font-scp text-xs sm:text-sm text-zanah/50 group-hover:text-zanah whitespace-nowrap transition-all">
+                      {featured.linkText} <span className="inline-block group-hover:translate-x-1 transition-transform">&#8599;</span>
                     </p>
                   </div>
-                </CardHeader>
-                <Divider />
-                <CardBody className="py-3">
-                  <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A terminal built for working with AI agents. Every project gets a row with its own Claude Code session, file explorer, and a real embedded browser. Hit #11 on Product Hunt on launch day.
-                  </p>
-                </CardBody>
-                <Divider />
-                <CardFooter>
-                  <Link
-                    isExternal
-                    showAnchorIcon
-                    className="text-xs sm:text-sm"
-                    href="https://tterm.sh"
-                  >
-                    Visit tterm.sh
-                  </Link>
-                </CardFooter>
-              </Card>
-            </div>
-            <div className="h-full w-full sm:h-1/2 w-3/6 sm:w-1/3 flex justify-center items-center">
-              <Card
-                className="w-4/5 h-full hover:animate-minipop bg-my-grey bg-cover bg-center"
-                isPressable
-                onClick={()=>{
-                  window.open('https://www.youtube.com/watch?v=9Qgm1yPk9os')
-                }}
-              >
-                <CardHeader className="flex gap-3 py-2">
-                  <Image
-                    alt="artemis logo"
-                    height={40}
-                    radius="sm"
-                    src="./artemis.png"
-                    width={40}
-                  />
-                  <div className="flex flex-col">
-                    <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      Artemis
-                    </p>
-                  </div>
-                </CardHeader>
-                <Divider />
-                <CardBody className="py-3">
-                  <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A cognitive-state monitoring & workspace orchestration tool using eye-tracking, browser telemetry, and environment control. Won 1st Place on the biggest track at DubHacks &apos;25.
-                  </p>
-                </CardBody>
-                <Divider />
-                <CardFooter>
-                  <Link
-                    isExternal
-                    showAnchorIcon
-                    className="text-xs sm:text-sm"
-                    href="https://www.youtube.com/watch?v=9Qgm1yPk9os"
-                  >
-                    View Demo
-                  </Link>
-                </CardFooter>
-              </Card>
-            </div>
-            <div className="h-1/2 w-full sm:w-1/3 sm:h-1/2 w-3/6 flex hover:animate-minipop justify-center items-center">
-              <Card
-                className="w-4/5 h-full bg-my-grey bg-cover bg-center "
-                isPressable
-                onClick={()=>{
-                  window.open('https://www.youtube.com/watch?v=T3Psh8Hm7so')
-                }}
-              >
-                <CardHeader className="flex gap-2 py-2 items-center">
-                  <Image
-                    alt="iris logo"
-                    height={20}
-                    radius="sm"
-                    src="./iris.png"
-                    width={30}
-                  />
-                  <div className="flex flex-col">
-                    <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      Iris
-                    </p>
-                  </div>
-                </CardHeader>
-                <Divider />
-                <CardBody className="py-3">
-                  <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A hands-free web-interface system with real-time eye tracking, voice commands, and AI agent control. Built for users with paralysis or in hands-free situations, won 2nd Place on the Crater Track at CalHacks &apos;25.
-                  </p>
-                </CardBody>
-                <Divider />
-                <CardFooter>
-                  <Link
-                    isExternal
-                    showAnchorIcon
-                    className="text-xs sm:text-sm"
-                    href="https://www.youtube.com/watch?v=T3Psh8Hm7so"
-                  >
-                    View Demo
-                  </Link>
-                </CardFooter>
-              </Card>
-            </div>
-            <div className="h-1/2 w-full  sm:w-1/3 sm:h-1/2 flex justify-center items-center">
-              <Card
-              onClick={()=>{
-                window.open('https://github.com/tgondil/cs390-wap')
-              }}
-                className="w-4/5  h-full bg-my-grey hover:animate-minipop bg-cover bg-center"
-                isPressable
-              >
-                <CardHeader className="flex gap-2 py-2 items-center">
-                  <Image
-                    alt="cs390 logo"
-                    height={10}
-                    radius="sm"
-                    src="./cs390.png"
-                    width={60}
-                  />
-                  <div className="flex flex-col">
-                    <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      CS390 Course Platform
-                    </p>
-                  </div>
-                </CardHeader>
-                <Divider />
-                <CardBody className="py-2">
-                  <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A fully custom course platform built from scratch for the class I teach at Purdue. Features interactive assignments, real-time grading, and student progress tracking.
-                  </p>
-                </CardBody>
-                <Divider />
-                <CardFooter>
-                  <Link
-                    isExternal
-                    showAnchorIcon
-                    className="text-xs sm:text-sm"
-                    href="https://github.com/tgondil/cs390-wap"
-                  >
-                    View on GitHub
-                  </Link>
-                </CardFooter>
-              </Card>
+                </div>
+                <pre className={`hidden lg:block font-scp text-[11px] leading-[1.25] ${featured.artColor} pointer-events-none select-none whitespace-pre shrink-0`}>
+                  {featured.art}
+                </pre>
+              </div>
             </div>
 
-            <div className="h-1/2 w-full sm:h-1/2 sm:w-1/3 flex justify-center items-center">
-              <Card
-                className="w-4/5 h-full bg-my-grey hover:animate-minipop bg-cover bg-center"
-                isPressable
-                onClick={()=>{
-                  window.open('https://github.com/AashiAgarw/StaySafePurdue')
-                }}
-              >
-                <CardHeader className="flex gap-3 py-2">
-                  <Image
-                    alt="nextui logo"
-                    height={40}
-                    radius="sm"
-                    src="./safe.png"
-                    width={40}
-                  />
-                  <div className="flex flex-col">
-                    <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      StaySafePurdue
+            {/* The rest */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {projects.map((p) => (
+                <div
+                  key={p.name}
+                  onClick={() => window.open(p.href)}
+                  className="group relative cursor-pointer overflow-hidden flex flex-col rounded-xl bg-my-grey border border-zanah/10 px-5 py-5 transition-all duration-300 hover:-translate-y-1 hover:border-zanah/25"
+                >
+                  <pre className={`absolute top-3 right-3 font-scp text-[9px] leading-[1.2] ${p.artColor} pointer-events-none select-none whitespace-pre`}>
+                    {p.art}
+                  </pre>
+                  <div className="relative flex flex-col flex-1">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 shrink-0 rounded-lg bg-black/30 flex items-center justify-center overflow-hidden">
+                        <img src={p.logo} alt={p.logoAlt} className="max-w-full max-h-full object-contain" />
+                      </div>
+                      <h3 className="text-base sm:text-lg gradient font-bold leading-tight">{p.name}</h3>
+                    </div>
+                    <p className="text-zanah/70 text-xs sm:text-sm leading-relaxed flex-1">
+                      {p.desc}
                     </p>
+                    <div className="flex items-center justify-between gap-3 mt-4">
+                      <p className="font-scp text-[10px] text-zanah/35">{p.award}</p>
+                      <p className="font-scp text-xs text-zanah/50 group-hover:text-zanah whitespace-nowrap transition-all">
+                        {p.linkText} <span className="inline-block group-hover:translate-x-1 transition-transform">&#8599;</span>
+                      </p>
+                    </div>
                   </div>
-                </CardHeader>
-                <Divider />
-                <CardBody className="py-3">
-                  <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    A safety application for Purdue students, that scrapes data from the Purdue Police department archives to showcase the safest routes to a destination. Built using Python. Placed 2nd at Hello World 2022!
-                  </p>
-                </CardBody>
-                <Divider />
-                <CardFooter>
-                  <Link
-                    isExternal
-                    showAnchorIcon
-                    className="text-xs sm:text-sm"
-                    href="https://github.com/AashiAgarw/StaySafePurdue"
-                  >
-                    Visit source code on GitHub.
-                  </Link>
-                </CardFooter>
-              </Card>
-            </div>
-            <div className="h-1/2 w-full sm:h-1/2 sm:w-1/3 flex justify-center items-center">
-              <Card
-                className="w-4/5 h-full hover:animate-minipop bg-my-grey bg-cover bg-center "
-                isPressable
-                onClick={()=>{
-                  window.open('https://devpost.com/software/signbridge')
-                }}
-              >
-                <CardHeader className="flex gap-3 py-2">
-                  <Image
-                    alt="signbridge logo"
-                    height={40}
-                    radius="sm"
-                    src="./signbridge.png"
-                    width={40}
-                  />
-                  <div className="flex flex-col">
-                    <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      SignBridge
-                    </p>
-                  </div>
-                </CardHeader>
-                <Divider />
-                <CardBody className="py-3">
-                  <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    An AI-powered system translating American Sign Language (ASL) into text and speech in real time, with lip-syncing and personalized voice generation. Won &quot;Best Use of Auth0&quot; at BoilerMake XII.
-                  </p>
-                </CardBody>
-                <Divider />
-                <CardFooter>
-                  <Link
-                    isExternal
-                    showAnchorIcon
-                    className="text-xs sm:text-sm"
-                    href="https://devpost.com/software/signbridge"
-                  >
-                    View on Devpost
-                  </Link>
-                </CardFooter>
-              </Card>
-            </div>
-
+                </div>
+              ))}
             </div>
 
           </div>
-
-          <div>
-
-          </div>
-
         </div>
   )
 }
