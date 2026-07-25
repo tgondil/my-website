@@ -4,6 +4,19 @@ import { useState } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
+function Spoiler({ children }: { children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <span
+      onClick={() => setOpen(true)}
+      title={open ? undefined : "spoiler, click to reveal"}
+      className={open ? "" : "blur-sm cursor-pointer select-none"}
+    >
+      {children}
+    </span>
+  );
+}
+
 export default function RogerAckroyd() {
   const router = useRouter();
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -66,27 +79,27 @@ export default function RogerAckroyd() {
           <div className="animate-fade-in">
 
           <p className={pClass}>
-            <em>The Murder of Roger Ackroyd</em> is my favorite mystery novel ever, and it just turned a hundred. The setup is as stock as the genre gets: rich man dead in his study, gossipy village, Poirot retired next door growing vegetables, and the local doctor narrating the case (a doctor narrating a detective, where have I heard that before).
+            <em>The Murder of Roger Ackroyd</em> is my favorite mystery novel ever, and it just turned a hundred years old. The setup is as generic as the genre gets. There&apos;s a rich man dead in his study, a super gossipy village, for whatever reason Hercule Poirot has retired next door growing vegetables, and we&apos;ve got the local doctor, Dr. Sheppard, narrating the case (a doctor narrating a detective, where have I heard that before?).
           </p>
 
           <p className={pClass}>
-            BUT HE DID IT. The doctor was blackmailing the woman who dies on page one. The murder happens in chapter four of the book he&apos;s writing. And he never lies once. He tells you the letter came at twenty to nine. He tells you he left at ten to nine, having done the little there was to be done. Both true. The murder is inside that sentence. You read right past it.
+            BUT THE DOCTOR DID IT. He was blackmailing the woman who dies on page one. The murder happens in chapter four of the book he&apos;s writing. And throughout his account, he never lies once. He tells you the letter came at twenty to nine. He also tells you he left at ten to nine, having done &ldquo;the little there was to be done&rdquo;. Both statements were completely true. The murder is inside that sentence. But everyone still read right past it.
           </p>
 
           <p className={pClass}>
-            The ending tells you nothing new. By the last chapters you already have every piece, the missing ten minutes, the dead man&apos;s voice through a locked door. Poirot just tells you what they meant.
+            The ending of the book tells you nothing new. By the last chapters you already have every single piece you need to solve the mystery: the missing ten minutes, the dead man&apos;s voice through a locked door. Poirot just tells you what they meant.
           </p>
 
           <p className={pClass}>
-            People in 1926 called it cheating. But there&apos;s no lie to point at. Christie didn&apos;t break a rule, she broke an assumption nobody had ever said out loud: you suspect everyone in a detective story except the person telling it. Sheppard never earned that trust. You gave it away on page one like you always do.
+            Funnily enough, people in 1926 called it cheating. But Christie didn&apos;t break any rules, she broke an assumption nobody had ever said out loud: you suspect everyone in a detective story except the person telling it. Sheppard never had to earn the reader&apos;s trust, the reader just gave it away for free since the very beginning.
           </p>
 
           <p className={pClass}>
-            And the manuscript itself: Sheppard was writing it as the record of the great Poirot&apos;s failure, to be published once the murder went unsolved. A trophy. Poirot corners him, he writes one last chapter, takes an overdose, and the trophy becomes the confession. THE BOOK IS EVIDENCE INSIDE ITS OWN PLOT.
+            Another great point: Sheppard was writing the book as the record of the great Poirot&apos;s failure, to be published once the murder went unsolved. But when Poirot corners him, he writes one last chapter, overdoses, and the trophy becomes the confession. THE BOOK IS EVIDENCE INSIDE ITS OWN PLOT. Poirot did not need that ego boost.
           </p>
 
           <p className={pClass}>
-            Everyone has copied the unreliable narrator since. Nobody has done it this clean, and nobody can, because it needed readers who had never suspected a narrator before, and it converted all of them in one book. We all check now. This book is why we check.
+            A lot of people have copied the unreliable narrator since. But nobody has done it this clean (unless maybe <Spoiler><em>Andhadhun</em> or <em>The Usual Suspects</em></Spoiler>), and nobody can, because it needed readers who had never suspected a narrator before, and Christie converted all of them in one book. DAMN YOU AGATHA CHRISTIE. We all check now. This book is why we check.
           </p>
 
           {/* Reading */}
