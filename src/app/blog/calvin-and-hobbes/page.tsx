@@ -44,7 +44,7 @@ export default function CalvinAndHobbes() {
         {/* Hero section */}
         <div className="relative flex flex-col h-screen overflow-hidden">
           <div
-            className="absolute inset-0 bg-[url('/real3.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-center bg-no-repeat"
+            className="absolute inset-0 bg-[url('/real3.webp')] sm:bg-[url('/calvin.webp')] bg-cover bg-center bg-no-repeat"
             style={{
               transform: `translateY(${scrollY * 0.3}px)`,
               willChange: 'transform'

@@ -17,13 +17,13 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
   const scrollContact = () => {
     document.getElementById("after")?.scrollIntoView({behavior: 'smooth'});
   }
-  
+
   const projectsOffset = typeof window !== 'undefined' ? document.getElementById('projects')?.offsetTop || 0 : 0;
-  
+
   return (
     <div id='projects' className="relative w-full sm:h-screen flex flex-col overflow-hidden sm:pt-10">
-          <div 
-            className="absolute inset-0 bg-[url('/mobilestars.png')] sm:bg-[url('/stars.jpg')] bg-cover bg-center bg-no-repeat"
+          <div
+            className="absolute inset-0 bg-[url('/mobilestars.webp')] sm:bg-[url('/stars.webp')] bg-cover bg-center bg-no-repeat"
             style={{
               transform: `translateY(${(scrollY - projectsOffset) * 0.5}px)`,
               willChange: 'transform'
@@ -40,9 +40,50 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 Things I&apos;ve built
               </h1>
             </div>
-            
+
             <div className="h-5/6 sm:h-4/6 w-full flex flex-wrap gap-y-8">
             <div className="sm:h-1/2 sm:w-1/3 flex justify-center items-center">
+              <Card
+                className="w-4/5 h-full hover:animate-minipop bg-my-grey bg-cover bg-center"
+                isPressable
+                onClick={()=>{
+                  window.open('https://tterm.sh')
+                }}
+              >
+                <CardHeader className="flex gap-3 py-2 items-center">
+                  <Image
+                    alt="tterm logo"
+                    height={40}
+                    radius="sm"
+                    src="./tterm.png"
+                    width={40}
+                  />
+                  <div className="flex flex-col">
+                    <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
+                      tterm
+                    </p>
+                  </div>
+                </CardHeader>
+                <Divider />
+                <CardBody className="py-3">
+                  <p className="text-zanah text-xs sm:text-sm lg:text-base">
+                    A terminal built for working with AI agents. Every project gets a row with its own Claude Code session, file explorer, and a real embedded browser. Hit #11 on Product Hunt on launch day.
+                  </p>
+                </CardBody>
+                <Divider />
+                <CardFooter>
+                  <Link
+                    isExternal
+                    showAnchorIcon
+                    className="text-xs sm:text-sm"
+                    href="https://tterm.sh"
+                  >
+                    Visit tterm.sh
+                  </Link>
+                </CardFooter>
+              </Card>
+            </div>
+            <div className="h-full w-full sm:h-1/2 w-3/6 sm:w-1/3 flex justify-center items-center">
               <Card
                 className="w-4/5 h-full hover:animate-minipop bg-my-grey bg-cover bg-center"
                 isPressable
@@ -83,9 +124,9 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 </CardFooter>
               </Card>
             </div>
-            <div className="h-full w-full sm:h-1/2 w-3/6 sm:w-1/3 flex justify-center items-center">
+            <div className="h-1/2 w-full sm:w-1/3 sm:h-1/2 w-3/6 flex hover:animate-minipop justify-center items-center">
               <Card
-                className="w-4/5 h-full bg-my-grey hover:animate-minipop bg-cover bg-center "
+                className="w-4/5 h-full bg-my-grey bg-cover bg-center "
                 isPressable
                 onClick={()=>{
                   window.open('https://www.youtube.com/watch?v=T3Psh8Hm7so')
@@ -124,12 +165,12 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 </CardFooter>
               </Card>
             </div>
-            <div className="h-1/2 w-full sm:w-1/3 sm:h-1/2 w-3/6 flex hover:animate-minipop justify-center items-center">
+            <div className="h-1/2 w-full  sm:w-1/3 sm:h-1/2 flex justify-center items-center">
               <Card
               onClick={()=>{
                 window.open('https://github.com/tgondil/cs390-wap')
               }}
-                className="w-4/5  h-full bg-my-grey bg-cover bg-center"
+                className="w-4/5  h-full bg-my-grey hover:animate-minipop bg-cover bg-center"
                 isPressable
               >
                 <CardHeader className="flex gap-2 py-2 items-center">
@@ -165,7 +206,8 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 </CardFooter>
               </Card>
             </div>
-            <div className="h-1/2 w-full  sm:w-1/3 sm:h-1/2 flex justify-center items-center">
+
+            <div className="h-1/2 w-full sm:h-1/2 sm:w-1/3 flex justify-center items-center">
               <Card
                 className="w-4/5 h-full bg-my-grey hover:animate-minipop bg-cover bg-center"
                 isPressable
@@ -206,7 +248,6 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 </CardFooter>
               </Card>
             </div>
-            
             <div className="h-1/2 w-full sm:h-1/2 sm:w-1/3 flex justify-center items-center">
               <Card
                 className="w-4/5 h-full hover:animate-minipop bg-my-grey bg-cover bg-center "
@@ -248,55 +289,15 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 </CardFooter>
               </Card>
             </div>
-            <div className="h-1/2 w-full sm:h-1/2 sm:w-1/3 flex justify-center items-center">
-              <Card
-                className="w-4/5 h-full bg-my-grey hover:animate-minipop bg-cover bg-center"
-                isPressable
-                onClick={scrollProject}
-              >
-                <CardHeader className="flex gap-3 py-2">
-                  <Image
-                    alt="nextui logo"
-                    height={40}
-                    radius="sm"
-                    src="./angry.png"
-                    width={40}
-                  />
-                  <div className="flex flex-col">
-                    <p className="text-sm sm:text-base lg:text-lg text-zanah gradient font-bold">
-                      tanaygondil.com
-                    </p>
-                  </div>
-                </CardHeader>
-                <Divider />
-                <CardBody className="py-3">
-                  <p className="text-zanah text-xs sm:text-sm lg:text-base">
-                    This website, built using Next.js, NextUI, and Tailwind.
-                  </p>
-                </CardBody>
-                <Divider />
-                <CardFooter>
-                  <Link
-                    isExternal
-                    showAnchorIcon
-                    className="text-xs sm:text-sm"
-                    onClick={scrollProject}
-                  >
-                    Go to top
-                  </Link>
-                </CardFooter>
-              </Card>
-              
-            </div>
-            
+
             </div>
 
           </div>
-          
+
           <div>
-          
+
           </div>
-          
+
         </div>
   )
 }

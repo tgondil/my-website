@@ -71,7 +71,13 @@ export default function Home() {
 
   return (
     <>
-    <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script> 
+    <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+    <link rel="preload" as="image" href="/real2.webp" media="(max-width: 639px)" />
+    <link rel="preload" as="image" href="/calvin2.webp" media="(min-width: 640px)" />
+    <link rel="preload" as="image" href="/mobilestars.webp" media="(max-width: 639px)" />
+    <link rel="preload" as="image" href="/stars.webp" media="(min-width: 640px)" />
+    <link rel="preload" as="image" href="/real6.webp" media="(max-width: 639px)" />
+    <link rel="preload" as="image" href="/calvin.webp" media="(min-width: 640px)" />
     <Head>
     <title>Tanay Gondil | Full Stack Developer and ML/AI Engineer</title>
     <meta name="description" content="Hi, I'm Tanay. I make specialized tools that make life easier for people, and I really enjoy it." />
@@ -81,7 +87,7 @@ export default function Home() {
       <main className={`flex overscroll-none flex-col min-h-screen ${isTransitioning ? 'animate-fade-to-black' : ''}`}>
         <div className="relative flex flex-col h-mobile sm:h-screen overflow-hidden">
           <div
-            className="absolute inset-0 bg-[url('/real2.png')] sm:bg-[url('/calvin2.jpg')] bg-cover bg-top sm:bg-center bg-no-repeat"
+            className="absolute inset-0 bg-[url('/real2.webp')] sm:bg-[url('/calvin2.webp')] bg-cover bg-top sm:bg-center bg-no-repeat"
             style={{
               transform: `translateY(${scrollY * 0.5}px)`,
               willChange: 'transform'
@@ -162,7 +168,7 @@ export default function Home() {
 
         <div id="after" className="relative h-mobile sm:h-screen flex flex-col overflow-hidden">
           <div
-            className="absolute inset-0 bg-[url('/real6.png')] sm:bg-[url('/calvin.jpg')] bg-cover bg-bottom sm:bg-center bg-no-repeat"
+            className="absolute inset-0 bg-[url('/real6.webp')] sm:bg-[url('/calvin.webp')] bg-cover bg-bottom sm:bg-center bg-no-repeat"
             style={{
               transform: `translateY(${(scrollY - (typeof window !== 'undefined' ? document.getElementById('after')?.offsetTop || 0 : 0)) * 0.5}px)`,
               willChange: 'transform'
