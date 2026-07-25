@@ -34,6 +34,17 @@ export default function Blog() {
           {/* Posts */}
           <div className="space-y-6">
 
+            <Link href="/blog/roger-ackroyd" className="group block">
+              <article className="py-6 border-b border-zanah/10 hover:border-zanah/30 transition-all">
+                <h2 className="text-lg sm:text-xl text-zanah font-cv leading-snug group-hover:gradient transition-all">
+                  The Perfect Murder Mystery
+                </h2>
+                <p className="text-zanah/40 font-scp text-xs mt-3">
+                  reading · jul 21, 2026
+                </p>
+              </article>
+            </Link>
+
             <Link href="/blog/building-tterm" className="group block">
               <article className="py-6 border-b border-zanah/10 hover:border-zanah/30 transition-all">
                 <h2 className="text-lg sm:text-xl text-zanah font-cv leading-snug group-hover:gradient transition-all">
