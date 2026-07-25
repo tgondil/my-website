@@ -87,7 +87,7 @@ export default function RogerAckroyd() {
           </p>
 
           <p className={pClass}>
-            The ending of the book tells you nothing new. By the last chapters you already have every single piece you need to solve the mystery: the missing ten minutes, the dead man&apos;s voice through a locked door. Poirot just tells you what they meant.
+            The ending&apos;s power isn&apos;t in revealing new clues, it&apos;s in reinterpreting the ones you&apos;ve already seen. By the last chapters you already have every single piece you need to solve the mystery: the missing ten minutes, the dead man&apos;s voice through a locked door. Poirot just tells you what they meant.
           </p>
 
           <p className={pClass}>
@@ -99,7 +99,7 @@ export default function RogerAckroyd() {
           </p>
 
           <p className={pClass}>
-            A lot of people have copied the unreliable narrator since. But nobody has done it this clean (unless maybe <Spoiler><em>Andhadhun</em> or <em>The Usual Suspects</em></Spoiler>), and nobody can, because it needed readers who had never suspected a narrator before, and Christie converted all of them in one book. DAMN YOU AGATHA CHRISTIE. We all check now. This book is why we check.
+            A lot of people have copied the unreliable narrator since. But few have done it this cleanly. The ones that come closest for me are <Spoiler><em>Andhadhun</em> and <em>The Usual Suspects</em>, and they earn the comparison because they run the same con: the person telling you the story is the person the story is protecting</Spoiler>. And nobody can ever do it like Christie did, because it needed readers who had never suspected a narrator before, and she converted all of them in one book. DAMN YOU AGATHA CHRISTIE. We all check now. This book is why we check.
           </p>
 
           {/* Reading */}
