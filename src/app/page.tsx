@@ -14,7 +14,6 @@ import { SiDevpost, SiGooglescholar } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from "react";
-import Head from "next/head";
 import {Link} from 'react-scroll';
 import { useRouter } from "next/navigation";
 
@@ -64,8 +63,14 @@ export default function Home() {
   }
 
   const copy = () => {
-    navigator.clipboard.writeText("gondil.tanay@gmail.com");
-    toast.success("Email copied to clipboard!");
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText("gondil.tanay@gmail.com").then(
+        () => toast.success("Email copied to clipboard!"),
+        () => { window.location.href = "mailto:gondil.tanay@gmail.com"; }
+      );
+    } else {
+      window.location.href = "mailto:gondil.tanay@gmail.com";
+    }
   }
 
 
@@ -78,11 +83,6 @@ export default function Home() {
     <link rel="preload" as="image" href="/stars.webp" media="(min-width: 640px)" />
     <link rel="preload" as="image" href="/real6.webp" media="(max-width: 639px)" />
     <link rel="preload" as="image" href="/calvin.webp" media="(min-width: 640px)" />
-    <Head>
-    <title>Tanay Gondil | Full Stack Developer and ML/AI Engineer</title>
-    <meta name="description" content="Hi, I'm Tanay. I make specialized tools that make life easier for people, and I really enjoy it." />
-    <link rel="icon" type="image/png" href="./icon.png"></link>
-    </Head>
     <NextUIProvider>
       <main className={`flex overscroll-none flex-col min-h-screen ${isTransitioning ? 'animate-fade-to-black' : ''}`}>
         <div className="relative flex flex-col h-mobile sm:h-screen overflow-hidden">
@@ -158,6 +158,7 @@ export default function Home() {
               </GithubActivity>
               <a target="_blank" href="https://scholar.google.com/citations?user=a9sDq0gAAAAJ&hl=en"><SiGooglescholar className="hover:animate-pop cursor-pointer transition-all" /></a>
               <a target="_blank" href="https://x.com/tanaygondil"><FaXTwitter className="hover:animate-pop cursor-pointer transition-all" /></a>
+              <a onClick={copy} className="cursor-pointer"><MdEmail className="hover:animate-pop transition-all" /></a>
             </div>
           </div>
 
