@@ -21,7 +21,7 @@ export default function Blog() {
     <NextUIProvider>
       <main className={`min-h-screen bg-black animate-fade-in ${isTransitioning ? 'animate-fade-to-black' : ''}`}>
 
-        <div className="max-w-2xl mx-auto px-8 pt-8 sm:pt-10 pb-16">
+        <div className="max-w-2xl mx-auto px-8 pt-4 sm:pt-5 pb-16">
 
           {/* Header */}
           <div className="relative mb-5">
