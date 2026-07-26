@@ -24,11 +24,17 @@ export default function Blog() {
         <div className="max-w-2xl mx-auto px-8 pt-14 sm:pt-20 pb-16">
 
           {/* Header */}
-          <div className="flex items-center justify-between mb-10">
-            <h1 className="dot-text text-2xl sm:text-3xl gradient font-invis">Blog</h1>
-            <a onClick={handleHomeClick} href="/" className="cursor-pointer text-zanah/40 hover:text-zanah font-scp text-sm transition-all">
+          <div className="relative mb-12">
+            <a onClick={handleHomeClick} href="/" className="absolute right-0 top-0 cursor-pointer text-zanah/40 hover:text-zanah font-scp text-sm transition-all">
               &larr; home
             </a>
+            <div className="flex justify-center pt-4">
+              <img
+                src="/blog/calvin-happiness.webp"
+                alt="Calvin grinning behind his cardboard stand: HAPPINESS 10 cents"
+                className="w-36 sm:w-44 opacity-90"
+              />
+            </div>
           </div>
 
           {/* Posts */}
@@ -89,14 +95,6 @@ export default function Blog() {
               </article>
             </Link>
 
-          </div>
-
-          <div className="flex justify-center mt-16">
-            <img
-              src="/blog/calvin-happiness.webp"
-              alt="Calvin grinning behind his cardboard stand: HAPPINESS 10 cents"
-              className="w-36 sm:w-44 opacity-90"
-            />
           </div>
 
         </div>
