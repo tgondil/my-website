@@ -21,14 +21,14 @@ export default function Blog() {
     <NextUIProvider>
       <main className={`min-h-screen bg-black animate-fade-in ${isTransitioning ? 'animate-fade-to-black' : ''}`}>
 
-        <div className="max-w-2xl mx-auto px-8 pt-14 sm:pt-20 pb-16">
+        <div className="max-w-2xl mx-auto px-8 pt-8 sm:pt-10 pb-16">
 
           {/* Header */}
-          <div className="relative mb-12">
+          <div className="relative mb-5">
             <a onClick={handleHomeClick} href="/" className="absolute right-0 top-0 cursor-pointer text-zanah/40 hover:text-zanah font-scp text-sm transition-all">
               &larr; home
             </a>
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center">
               <img
                 src="/blog/calvin-happiness.webp"
                 alt="Calvin grinning behind his cardboard stand: HAPPINESS 10 cents"
