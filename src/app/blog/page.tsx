@@ -32,7 +32,7 @@ export default function Blog() {
               <img
                 src="/blog/calvin-happiness.webp"
                 alt="Calvin grinning behind his cardboard stand: HAPPINESS 10 cents"
-                className="w-36 sm:w-44 opacity-90"
+                className="w-24 sm:w-28 opacity-90"
               />
             </div>
           </div>
