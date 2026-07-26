@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import Halftone from "../../components/halftone";
 
 export default function CalvinAndHobbes() {
   const router = useRouter();
@@ -44,17 +45,19 @@ export default function CalvinAndHobbes() {
         {/* Hero section */}
         <div className="relative flex flex-col h-screen overflow-hidden">
           <div
-            className="absolute inset-0 bg-[url('/real3.webp')] sm:bg-[url('/calvin.webp')] bg-cover bg-center bg-no-repeat"
+            className="absolute inset-0"
             style={{
               transform: `translateY(${scrollY * 0.3}px)`,
               willChange: 'transform'
             }}
-          ></div>
+          >
+            <Halftone src="/calvin.webp" mobileSrc="/real3.webp" cell={5} detail realSubjects className="absolute inset-0" />
+          </div>
           <div className="absolute inset-0 bg-black/50"></div>
           <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent to-black pointer-events-none"></div>
 
           <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-8 sm:px-16">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl text-center text-zanah leading-snug font-invis max-w-4xl">
+            <h1 className="dot-text text-3xl sm:text-5xl lg:text-6xl text-center text-zanah leading-snug font-invis max-w-4xl">
               what calvin and hobbes taught me about <span className="gradient">saying goodbye</span> before learning to say hello
             </h1>
           </div>

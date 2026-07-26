@@ -49,7 +49,7 @@ export default function IntrospectiveRefusal() {
             <p className="text-zanah/40 font-scp text-xs tracking-widest mb-6">
               Jan 28, 2025
             </p>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl text-zanah leading-tight font-invis mb-6">
+            <h1 className="dot-text text-3xl sm:text-4xl lg:text-5xl text-zanah leading-tight font-invis mb-6">
               Do Language Models Know When They&apos;ll Refuse?
             </h1>
             <p className="text-lg sm:text-xl text-zanah/60 font-cv leading-relaxed">

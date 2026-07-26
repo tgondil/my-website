@@ -55,7 +55,7 @@ export default function RogerAckroyd() {
             <p className="text-zanah/40 font-scp text-xs tracking-widest mb-6">
               Jul 21, 2026
             </p>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl text-zanah leading-tight font-invis mb-6">
+            <h1 className="dot-text text-3xl sm:text-4xl lg:text-5xl text-zanah leading-tight font-invis mb-6">
               The <span className="gradient">Perfect</span> Murder Mystery
             </h1>
             <p className="text-base sm:text-lg text-zanah/50 font-scp leading-relaxed">
@@ -68,9 +68,16 @@ export default function RogerAckroyd() {
           <div className="text-center py-12">
             <button
               onClick={() => setRevealed(true)}
-              className="text-base sm:text-lg text-zanah/60 hover:text-zanah font-cv leading-relaxed max-w-md mx-auto cursor-pointer transition-all"
+              className="group flex items-center gap-6 text-left max-w-lg mx-auto cursor-pointer"
             >
-              This has spoilers. If you haven&apos;t read the book, you will regret not reading it first for the rest of your life, because you will never forget the killer.
+              <img
+                src="/blog/calvin-spoilers.webp"
+                alt="Calvin, clutching Hobbes: HE SPOILS ALL THE GOOD PARTS TOO! HE YELLS OUT WHAT'S HAPPENING WHILE HE'S READING!"
+                className="w-28 sm:w-36 shrink-0"
+              />
+              <span className="text-base sm:text-lg text-zanah/60 group-hover:text-zanah font-cv leading-relaxed transition-all">
+                This has spoilers. If you haven&apos;t read the book, you will regret not reading it first for the rest of your life, because you will never forget the killer.
+              </span>
             </button>
           </div>
           )}

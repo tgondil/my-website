@@ -2,7 +2,6 @@
 import React from "react";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
-import { FaGithubSquare } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import Projects from "./components/projects";
@@ -11,10 +10,12 @@ import NextLink from "next/link";
 import { BiLogoGmail } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
 import { SiDevpost, SiGooglescholar } from "react-icons/si";
+import { FaGithubSquare } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from "react";
 import {Link} from 'react-scroll';
+import Halftone from "./components/halftone";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -87,12 +88,15 @@ export default function Home() {
       <main className={`flex overscroll-none flex-col min-h-screen ${isTransitioning ? 'animate-fade-to-black' : ''}`}>
         <div className="relative flex flex-col h-mobile sm:h-screen overflow-hidden">
           <div
-            className="absolute inset-0 bg-[url('/real2.webp')] sm:bg-[url('/calvin2.webp')] bg-cover bg-top sm:bg-center bg-no-repeat"
+            id="hero-dots"
+            className="absolute inset-0"
             style={{
               transform: `translateY(${scrollY * 0.5}px)`,
               willChange: 'transform'
             }}
-          ></div>
+          >
+            <Halftone src="/calvin2.webp" mobileSrc="/real2.webp" cell={5} detail realSubjects align="center" mobileAlign="top" className="absolute inset-0" />
+          </div>
           <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
           {/* Mobile Nav */}
           <div className="relative z-20 sm:hidden px-6 pt-6 pb-2 text-sm flex justify-center gap-7 font-medium w-full">
@@ -113,7 +117,7 @@ export default function Home() {
             </Link>
           </div>
           {/* Desktop Nav */}
-          <div className="relative z-20 hidden sm:flex justify-end gap-10 text-sm lg:text-base animate-intro-unhide font-medium pt-8 w-full mb-8">
+          <div className="relative z-20 hidden sm:flex justify-end gap-10 text-sm lg:text-base font-medium pt-8 w-full mb-8">
             <h1 id="home" className="gradient text-zanah font-roboto cursor-pointer">
               {"<"}home{">"}
             </h1>
@@ -133,15 +137,15 @@ export default function Home() {
               </h1>
             </Link>
           </div>
-          <div className="relative z-20 flex-1 flex flex-col items-center justify-center animate-slide-right px-6 pb-12 sm:pb-16">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl animate-slide-right tracking-wide text-zanah leading-hero font-invis text-center">
+          <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-6 pb-12 sm:pb-16">
+            <h1 className="dot-text text-3xl sm:text-4xl lg:text-5xl tracking-wide text-zanah leading-hero font-invis text-center">
               Hey, my name is
             </h1>
-            <h1 className="text-5xl pt-3 sm:pt-2 sm:text-6xl lg:text-7xl gradient tracking-wide text-zanah leading-hero font-invis text-center">
+            <h1 className="dot-text text-5xl pt-3 sm:pt-2 sm:text-6xl lg:text-7xl gradient tracking-wide text-zanah leading-hero font-invis text-center">
               Tanay Gondil
             </h1>
 
-            <div className="pt-5 sm:pt-5 animate-intro-unhide text-center max-w-md">
+            <div className="pt-5 sm:pt-5 text-center max-w-md">
               <p className="font-scp text-zanah/60 text-sm sm:text-lg italic leading-relaxed">
                 &quot;There&apos;s never enough time to do all the nothing you want.&quot;
               </p>
@@ -162,23 +166,29 @@ export default function Home() {
             </div>
           </div>
 
+          <button onClick={scrollProject} className="absolute bottom-5 left-1/2 -translate-x-1/2 z-50 animate-other-bounce cursor-pointer">
+            <span className="font-scp text-xs text-zanah/40 hover:text-zanah transition-all">↓ scroll</span>
+          </button>
         </div>
         <div ref = {myRef} id="projects">
         <Projects about={'after'} scrollY={scrollY}></Projects>
         </div>
 
+
         <div id="after" className="relative h-mobile sm:h-screen flex flex-col overflow-hidden">
           <div
-            className="absolute inset-0 bg-[url('/real6.webp')] sm:bg-[url('/calvin.webp')] bg-cover bg-bottom sm:bg-center bg-no-repeat"
+            className="absolute inset-0"
             style={{
               transform: `translateY(${(scrollY - (typeof window !== 'undefined' ? document.getElementById('after')?.offsetTop || 0 : 0)) * 0.5}px)`,
               willChange: 'transform'
             }}
-          ></div>
+          >
+            <Halftone src="/calvin.webp" mobileSrc="/real6.webp" cell={5} detail realSubjects align="center" mobileAlign="bottom" className="absolute inset-0" />
+          </div>
           <div className="absolute top-0 left-0 right-0 h-72 bg-gradient-to-t from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
 
           <div className="relative z-20 flex flex-col w-full px-6 sm:px-16 lg:px-24 pt-10 sm:pt-16 flex-shrink-0">
-            <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold gradient text-center mb-6 sm:mb-10 leading-snug font-invis">
+            <h1 className="dot-text text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold gradient text-center mb-6 sm:mb-10 leading-snug font-invis">
               I build systems that help people grow, and I try to raise the ceiling for what students can do.
             </h1>
 
@@ -223,9 +233,17 @@ export default function Home() {
               <p className="text-zanah/30 font-scp text-xs">
                 Tanay Gondil
               </p>
-              <a href="https://www.linkedin.com/in/tgondil/" target="_blank" className="text-zanah/30 hover:text-zanah font-scp text-xs transition-all">
-                linkedin
-              </a>
+              <div className="flex gap-4">
+                <a href="https://github.com/tgondil" target="_blank" className="text-zanah/30 hover:text-zanah font-scp text-xs transition-all">
+                  github
+                </a>
+                <a href="/feed.xml" className="text-zanah/30 hover:text-zanah font-scp text-xs transition-all">
+                  rss
+                </a>
+                <a href="https://www.linkedin.com/in/tgondil/" target="_blank" className="text-zanah/30 hover:text-zanah font-scp text-xs transition-all">
+                  linkedin
+                </a>
+              </div>
             </div>
           </div>
       </div>

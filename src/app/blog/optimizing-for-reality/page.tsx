@@ -50,7 +50,7 @@ export default function OptimizingForReality() {
             <p className="text-zanah/40 font-scp text-xs tracking-widest mb-6">
               May 6, 2026
             </p>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl text-zanah leading-tight font-invis mb-6">
+            <h1 className="dot-text text-3xl sm:text-4xl lg:text-5xl text-zanah leading-tight font-invis mb-6">
               The Most Dangerous Thing You Can Optimize For
             </h1>
           </header>

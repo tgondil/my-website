@@ -71,7 +71,7 @@ button:hover, button:focus, button:active,
 }
 
 .star-cursor::before {
-  content: "✦";
+  content: "\2726";
   font-size: 14px;
   color: rgba(212, 236, 221, 0.9);
   text-shadow: 0 0 10px rgba(212, 236, 221, 0.5);
@@ -245,3 +245,16 @@ html {
 	overscroll-behavior: none;
   }
 
+
+::selection {
+  background: rgba(184, 181, 255, 0.35);
+  color: #D4ECDD;
+}
+
+/* display text renders as halftone dots; body text stays crisp */
+.dot-text {
+  -webkit-mask-image: radial-gradient(circle, #000 0 1.15px, rgba(0, 0, 0, 0) 1.25px);
+  -webkit-mask-size: 2.4px 2.4px;
+  mask-image: radial-gradient(circle, #000 0 1.15px, rgba(0, 0, 0, 0) 1.25px);
+  mask-size: 2.4px 2.4px;
+}
