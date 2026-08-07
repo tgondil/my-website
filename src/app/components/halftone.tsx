@@ -1,10 +1,23 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import {
+  MUSIC_SPECTRUM_EVENT,
+  type MusicSpectrumDetail,
+} from "../lib/music-spectrum";
 
 type Fit = "cover" | "tile";
 type Align = "top" | "center" | "bottom";
 
-export type Dot = { x: number; y: number; r: number; c: string };
+export type Dot = { x: number; y: number; r: number; c: string; lum: number };
+
+const REACTIVE_STAR_COLORS = [
+  "#00D4FF",
+  "#6F70FF",
+  "#B8B5FF",
+  "#D94F8A",
+  "#D4ECDD",
+];
+const REACTIVE_LAYER_COUNT = 3;
 
 /**
  * Live halftone renderer. Samples an image on a grid and draws it as
@@ -31,6 +44,9 @@ export default function Halftone({
   mobileAlign,
   detail = false,
   realSubjects = false,
+  audioReactive = false,
+  deferMs = 64,
+  preview = false,
   className = "",
 }: {
   src: string;
@@ -45,12 +61,19 @@ export default function Halftone({
   mobileAlign?: Align;
   detail?: boolean;
   realSubjects?: boolean;
+  audioReactive?: boolean;
+  deferMs?: number;
+  preview?: boolean;
   className?: string;
 }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const reactiveCanvasRefs = useRef<Array<HTMLCanvasElement | null>>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    const reactiveCanvases = reactiveCanvasRefs.current.filter(
+      (layer): layer is HTMLCanvasElement => Boolean(layer),
+    );
     const parent = canvas?.parentElement;
     if (!canvas || !parent) return;
     const ctx = canvas.getContext("2d");
@@ -58,10 +81,25 @@ export default function Halftone({
 
     let dots: Dot[] = [];
     let base: HTMLCanvasElement | null = null;
+    let reactiveLayers: HTMLCanvasElement[] = [];
     let disposed = false;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let visible = false;
+    let buildQueued = false;
+    let buildVersion = 0;
+    let buildTimer: number | null = null;
+    let resizeTimer: number | null = null;
+    let lastWidth = 0;
+    let lastHeight = 0;
+    const dpr = Math.min(
+      window.devicePixelRatio || 1,
+      window.innerWidth < 640 ? 1 : 1.25,
+    );
+    // Reactive light is rendered at CSS-pixel resolution. Three musical
+    // layers therefore use roughly the same memory as the old two DPR layers.
+    const reactiveDpr = Math.min(1, dpr);
 
-    const build = () => {
+    const drawPreview = () => {
+      if (!preview) return;
       const W = Math.ceil(parent.clientWidth);
       const H = Math.ceil(parent.clientHeight);
       if (!W || !H) return;
@@ -73,12 +111,69 @@ export default function Halftone({
       const isMobile = window.innerWidth < 640;
       const chosen = isMobile && mobileSrc ? mobileSrc : src;
       const vAlign = isMobile && mobileAlign ? mobileAlign : align;
+      const image = new Image();
+      image.decoding = "async";
+      image.src = chosen;
+      image.onload = () => {
+        if (disposed || base) return;
+        const scale = Math.max(canvas.width / image.width, canvas.height / image.height);
+        const drawnWidth = image.width * scale;
+        const drawnHeight = image.height * scale;
+        const x = (canvas.width - drawnWidth) / 2;
+        const y =
+          vAlign === "top"
+            ? 0
+            : vAlign === "bottom"
+              ? canvas.height - drawnHeight
+              : (canvas.height - drawnHeight) / 2;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, x, y, drawnWidth, drawnHeight);
+
+        const maskTile = document.createElement("canvas");
+        const spacing = Math.max(4, Math.round(4.8 * dpr));
+        maskTile.width = spacing;
+        maskTile.height = spacing;
+        const maskContext = maskTile.getContext("2d");
+        if (!maskContext) return;
+        maskContext.fillStyle = "#fff";
+        maskContext.beginPath();
+        maskContext.arc(spacing / 2, spacing / 2, 1.45 * dpr, 0, 6.2832);
+        maskContext.fill();
+        const pattern = ctx.createPattern(maskTile, "repeat");
+        if (!pattern) return;
+        ctx.globalCompositeOperation = "destination-in";
+        ctx.fillStyle = pattern;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = "source-over";
+      };
+    };
+
+    const build = () => {
+      const W = Math.ceil(parent.clientWidth);
+      const H = Math.ceil(parent.clientHeight);
+      if (!W || !H) return;
+      if (W === lastWidth && H === lastHeight && base) return;
+      lastWidth = W;
+      lastHeight = H;
+      const version = ++buildVersion;
+      const targetWidth = Math.ceil(W * dpr);
+      const targetHeight = Math.ceil(H * dpr);
+      const reactiveWidth = Math.ceil(W * reactiveDpr);
+      const reactiveHeight = Math.ceil(H * reactiveDpr);
+      const reactiveScale = reactiveDpr / dpr;
+      canvas.style.width = `${W}px`;
+      canvas.style.height = `${H}px`;
+
+      const isMobile = window.innerWidth < 640;
+      const chosen = isMobile && mobileSrc ? mobileSrc : src;
+      const vAlign = isMobile && mobileAlign ? mobileAlign : align;
 
       const img = new Image();
       img.decoding = "async";
       img.src = chosen;
       img.onload = () => {
-        if (disposed) return;
+        if (disposed || version !== buildVersion) return;
         // sample at fine resolution; without detail, fine == cell
         const sub = detail ? 2 : 1;
         const cellF = cell / sub;
@@ -113,6 +208,8 @@ export default function Halftone({
 
         const data = octx.getImageData(0, 0, colsF, rowsF).data;
         dots = [];
+        reactiveLayers = [];
+        let subjectMask: Uint8Array | null = null;
         const csF = cellF * dpr;
         const maxRF = csF / 2;
         const cs = cell * dpr;
@@ -125,11 +222,14 @@ export default function Halftone({
           if (lum < 0.015) return;
           let frac = Math.min(1, Math.pow(lum, gamma) * boost);
           frac = Math.max(frac, floor);
+          const quantize = (value: number) =>
+            Math.min(255, Math.round(Math.min(255, value * lift) / 32) * 32);
           dots.push({
             x: px,
             y: py,
             r: mR * frac,
-            c: `rgb(${Math.min(255, (r * lift) | 0)},${Math.min(255, (g * lift) | 0)},${Math.min(255, (b * lift) | 0)})`,
+            c: `rgb(${quantize(r)},${quantize(g)},${quantize(b)})`,
+            lum,
           });
         };
 
@@ -196,18 +296,26 @@ export default function Halftone({
         }
 
         base = document.createElement("canvas");
-        base.width = canvas.width;
-        base.height = canvas.height;
+        base.width = targetWidth;
+        base.height = targetHeight;
         const bctx = base.getContext("2d");
         if (!bctx) return;
         bctx.fillStyle = "#000";
         bctx.fillRect(0, 0, base.width, base.height);
+        const pathsByColor = new Map<string, Path2D>();
         for (const d of dots) {
-          bctx.fillStyle = d.c;
-          bctx.beginPath();
-          bctx.arc(d.x, d.y, d.r, 0, 6.2832);
-          bctx.fill();
+          let path = pathsByColor.get(d.c);
+          if (!path) {
+            path = new Path2D();
+            pathsByColor.set(d.c, path);
+          }
+          path.moveTo(d.x + d.r, d.y);
+          path.arc(d.x, d.y, d.r, 0, 6.2832);
         }
+        pathsByColor.forEach((path, color) => {
+          bctx.fillStyle = color;
+          bctx.fill(path);
+        });
         // bright / colorful regions (the characters and the ground they're on)
         // come through as the real image, feathered into the dot field
         if (realSubjects) {
@@ -276,6 +384,8 @@ export default function Halftone({
             }
           }
 
+          subjectMask = cur;
+
           let any = false;
           for (let k = 0; k < cur.length; k++) if (cur[k]) { any = true; break; }
           if (any) {
@@ -294,8 +404,8 @@ export default function Halftone({
               mctx.putImageData(mimg, 0, 0);
 
               const layer = document.createElement("canvas");
-              layer.width = canvas.width;
-              layer.height = canvas.height;
+              layer.width = targetWidth;
+              layer.height = targetHeight;
               const lctx = layer.getContext("2d");
               if (lctx) {
                 if (fit === "tile") {
@@ -325,21 +435,224 @@ export default function Halftone({
           }
         }
 
+        if (audioReactive) {
+          // Keep the reactive bloom away from the illustrated subjects. The
+          // extra clearance prevents large star glows from spilling back over
+          // Calvin and Hobbes even when the source dot itself is just outside
+          // the subject mask.
+          let starExclusionMask = subjectMask;
+          if (subjectMask) {
+            let expanded = subjectMask;
+            for (let pass = 0; pass < 4; pass++) {
+              const next = expanded.slice();
+              for (let y = 0; y < rowsF; y++) {
+                for (let x = 0; x < colsF; x++) {
+                  const index = y * colsF + x;
+                  if (!expanded[index]) continue;
+                  for (let oy = -1; oy <= 1; oy++) {
+                    for (let ox = -1; ox <= 1; ox++) {
+                      const yy = y + oy;
+                      const xx = x + ox;
+                      if (yy < 0 || xx < 0 || yy >= rowsF || xx >= colsF) continue;
+                      next[yy * colsF + xx] = 1;
+                    }
+                  }
+                }
+              }
+              expanded = next;
+            }
+            starExclusionMask = expanded;
+          }
+
+          const starDots = dots.filter((dot) => {
+            if (dot.lum < 0.1) return false;
+            const sampleX = Math.min(
+              colsF - 1,
+              Math.max(0, Math.floor(dot.x / csF)),
+            );
+            const sampleY = Math.min(
+              rowsF - 1,
+              Math.max(0, Math.floor(dot.y / csF)),
+            );
+            return !starExclusionMask?.[sampleY * colsF + sampleX];
+          });
+          const stride = Math.max(1, Math.ceil(starDots.length / 1800));
+
+          reactiveLayers = Array.from({ length: REACTIVE_LAYER_COUNT }, () => {
+            const layer = document.createElement("canvas");
+            layer.width = reactiveWidth;
+            layer.height = reactiveHeight;
+            return layer;
+          });
+          const bloomPaths = REACTIVE_STAR_COLORS.map(() => new Path2D());
+          const corePaths = REACTIVE_STAR_COLORS.map(() => new Path2D());
+
+          for (let index = 0; index < starDots.length; index += stride) {
+            const dot = starDots[index];
+            const gridX = Math.floor(dot.x / cs);
+            const gridY = Math.floor(dot.y / cs);
+            const band = Math.abs(gridX + gridY * 3) % REACTIVE_STAR_COLORS.length;
+            const x = dot.x * reactiveScale;
+            const y = dot.y * reactiveScale;
+            const bloomRadius = Math.max(
+              dot.r * reactiveScale * (band === 4 ? 2.15 : 2.8),
+              1.1 * reactiveDpr,
+            );
+            const coreRadius = Math.max(
+              dot.r * reactiveScale * (band === 4 ? 0.9 : 1.25),
+              0.55 * reactiveDpr,
+            );
+            bloomPaths[band].moveTo(x + bloomRadius, y);
+            bloomPaths[band].arc(x, y, bloomRadius, 0, 6.2832);
+            corePaths[band].moveTo(x + coreRadius, y);
+            corePaths[band].arc(x, y, coreRadius, 0, 6.2832);
+          }
+
+          REACTIVE_STAR_COLORS.forEach((color, band) => {
+            const layerIndex = band < 2 ? 0 : band < 4 ? 1 : 2;
+            const layerContext = reactiveLayers[layerIndex].getContext("2d");
+            if (!layerContext) return;
+            layerContext.save();
+            layerContext.fillStyle = color;
+            layerContext.shadowColor = color;
+            layerContext.shadowBlur = (band === 4 ? 4 : 7) * reactiveDpr;
+            layerContext.globalAlpha = band === 4 ? 0.18 : 0.15;
+            layerContext.fill(bloomPaths[band]);
+            layerContext.shadowBlur = band === 4 ? 2 : 4;
+            layerContext.globalAlpha = 1;
+            layerContext.fill(corePaths[band]);
+            layerContext.restore();
+          });
+        }
+
         (canvas as HTMLCanvasElement & { __halftoneDots?: Dot[] }).__halftoneDots = dots;
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        canvas.style.width = `${W}px`;
+        canvas.style.height = `${H}px`;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(base, 0, 0);
+        reactiveCanvases.forEach((layerCanvas, index) => {
+          layerCanvas.width = reactiveWidth;
+          layerCanvas.height = reactiveHeight;
+          layerCanvas.style.width = `${W}px`;
+          layerCanvas.style.height = `${H}px`;
+          const layerContext = layerCanvas.getContext("2d");
+          layerContext?.clearRect(0, 0, reactiveWidth, reactiveHeight);
+          if (reactiveLayers[index]) {
+            layerContext?.drawImage(reactiveLayers[index], 0, 0);
+          }
+        });
       };
     };
 
-    build();
-    const ro = new ResizeObserver(() => build());
+    const handleSpectrum = (event: Event) => {
+      if (!audioReactive || !base) return;
+      const { levels, playing, beat, energy, shimmer } = (
+        event as CustomEvent<MusicSpectrumDetail>
+      ).detail;
+
+      if (!playing || !visible) {
+        reactiveCanvases.forEach((layer) => {
+          layer.style.opacity = "0";
+        });
+        return;
+      }
+
+      const layerLevels = [
+        (levels[0] ?? 0) * 0.68 + (levels[1] ?? 0) * 0.32,
+        (levels[2] ?? 0) * 0.44 + (levels[3] ?? 0) * 0.56,
+        (levels[3] ?? 0) * 0.22 + (levels[4] ?? 0) * 0.78,
+      ];
+      reactiveCanvases.forEach((layer, index) => {
+        const level = Math.max(0, Math.min(1, layerLevels[index] ?? 0));
+        const response = Math.pow(level, index === 2 ? 1.12 : 0.82);
+        const opacity = index === 0
+          ? response * 0.42 + beat * 0.32
+          : index === 1
+            ? response * 0.56 + energy * 0.12 + beat * 0.08
+            : response * 0.72 + shimmer * 0.24;
+        layer.style.opacity = String(Math.min(index === 2 ? 0.92 : 0.78, opacity));
+
+        const scale = index === 0
+          ? 1 + beat * 0.0045 + response * 0.0015
+          : index === 1
+            ? 1 + beat * 0.0018 + energy * 0.0012
+            : 1 + shimmer * 0.0009;
+        layer.style.transform = `translate3d(0, 0, 0) scale(${scale})`;
+      });
+    };
+
+    const scheduleBuild = () => {
+      if (disposed || !visible || buildQueued) return;
+      buildQueued = true;
+
+      const run = () => {
+        buildQueued = false;
+        buildTimer = null;
+        if (!disposed && visible) build();
+      };
+
+      buildTimer = window.setTimeout(run, deferMs);
+    };
+
+    drawPreview();
+
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible) {
+          scheduleBuild();
+        } else {
+          reactiveCanvases.forEach((layer) => {
+            layer.style.opacity = "0";
+          });
+        }
+      },
+      { rootMargin: "-180px 0px" },
+    );
+    intersectionObserver.observe(parent);
+
+    const ro = new ResizeObserver(() => {
+      const nextWidth = Math.ceil(parent.clientWidth);
+      const nextHeight = Math.ceil(parent.clientHeight);
+      if (base && nextWidth === lastWidth && nextHeight === lastHeight) return;
+      if (resizeTimer !== null) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        resizeTimer = null;
+        lastWidth = 0;
+        lastHeight = 0;
+        scheduleBuild();
+      }, 150);
+    });
     ro.observe(parent);
-    window.addEventListener("resize", build);
+    window.addEventListener(MUSIC_SPECTRUM_EVENT, handleSpectrum);
     return () => {
       disposed = true;
+      buildVersion += 1;
       ro.disconnect();
-      window.removeEventListener("resize", build);
+      intersectionObserver.disconnect();
+      if (buildTimer !== null) window.clearTimeout(buildTimer);
+      if (resizeTimer !== null) window.clearTimeout(resizeTimer);
+      window.removeEventListener(MUSIC_SPECTRUM_EVENT, handleSpectrum);
     };
-  }, [src, mobileSrc, cell, gamma, boost, floor, lift, fit, align, mobileAlign, detail, realSubjects]);
+  }, [src, mobileSrc, cell, gamma, boost, floor, lift, fit, align, mobileAlign, detail, realSubjects, audioReactive, deferMs, preview]);
 
-  return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
+  return (
+    <>
+      <canvas ref={canvasRef} className={className} aria-hidden="true" />
+      {audioReactive &&
+        Array.from({ length: REACTIVE_LAYER_COUNT }, (_, index) => (
+          <canvas
+            key={index}
+            ref={(layer) => {
+              reactiveCanvasRefs.current[index] = layer;
+            }}
+            className={`${className} pointer-events-none origin-center mix-blend-screen transition-[opacity,transform] duration-75 ease-linear`}
+            style={{ opacity: 0 }}
+            aria-hidden="true"
+          />
+        ))}
+    </>
+  );
 }

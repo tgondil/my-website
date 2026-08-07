@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaGithubSquare } from "react-icons/fa";
 
 type Contribution = { date: string; count: number; level: 0 | 1 | 2 | 3 | 4 };
 
@@ -42,11 +40,13 @@ function addDays(d: Date, n: number): Date {
 
 export default function GithubActivity({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
+  const [requested, setRequested] = useState(false);
   const [raw, setRaw] = useState<Contribution[] | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    if (!requested || raw) return;
     let cancelled = false;
     fetch(`https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=all`)
       .then((r) => r.json())
@@ -61,7 +61,7 @@ export default function GithubActivity({ children }: { children: React.ReactNode
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [requested, raw]);
 
   // Build a dense week grid: each column is a Sun→Sat week, no missing days.
   const { weeks, yearMarkers, todayColIndex, totalAll } = useMemo(() => {
@@ -140,6 +140,7 @@ export default function GithubActivity({ children }: { children: React.ReactNode
       clearTimeout(closeTimer.current);
       closeTimer.current = null;
     }
+    setRequested(true);
     setOpen(true);
   };
   const handleLeave = () => {
@@ -178,14 +179,9 @@ export default function GithubActivity({ children }: { children: React.ReactNode
       onMouseLeave={handleLeave}
     >
       {children}
-      <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.96 }}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 pb-4"
+          <div
+            className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 pb-4 animate-fade-in"
             onMouseEnter={handleEnter}
             onMouseLeave={handleLeave}
           >
@@ -264,9 +260,8 @@ export default function GithubActivity({ children }: { children: React.ReactNode
 
               <div className="absolute left-1/2 -translate-x-1/2 -bottom-[6px] w-3 h-3 rotate-45 bg-black/85 border-r border-b border-zanah/15" />
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </div>
   );
 }

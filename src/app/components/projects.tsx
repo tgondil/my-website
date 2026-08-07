@@ -14,7 +14,7 @@ type Project = {
 
 const featured: Project = {
   name: "tterm",
-  logo: "./tterm.png",
+  logo: "/project-logos/tterm.webp",
   logoAlt: "tterm logo",
   desc: "A terminal built for working with AI agents. Every project gets a row with its own Claude Code session, file explorer, and a real embedded browser.",
   href: "https://tterm.sh",
@@ -25,7 +25,7 @@ const featured: Project = {
 const projects: Project[] = [
   {
     name: "Artemis",
-    logo: "./artemis.png",
+    logo: "/project-logos/artemis.webp",
     logoAlt: "artemis logo",
     desc: "A cognitive-state monitoring & workspace orchestration tool using eye-tracking, browser telemetry, and environment control.",
     href: "https://www.youtube.com/watch?v=9Qgm1yPk9os",
@@ -34,7 +34,7 @@ const projects: Project[] = [
   },
   {
     name: "Iris",
-    logo: "./iris.png",
+    logo: "/project-logos/iris.webp",
     logoAlt: "iris logo",
     desc: "A hands-free web-interface system with real-time eye tracking, voice commands, and AI agent control, built for users with paralysis or anyone in hands-free situations.",
     href: "https://www.youtube.com/watch?v=T3Psh8Hm7so",
@@ -43,7 +43,7 @@ const projects: Project[] = [
   },
   {
     name: "CS390 Course Platform",
-    logo: "./cs390.png",
+    logo: "/project-logos/cs390.webp",
     logoAlt: "cs390 logo",
     desc: "A fully custom course platform built from scratch for the class I teach at Purdue. Interactive assignments, real-time grading, and student progress tracking.",
     href: "https://github.com/tgondil/cs390-wap",
@@ -52,7 +52,7 @@ const projects: Project[] = [
   },
   {
     name: "SignBridge",
-    logo: "./signbridge.png",
+    logo: "/project-logos/signbridge.webp",
     logoAlt: "signbridge logo",
     desc: "An AI-powered system translating American Sign Language into text and speech in real time, with lip-syncing and personalized voice generation.",
     href: "https://devpost.com/software/signbridge",
@@ -61,7 +61,7 @@ const projects: Project[] = [
   },
   {
     name: "StaySafePurdue",
-    logo: "./safe.png",
+    logo: "/project-logos/safe.webp",
     logoAlt: "staysafepurdue logo",
     desc: "A safety app for Purdue students that scrapes Purdue Police archives to find the safest walking routes to a destination.",
     href: "https://github.com/AashiAgarw/StaySafePurdue",
@@ -94,19 +94,14 @@ const posts = [
   },
 ];
 
-export default function Projects({about, scrollY}: {about: any, scrollY: number}) {
-  const projectsOffset = typeof window !== 'undefined' ? document.getElementById('projects')?.offsetTop || 0 : 0;
-
+export default function Projects() {
   return (
     <div id='projects' className="relative w-full overflow-hidden">
           <div
-            className="absolute -top-40 -bottom-40 left-0 right-0"
-            style={{
-              transform: `translateY(${(scrollY - projectsOffset) * 0.5}px)`,
-              willChange: 'transform'
-            }}
+            data-projects-parallax
+            className="parallax-layer absolute -top-40 -bottom-40 left-0 right-0"
           >
-            <Halftone src="/stars.webp" mobileSrc="/mobilestars.webp" cell={4} fit="tile" floor={0} gamma={0.7} boost={1.2} lift={1.15} className="absolute inset-0" />
+            <Halftone src="/stars.webp" mobileSrc="/mobilestars.webp" cell={4} fit="tile" floor={0} gamma={0.7} boost={1.2} lift={1.15} audioReactive className="absolute inset-0" />
           </div>
           <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-t from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
           <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
@@ -128,8 +123,8 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
               className="group relative cursor-pointer overflow-hidden rounded-xl bg-my-grey border border-zanah/10 px-6 py-6 sm:px-8 sm:py-7 transition-all duration-300 hover:-translate-y-1 hover:border-zanah/25"
             >
               <div className="flex items-center gap-3 mb-2">
-                <img src={featured.logo} alt={featured.logoAlt} className="w-10 h-10 rounded-lg shrink-0" />
-                <h3 className="text-xl sm:text-2xl gradient font-bold">{featured.name}</h3>
+                <img src={featured.logo} alt={featured.logoAlt} width="80" height="80" loading="lazy" decoding="async" className="w-10 h-10 rounded-lg shrink-0" />
+                <h2 className="text-xl sm:text-2xl gradient font-bold">{featured.name}</h2>
               </div>
               <p className="text-zanah/80 text-sm sm:text-base leading-relaxed max-w-3xl mb-4">
                 {featured.desc}
@@ -152,9 +147,9 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 shrink-0 rounded-lg bg-black/30 flex items-center justify-center overflow-hidden">
-                      <img src={p.logo} alt={p.logoAlt} className="max-w-full max-h-full object-contain" />
+                      <img src={p.logo} alt={p.logoAlt} width="80" height="80" loading="lazy" decoding="async" className="max-w-full max-h-full object-contain" />
                     </div>
-                    <h3 className="text-base sm:text-lg gradient font-bold leading-tight">{p.name}</h3>
+                    <h2 className="text-base sm:text-lg gradient font-bold leading-tight">{p.name}</h2>
                   </div>
                   <p className="text-zanah/70 text-xs sm:text-sm leading-relaxed flex-1">
                     {p.desc}
@@ -179,7 +174,7 @@ export default function Projects({about, scrollY}: {about: any, scrollY: number}
               {posts.map((post) => (
                 <Link key={post.href} href={post.href} className="group block">
                   <div className="py-5 border-b border-zanah/10 hover:border-zanah/30 transition-all flex items-baseline justify-between gap-4">
-                    <h3 className="text-base sm:text-lg text-zanah font-cv group-hover:gradient transition-all">{post.title}</h3>
+                    <h2 className="text-base sm:text-lg text-zanah font-cv group-hover:gradient transition-all">{post.title}</h2>
                     <p className="text-zanah/40 font-scp text-xs whitespace-nowrap"><span className={post.categoryColor}>{post.category}</span> · {post.date}</p>
                   </div>
                 </Link>

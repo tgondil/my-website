@@ -20,42 +20,72 @@ export default function Cursor() {
   useEffect(() => {
     setIsMounted(true);
 
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) return;
 
-    let animationId: number;
+    let animationId: number | null = null;
+    let hasPosition = false;
 
     const lerp = (start: number, end: number, factor: number) => {
       return start + (end - start) * factor;
     };
 
     const animate = () => {
+      animationId = null;
+      const previousX = position.current.x;
+      const previousY = position.current.y;
       position.current.x = lerp(position.current.x, target.current.x, 0.2);
       position.current.y = lerp(position.current.y, target.current.y, 0.2);
 
       if (cursorRef.current) {
-        cursorRef.current.style.left = `${position.current.x}px`;
-        cursorRef.current.style.top = `${position.current.y}px`;
+        cursorRef.current.style.transform = `translate3d(${position.current.x}px, ${position.current.y}px, 0) translate(-50%, -50%)`;
       }
 
       // Update trail positions with increasing delay
+      let largestTrailDelta = 0;
       trailPositions.current.forEach((trail, i) => {
         const prevPos = i === 0 ? position.current : trailPositions.current[i - 1];
+        const beforeX = trail.x;
+        const beforeY = trail.y;
         trail.x = lerp(trail.x, prevPos.x, 0.1 - i * 0.02);
         trail.y = lerp(trail.y, prevPos.y, 0.1 - i * 0.02);
+        largestTrailDelta = Math.max(
+          largestTrailDelta,
+          Math.abs(trail.x - beforeX) + Math.abs(trail.y - beforeY),
+        );
 
         if (trailsRef.current[i]) {
-          trailsRef.current[i].style.left = `${trail.x}px`;
-          trailsRef.current[i].style.top = `${trail.y}px`;
+          trailsRef.current[i].style.transform = `translate3d(${trail.x}px, ${trail.y}px, 0) translate(-50%, -50%)`;
         }
       });
 
-      animationId = requestAnimationFrame(animate);
+      const cursorDelta =
+        Math.abs(position.current.x - previousX) +
+        Math.abs(position.current.y - previousY);
+      if (cursorDelta > 0.05 || largestTrailDelta > 0.05) {
+        animationId = requestAnimationFrame(animate);
+      }
+    };
+
+    const requestAnimation = () => {
+      if (animationId === null) animationId = requestAnimationFrame(animate);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
+      if (!hasPosition) {
+        hasPosition = true;
+        position.current = { x: e.clientX, y: e.clientY };
+        trailPositions.current.forEach((trail) => {
+          trail.x = e.clientX;
+          trail.y = e.clientY;
+        });
+      }
       target.current.x = e.clientX;
       target.current.y = e.clientY;
       setIsVisible(true);
+      requestAnimation();
     };
 
     const handleMouseOver = (e: Event) => {
@@ -102,8 +132,6 @@ export default function Cursor() {
     document.documentElement.addEventListener("mouseleave", handleMouseLeave);
     document.documentElement.addEventListener("mouseenter", handleMouseEnter);
 
-    animationId = requestAnimationFrame(animate);
-
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseover", handleMouseOver);
@@ -112,7 +140,7 @@ export default function Cursor() {
       document.removeEventListener("mouseup", handleMouseUp);
       document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
       document.documentElement.removeEventListener("mouseenter", handleMouseEnter);
-      cancelAnimationFrame(animationId);
+      if (animationId !== null) cancelAnimationFrame(animationId);
     };
   }, []);
 

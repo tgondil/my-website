@@ -4,7 +4,7 @@ import "./globals.css";
 import Cursor from "./components/cursor";
 import Analytics from "./components/analytics";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tanaygondil.com"),
@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${inter.variable}`}>
         <Cursor />
         <Analytics />
         {children}

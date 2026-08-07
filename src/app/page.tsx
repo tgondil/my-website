@@ -1,36 +1,74 @@
 "use client";
 import React from "react";
-import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { NextUIProvider } from "@nextui-org/react";
 import Projects from "./components/projects";
 import GithubActivity from "./components/github-activity";
-import NextLink from "next/link";
-import { BiLogoGmail } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
-import { SiDevpost, SiGooglescholar } from "react-icons/si";
+import { SiDevpost, SiGooglescholar, SiLetterboxd } from "react-icons/si";
 import { FaGithubSquare } from "react-icons/fa";
+import { FaGoodreads } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import toast, { Toaster } from 'react-hot-toast';
 import { useRef } from "react";
-import {Link} from 'react-scroll';
 import Halftone from "./components/halftone";
 import { useRouter } from "next/navigation";
+import MusicToggle from "./components/music-toggle";
 
 export default function Home() {
   const router = useRouter();
   const myRef = useRef<HTMLDivElement | null>(null);
-  const [scrollY, setScrollY] = useState(0);
+  const heroSectionRef = useRef<HTMLDivElement | null>(null);
+  const afterRef = useRef<HTMLDivElement | null>(null);
+  const afterParallaxRef = useRef<HTMLDivElement | null>(null);
+  const [emailCopied, setEmailCopied] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    let animationFrame = 0;
+    let projectsTop = 0;
+    let afterTop = 0;
+    let projectsLayer: HTMLElement | null = null;
+
+    const updateParallax = () => {
+      animationFrame = 0;
+      const scrollY = window.scrollY;
+      const heroParallaxY = scrollY * 0.5;
+      heroSectionRef.current?.style.setProperty(
+        "--hero-parallax-y",
+        `${heroParallaxY}px`,
+      );
+      if (projectsLayer) {
+        projectsLayer.style.transform = `translate3d(0, ${(scrollY - projectsTop) * 0.5}px, 0)`;
+      }
+      if (afterParallaxRef.current) {
+        afterParallaxRef.current.style.transform = `translate3d(0, ${(scrollY - afterTop) * 0.5}px, 0)`;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const scheduleParallax = () => {
+      if (!animationFrame) animationFrame = window.requestAnimationFrame(updateParallax);
+    };
+
+    const measure = () => {
+      projectsLayer = myRef.current?.querySelector<HTMLElement>("[data-projects-parallax]") ?? null;
+      projectsTop = myRef.current?.offsetTop ?? 0;
+      afterTop = afterRef.current?.offsetTop ?? 0;
+      scheduleParallax();
+    };
+
+    measure();
+    const resizeObserver = new ResizeObserver(measure);
+    if (myRef.current) resizeObserver.observe(myRef.current);
+    if (afterRef.current) resizeObserver.observe(afterRef.current);
+    window.addEventListener("scroll", scheduleParallax, { passive: true });
+    window.addEventListener("resize", measure, { passive: true });
+
+    return () => {
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      resizeObserver.disconnect();
+      window.removeEventListener("scroll", scheduleParallax);
+      window.removeEventListener("resize", measure);
+    };
   }, []);
 
   const handleBlogClick = (e: React.MouseEvent) => {
@@ -59,16 +97,17 @@ export default function Home() {
     })
   }
 
-  const scrollContact = () => {
-    document.getElementById("after")!.scrollIntoView({behavior: 'smooth'});
-  }
+  const scrollAbout = () => afterRef.current?.scrollIntoView({ behavior: "smooth" });
 
-  const copy = () => {
+  const copy = async () => {
     if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText("gondil.tanay@gmail.com").then(
-        () => toast.success("Email copied to clipboard!"),
-        () => { window.location.href = "mailto:gondil.tanay@gmail.com"; }
-      );
+      try {
+        await navigator.clipboard.writeText("gondil.tanay@gmail.com");
+        setEmailCopied(true);
+        window.setTimeout(() => setEmailCopied(false), 1800);
+      } catch {
+        window.location.href = "mailto:gondil.tanay@gmail.com";
+      }
     } else {
       window.location.href = "mailto:gondil.tanay@gmail.com";
     }
@@ -77,71 +116,66 @@ export default function Home() {
 
   return (
     <>
-    <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
     <link rel="preload" as="image" href="/real2.webp" media="(max-width: 639px)" />
     <link rel="preload" as="image" href="/calvin2.webp" media="(min-width: 640px)" />
-    <link rel="preload" as="image" href="/mobilestars.webp" media="(max-width: 639px)" />
-    <link rel="preload" as="image" href="/stars.webp" media="(min-width: 640px)" />
-    <link rel="preload" as="image" href="/real6.webp" media="(max-width: 639px)" />
-    <link rel="preload" as="image" href="/calvin.webp" media="(min-width: 640px)" />
-    <NextUIProvider>
       <main className={`flex overscroll-none flex-col min-h-screen ${isTransitioning ? 'animate-fade-to-black' : ''}`}>
-        <div className="relative flex flex-col h-mobile sm:h-screen overflow-hidden">
+        <div ref={heroSectionRef} className="relative flex flex-col h-mobile sm:h-screen overflow-hidden">
           <div
             id="hero-dots"
-            className="absolute inset-0"
-            style={{
-              transform: `translateY(${scrollY * 0.5}px)`,
-              willChange: 'transform'
-            }}
+            className="hero-parallax-layer parallax-layer absolute inset-0"
           >
-            <Halftone src="/calvin2.webp" mobileSrc="/real2.webp" cell={5} detail realSubjects align="center" mobileAlign="top" className="absolute inset-0" />
+            <Halftone src="/calvin2.webp" mobileSrc="/real2.webp" cell={5} detail realSubjects audioReactive deferMs={0} align="center" mobileAlign="top" className="absolute inset-0" />
           </div>
+          <div
+            id="music-star-layer"
+            className="hero-parallax-layer pointer-events-none absolute inset-0 z-30"
+          />
+          <MusicToggle />
           <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
           {/* Mobile Nav */}
           <div className="relative z-20 sm:hidden px-6 pt-6 pb-2 text-sm flex justify-center gap-7 font-medium w-full">
-            <Link to="projects" spy={true} smooth={true} duration={500}>
-              <h1 className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
+            <button type="button" onClick={scrollProject}>
+              <span className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
                 {"<"}work{">"}
-              </h1>
-            </Link>
+              </span>
+            </button>
             <a onClick={handleBlogClick} href="/blog">
-              <h1 className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
+              <span className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
                 {"<"}blog{">"}
-              </h1>
+              </span>
             </a>
-            <Link to="after" spy={true} smooth={true} duration={500}>
-              <h1 className="text-zanah cursor-pointer hover:gradient font-roboto transition-all">
+            <button type="button" onClick={scrollAbout}>
+              <span className="text-zanah cursor-pointer hover:gradient font-roboto transition-all">
                 {"<"}about{">"}
-              </h1>
-            </Link>
+              </span>
+            </button>
           </div>
           {/* Desktop Nav */}
           <div className="relative z-20 hidden sm:flex justify-end gap-10 text-sm lg:text-base font-medium pt-8 w-full mb-8">
             <h1 id="home" className="gradient text-zanah font-roboto cursor-pointer">
               {"<"}home{">"}
             </h1>
-            <Link to="projects" spy={true} smooth={true} duration={500}>
-              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
+            <button type="button" onClick={scrollProject}>
+              <span onMouseEnter={isHovered} onMouseLeave={unHovered} className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
                 {"<"}things I&apos;ve built{">"}
-              </h1>
-            </Link>
+              </span>
+            </button>
             <a onClick={handleBlogClick} href="/blog">
-              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
+              <span onMouseEnter={isHovered} onMouseLeave={unHovered} className="cursor-pointer text-zanah hover:gradient font-roboto transition-all">
                 {"<"}blog{">"}
-              </h1>
+              </span>
             </a>
-            <Link to="after" spy={true} smooth={true} duration={500}>
-              <h1 onMouseEnter={isHovered} onMouseLeave={unHovered} className="mr-10 text-zanah cursor-pointer hover:gradient font-roboto transition-all">
+            <button type="button" onClick={scrollAbout}>
+              <span onMouseEnter={isHovered} onMouseLeave={unHovered} className="mr-10 text-zanah cursor-pointer hover:gradient font-roboto transition-all">
                 {"<"}about{">"}
-              </h1>
-            </Link>
+              </span>
+            </button>
           </div>
           <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-6 pb-12 sm:pb-16">
             <h1 className="dot-text text-3xl sm:text-4xl lg:text-5xl tracking-wide text-zanah leading-hero font-invis text-center">
               Hey, my name is
             </h1>
-            <h1 className="dot-text text-5xl pt-3 sm:pt-2 sm:text-6xl lg:text-7xl gradient tracking-wide text-zanah leading-hero font-invis text-center">
+            <h1 className="dot-text text-5xl pt-3 sm:pt-2 sm:text-6xl lg:text-7xl gradient gradient-static tracking-wide text-zanah leading-hero font-invis text-center">
               Tanay Gondil
             </h1>
 
@@ -154,15 +188,17 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex w-full gap-5 sm:gap-5 pt-7 sm:pt-8 text-zanah justify-center text-4xl sm:text-4xl lg:text-5xl">
-              <a target="_blank" href="https://devpost.com/tgondil?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav"><SiDevpost className="hover:animate-pop cursor-pointer transition-all"></SiDevpost></a>
-              <a target="_blank" href="https://www.linkedin.com/in/tgondil/"><FaLinkedin className="hover:animate-pop cursor-pointer transition-all"></FaLinkedin></a>
+            <div className="flex w-full justify-between gap-0 pt-7 text-3xl text-zanah sm:justify-center sm:gap-5 sm:pt-8 sm:text-4xl lg:text-5xl">
+              <a aria-label="Devpost" target="_blank" href="https://devpost.com/tgondil?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav"><SiDevpost className="hover:animate-pop cursor-pointer transition-all"></SiDevpost></a>
+              <a aria-label="LinkedIn" target="_blank" href="https://www.linkedin.com/in/tgondil/"><FaLinkedin className="hover:animate-pop cursor-pointer transition-all"></FaLinkedin></a>
               <GithubActivity>
-                <a target="_blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop cursor-pointer transition-all" /></a>
+                <a aria-label="GitHub" target="_blank" href="https://github.com/tgondil"><FaGithubSquare className="hover:animate-pop cursor-pointer transition-all" /></a>
               </GithubActivity>
-              <a target="_blank" href="https://scholar.google.com/citations?user=a9sDq0gAAAAJ&hl=en"><SiGooglescholar className="hover:animate-pop cursor-pointer transition-all" /></a>
-              <a target="_blank" href="https://x.com/tanaygondil"><FaXTwitter className="hover:animate-pop cursor-pointer transition-all" /></a>
-              <a onClick={copy} className="cursor-pointer"><MdEmail className="hover:animate-pop transition-all" /></a>
+              <a aria-label="Google Scholar" target="_blank" href="https://scholar.google.com/citations?user=a9sDq0gAAAAJ&hl=en"><SiGooglescholar className="hover:animate-pop cursor-pointer transition-all" /></a>
+              <a target="_blank" rel="noopener noreferrer" aria-label="Letterboxd" title="Letterboxd" href="https://letterboxd.com/t4nay/"><SiLetterboxd className="hover:animate-pop cursor-pointer transition-all" /></a>
+              <a target="_blank" rel="noopener noreferrer" aria-label="Goodreads" title="Goodreads" href="https://www.goodreads.com/user/show/199645657-tanay"><FaGoodreads className="hover:animate-pop cursor-pointer transition-all" /></a>
+              <a aria-label="X" target="_blank" href="https://x.com/tanaygondil"><FaXTwitter className="hover:animate-pop cursor-pointer transition-all" /></a>
+              <button type="button" aria-label="Copy email address" onClick={copy} className="cursor-pointer"><MdEmail className="hover:animate-pop transition-all" /></button>
             </div>
           </div>
 
@@ -171,19 +207,16 @@ export default function Home() {
           </button>
         </div>
         <div ref = {myRef} id="projects">
-        <Projects about={'after'} scrollY={scrollY}></Projects>
+        <Projects />
         </div>
 
 
-        <div id="after" className="relative h-mobile sm:h-screen flex flex-col overflow-hidden">
+        <div ref={afterRef} id="after" className="relative h-mobile sm:h-screen flex flex-col overflow-hidden">
           <div
-            className="absolute inset-0"
-            style={{
-              transform: `translateY(${(scrollY - (typeof window !== 'undefined' ? document.getElementById('after')?.offsetTop || 0 : 0)) * 0.5}px)`,
-              willChange: 'transform'
-            }}
+            ref={afterParallaxRef}
+            className="parallax-layer absolute inset-0"
           >
-            <Halftone src="/calvin.webp" mobileSrc="/real6.webp" cell={5} detail realSubjects align="center" mobileAlign="bottom" className="absolute inset-0" />
+            <Halftone src="/calvin.webp" mobileSrc="/real6.webp" cell={5} detail realSubjects audioReactive preview align="center" mobileAlign="bottom" className="absolute inset-0" />
           </div>
           <div className="absolute top-0 left-0 right-0 h-72 bg-gradient-to-t from-transparent via-black/40 to-black/80 pointer-events-none z-10"></div>
 
@@ -218,10 +251,6 @@ export default function Home() {
               </div>
             </div>
 
-            <Toaster
-              position="bottom-center"
-              reverseOrder={false}
-            />
           </div>
 
           {/* Spacer fills remaining height so Calvin (via bg-bottom) sits below the text */}
@@ -249,7 +278,11 @@ export default function Home() {
       </div>
 
       </main>
-    </NextUIProvider>
+      {emailCopied && (
+        <div role="status" className="fixed bottom-6 left-1/2 z-[60] -translate-x-1/2 rounded-lg border border-zanah/15 bg-black/90 px-4 py-2 font-scp text-xs text-zanah shadow-xl">
+          Email copied to clipboard
+        </div>
+      )}
     </>
   );
 }

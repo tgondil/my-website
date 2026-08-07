@@ -1,12 +1,10 @@
 import type { Config } from "tailwindcss";
-const {nextui} = require("@nextui-org/react");
 
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -28,8 +26,8 @@ const config: Config = {
       fontFamily: {
         "nexa": ["NexaH", "sans-serif"],
         "invis": ["InvisibleEB", "sans-serif"],
-        "roboto": ["Roboto", "sans-serif"],
-        "scp": ["Source Code Pro", "monospace"],
+        "roboto": ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+        "scp": ["SFMono-Regular", "Consolas", "Liberation Mono", "monospace"],
         "nexaEL": ["NexaEL", "sans-serif"],
         "cs": ["CS", "cursive"],
         "cv": ["CV", "sans-serif"],
@@ -124,6 +122,6 @@ const config: Config = {
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [],
 };
 export default config;
