@@ -6,4 +6,6 @@ export type MusicSpectrumDetail = {
   beat: number;
   energy: number;
   shimmer: number;
+  climax: number;
+  phase: number;
 };

@@ -21,6 +21,36 @@ const INITIAL_BAND_PEAKS = [0.15, 0.14, 0.12, 0.1, 0.075];
 const BAND_GAINS = [1.08, 1.02, 0.96, 1.05, 1.18];
 const BAND_ATTACK = [0.34, 0.3, 0.27, 0.36, 0.48];
 const BAND_RELEASE = [0.075, 0.085, 0.1, 0.13, 0.2];
+const CLIMAX_TRANSITION_SECONDS = 1.6;
+const CLIMAX_EXIT_SECONDS = 1.2;
+const CLIMAX_WINDOWS = [
+  [69, 90],
+  [135, 170],
+] as const;
+
+const smoothstep = (value: number) => value * value * (3 - 2 * value);
+
+const getClimaxState = (audioTime: number) => {
+  const activeWindow = CLIMAX_WINDOWS.find(
+    ([start, end]) => audioTime >= start && audioTime < end,
+  );
+  if (!activeWindow) return { intensity: 0, phase: 0 };
+
+  const [start, end] = activeWindow;
+  const entrance = Math.min(
+    1,
+    Math.max(0, (audioTime - start) / CLIMAX_TRANSITION_SECONDS),
+  );
+  const exit = Math.min(
+    1,
+    Math.max(0, (end - audioTime) / CLIMAX_EXIT_SECONDS),
+  );
+
+  return {
+    intensity: smoothstep(Math.min(entrance, exit)),
+    phase: audioTime - start,
+  };
+};
 
 const HERO_STARS = {
   mobile: {
@@ -127,10 +157,12 @@ export default function MusicToggle() {
     beat = 0,
     energy = 0,
     shimmer = 0,
+    climax = 0,
+    phase = 0,
   ) => {
     window.dispatchEvent(
       new CustomEvent(MUSIC_SPECTRUM_EVENT, {
-        detail: { levels, playing, beat, energy, shimmer },
+        detail: { levels, playing, beat, energy, shimmer, climax, phase },
       }),
     );
   };
@@ -241,6 +273,8 @@ export default function MusicToggle() {
     const airOnset = Math.max(0, air - previousAirRef.current);
     previousAirRef.current = air;
     const shimmer = Math.min(1, air * 0.72 + airOnset * 4.5);
+    const audioTime = audioRef.current?.currentTime ?? 0;
+    const { intensity: climax, phase: climaxPhase } = getClimaxState(audioTime);
 
     if (timestamp - lastSpectrumPublishRef.current >= 40) {
       publishSpectrum(
@@ -249,6 +283,8 @@ export default function MusicToggle() {
         beatEnvelopeRef.current,
         energy,
         shimmer,
+        climax,
+        climaxPhase,
       );
       lastSpectrumPublishRef.current = timestamp;
     }

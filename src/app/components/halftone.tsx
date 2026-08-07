@@ -17,7 +17,12 @@ const REACTIVE_STAR_COLORS = [
   "#D94F8A",
   "#D4ECDD",
 ];
-const REACTIVE_LAYER_COUNT = 3;
+const REACTIVE_LAYER_COUNT = 4;
+
+const exponentialScale = (value: number, steepness: number) => {
+  const normalized = Math.max(0, Math.min(1, value));
+  return Math.expm1(normalized * steepness) / Math.expm1(steepness);
+};
 
 /**
  * Live halftone renderer. Samples an image on a grid and draws it as
@@ -90,6 +95,7 @@ export default function Halftone({
     let resizeTimer: number | null = null;
     let lastWidth = 0;
     let lastHeight = 0;
+    let relativeLayerBaselines: Array<number | null> = [null, null, null];
     const dpr = Math.min(
       window.devicePixelRatio || 1,
       window.innerWidth < 640 ? 1 : 1.25,
@@ -129,6 +135,11 @@ export default function Halftone({
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(image, x, y, drawnWidth, drawnHeight);
+
+        // Character artwork should never pass through the coarse preview's
+        // full-frame dot mask. It is replaced by the detailed render shortly,
+        // but remains clean while that render is prepared.
+        if (realSubjects) return;
 
         const maskTile = document.createElement("canvas");
         const spacing = Math.max(4, Math.round(4.8 * dpr));
@@ -342,9 +353,10 @@ export default function Halftone({
               if (nb >= 5) eroded[idx] = 1;
             }
           }
-          // dilate twice: keep the ground right around them
+          // Close dark outlines and interior gaps so the whole illustration,
+          // not just its bright pixels, comes through cleanly.
           let cur = eroded;
-          for (let pass = 0; pass < 2; pass++) {
+          for (let pass = 0; pass < 4; pass++) {
             const next = new Uint8Array(colsF * rowsF);
             for (let y = 0; y < rowsF; y++) {
               for (let x = 0; x < colsF; x++) {
@@ -429,6 +441,15 @@ export default function Halftone({
                 lctx.drawImage(mc, 0, 0, layer.width, layer.height);
                 lctx.filter = "none";
                 lctx.globalCompositeOperation = "source-over";
+
+                // Remove the halftone base beneath the clean subject before
+                // compositing it. Otherwise dots can show through feathered
+                // mask edges and dark linework as a visible pixel veil.
+                bctx.save();
+                bctx.globalCompositeOperation = "destination-out";
+                bctx.filter = `blur(${1.5 * dpr}px)`;
+                bctx.drawImage(mc, 0, 0, base.width, base.height);
+                bctx.restore();
                 bctx.drawImage(layer, 0, 0);
               }
             }
@@ -523,6 +544,60 @@ export default function Halftone({
             layerContext.fill(corePaths[band]);
             layerContext.restore();
           });
+
+          // A sparse constellation layer stays invisible until the 1:09
+          // climax. It is pre-rendered once so the later flare is still only
+          // an opacity/transform update on the compositor.
+          const constellationContext = reactiveLayers[3].getContext("2d");
+          if (constellationContext) {
+            const constellationPaths = REACTIVE_STAR_COLORS.map(
+              () => new Path2D(),
+            );
+            let constellationCount = 0;
+            for (
+              let index = 0;
+              index < starDots.length && constellationCount < 180;
+              index += stride
+            ) {
+              const dot = starDots[index];
+              const gridX = Math.floor(dot.x / cs);
+              const gridY = Math.floor(dot.y / cs);
+              const hash = Math.abs(gridX * 17 + gridY * 31);
+              if (dot.lum < 0.18 || hash % 11 !== 0) continue;
+
+              const x = dot.x * reactiveScale;
+              const y = dot.y * reactiveScale;
+              const colorIndex = hash % REACTIVE_STAR_COLORS.length;
+              const ray = Math.max(
+                4.5 * reactiveDpr,
+                dot.r * reactiveScale * (6.5 + dot.lum * 6.5),
+              );
+              const diagonal = ray * 0.42;
+              const path = constellationPaths[colorIndex];
+              path.moveTo(x - ray, y);
+              path.lineTo(x + ray, y);
+              path.moveTo(x, y - ray);
+              path.lineTo(x, y + ray);
+              path.moveTo(x - diagonal, y - diagonal);
+              path.lineTo(x + diagonal, y + diagonal);
+              path.moveTo(x + diagonal, y - diagonal);
+              path.lineTo(x - diagonal, y + diagonal);
+              constellationCount += 1;
+            }
+
+            constellationPaths.forEach((path, index) => {
+              const color = REACTIVE_STAR_COLORS[index];
+              constellationContext.save();
+              constellationContext.strokeStyle = color;
+              constellationContext.lineWidth = 1.05 * reactiveDpr;
+              constellationContext.lineCap = "round";
+              constellationContext.shadowColor = color;
+              constellationContext.shadowBlur = 11 * reactiveDpr;
+              constellationContext.globalAlpha = 0.96;
+              constellationContext.stroke(path);
+              constellationContext.restore();
+            });
+          }
         }
 
         (canvas as HTMLCanvasElement & { __halftoneDots?: Dot[] }).__halftoneDots = dots;
@@ -548,11 +623,12 @@ export default function Halftone({
 
     const handleSpectrum = (event: Event) => {
       if (!audioReactive || !base) return;
-      const { levels, playing, beat, energy, shimmer } = (
+      const { levels, playing, beat, energy, shimmer, climax, phase } = (
         event as CustomEvent<MusicSpectrumDetail>
       ).detail;
 
       if (!playing || !visible) {
+        if (!playing) relativeLayerBaselines = [null, null, null];
         reactiveCanvases.forEach((layer) => {
           layer.style.opacity = "0";
         });
@@ -564,22 +640,124 @@ export default function Halftone({
         (levels[2] ?? 0) * 0.44 + (levels[3] ?? 0) * 0.56,
         (levels[3] ?? 0) * 0.22 + (levels[4] ?? 0) * 0.78,
       ];
-      reactiveCanvases.forEach((layer, index) => {
-        const level = Math.max(0, Math.min(1, layerLevels[index] ?? 0));
-        const response = Math.pow(level, index === 2 ? 1.12 : 0.82);
-        const opacity = index === 0
-          ? response * 0.42 + beat * 0.32
-          : index === 1
-            ? response * 0.56 + energy * 0.12 + beat * 0.08
-            : response * 0.72 + shimmer * 0.24;
-        layer.style.opacity = String(Math.min(index === 2 ? 0.92 : 0.78, opacity));
+      const relativeBounces = layerLevels.map((rawLevel, index) => {
+        const level = Math.max(0, Math.min(1, rawLevel));
+        const previousBaseline = relativeLayerBaselines[index];
+        if (previousBaseline === null) {
+          relativeLayerBaselines[index] = level;
+          return 0;
+        }
 
-        const scale = index === 0
-          ? 1 + beat * 0.0045 + response * 0.0015
+        const delta = Math.max(0, level - previousBaseline);
+        const relativeDelta = delta / Math.max(0.06, previousBaseline * 0.16);
+        const bounce = 1 - Math.exp(-relativeDelta * 3.2);
+        const baselineFollow = level > previousBaseline ? 0.03 : 0.22;
+        relativeLayerBaselines[index] =
+          previousBaseline + (level - previousBaseline) * baselineFollow;
+        return Math.min(1, bounce);
+      });
+      const strongestRelativeBounce = Math.max(...relativeBounces);
+      const beatFlash = exponentialScale(beat, 5.2);
+      const energyBloom = exponentialScale(energy, 3.4);
+      const shimmerFlash = exponentialScale(shimmer, 5.6);
+      const climaxBeatFlash = exponentialScale(beat, 7.4);
+      const climaxEnergyFlash = exponentialScale(energy, 6.1);
+      const climaxShimmerFlash = exponentialScale(shimmer, 7.8);
+      const climaxPulse = exponentialScale(
+        Math.max(beat, energy * 0.82),
+        6.6,
+      );
+      const constellationWave =
+        (0.5 + Math.sin(phase * 2.15) * 0.5) * climax;
+
+      reactiveCanvases.forEach((layer, index) => {
+        if (index === 3) {
+          const constellationOpacity = climax * Math.min(
+            1,
+            0.12 +
+              climaxShimmerFlash * 1.05 +
+              climaxBeatFlash * 1.22 +
+              climaxEnergyFlash * 0.5 +
+              strongestRelativeBounce * 0.9 +
+              constellationWave * 0.24,
+          );
+          layer.style.opacity = String(constellationOpacity);
+          const constellationScale =
+            1 + climax * (
+              0.0015 +
+              climaxPulse * 0.03 +
+              strongestRelativeBounce * 0.018
+            );
+          const constellationRotation = Math.sin(phase * 0.72) * climax * 0.32;
+          const constellationX = Math.sin(phase * 0.54) * climax * 1.8;
+          const constellationY = Math.cos(phase * 0.47) * climax * 1.2;
+          layer.style.transform =
+            `translate3d(${constellationX}px, ${constellationY}px, 0) scale(${constellationScale}) rotate(${constellationRotation}deg)`;
+          return;
+        }
+
+        const level = Math.max(0, Math.min(1, layerLevels[index] ?? 0));
+        const response = exponentialScale(
+          level,
+          index === 0 ? 2.7 : index === 1 ? 3.2 : 4.1,
+        );
+        const baseOpacity = index === 0
+          ? response * 0.5 + beatFlash * 0.48
           : index === 1
-            ? 1 + beat * 0.0018 + energy * 0.0012
-            : 1 + shimmer * 0.0009;
-        layer.style.transform = `translate3d(0, 0, 0) scale(${scale})`;
+            ? response * 0.64 + energyBloom * 0.24 + beatFlash * 0.12
+            : response * 0.72 + shimmerFlash * 0.46;
+        const baselineReduction = index === 0 ? 0.28 : index === 1 ? 0.32 : 0.38;
+        const relativeBaseline = baseOpacity * (1 - climax * baselineReduction);
+        const climaxFlash = climax * (
+          index === 0
+            ? climaxBeatFlash * 0.76 +
+              climaxEnergyFlash * 0.14 +
+              relativeBounces[0] * 0.8
+            : index === 1
+              ? climaxEnergyFlash * 0.56 +
+                climaxBeatFlash * 0.38 +
+                relativeBounces[1] * 0.76
+              : climaxShimmerFlash * 0.94 +
+                climaxBeatFlash * 0.2 +
+                relativeBounces[2] * 0.88
+        );
+        const opacity = relativeBaseline + climaxFlash;
+        layer.style.opacity = String(Math.min(1, opacity));
+
+        const baseScale = index === 0
+          ? 1 + beatFlash * 0.007 + response * 0.0018
+          : index === 1
+            ? 1 + beatFlash * 0.003 + energyBloom * 0.0015
+            : 1 + shimmerFlash * 0.0018;
+        const climaxScale = climax * (
+          index === 0
+            ? climaxBeatFlash * 0.022 +
+              climaxPulse * 0.004 +
+              relativeBounces[0] * 0.018
+            : index === 1
+              ? climaxEnergyFlash * 0.01 +
+                climaxBeatFlash * 0.009 +
+                relativeBounces[1] * 0.014
+              : climaxShimmerFlash * 0.01 +
+                climaxBeatFlash * 0.004 +
+                relativeBounces[2] * 0.012
+        );
+        const direction = index === 1 ? -1 : 1;
+        const driftX =
+          Math.sin(phase * (0.48 + index * 0.1) + index * 2.1) *
+          climax *
+          (index === 2 ? 1.35 : 0.9);
+        const driftY =
+          Math.cos(phase * (0.42 + index * 0.08) + index) *
+          climax *
+          (index === 2 ? 0.85 : 0.55);
+        const rotation =
+          Math.sin(phase * (index === 2 ? 1.05 : 0.62)) *
+          climax *
+          (index === 2 ? 0.18 : 0.1) *
+          direction;
+        layer.style.transform =
+          `translate3d(${driftX}px, ${driftY}px, 0) scale(${baseScale + climaxScale}) rotate(${rotation}deg)`;
       });
     };
 
