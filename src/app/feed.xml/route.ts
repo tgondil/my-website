@@ -4,6 +4,12 @@ const SITE = "https://tanaygondil.com";
 
 const posts = [
   {
+    slug: "remembering-every-flag",
+    title: "my mental model for remembering every flag",
+    description: "an insight into my big brain",
+    date: "2026-09-19",
+  },
+  {
     slug: "roger-ackroyd",
     title: "The Perfect Murder Mystery",
     description: "It's The Murder of Roger Ackroyd by Agatha Christie.",
