@@ -49,7 +49,7 @@ const sections: { title: string; entries: Entry[] }[] = [
     ],
   },
   {
-    title: "versions of other flags:",
+    title: "versions of other flags",
     entries: [
       { text: "tunisia → turkey", flags: [["TN", "tunisia"], ["TR", "turkey"]] },
       { text: "vietnam → china", flags: [["VN", "vietnam"], ["CN", "china"]] },
@@ -70,7 +70,7 @@ const sections: { title: string; entries: Entry[] }[] = [
     ],
   },
   {
-    title: "twins →",
+    title: "twins",
     entries: [
       { text: "poland / indonesia", flags: [["PL", "poland"], ["ID", "indonesia"]] },
       { text: "chad / romania", flags: [["TD", "chad"], ["RO", "romania"]] },
@@ -104,13 +104,13 @@ const sections: { title: string; entries: Entry[] }[] = [
     ],
   },
   {
-    title: "country on flag:",
+    title: "country on flag",
     entries: [
       { text: "kosovo & cyprus", flags: [["XK", "kosovo"], ["CY", "cyprus"]] },
     ],
   },
   {
-    title: "name games:",
+    title: "name games",
     entries: [
       { text: "ecuador → eaglecuador", flags: [["EC", "ecuador"]] },
       { text: "slovenia → snowvenia (and the other one is slovakia)", flags: [["SI", "slovenia"], ["SK", "slovakia"]] },
@@ -385,7 +385,7 @@ export default function RememberingEveryFlag() {
               <h2 id={`section-${index}`} className="text-xl sm:text-2xl text-zanah font-cv leading-snug mb-6">
                 {section.title}
               </h2>
-              {section.title === "versions of other flags:" || section.title === "twins →" ? (
+              {section.title === "versions of other flags" || section.title === "twins" ? (
                 <ul className="flex flex-wrap items-center gap-4">
                   {section.entries.map((entry) => (
                     <li key={entry.text} className="flex flex-wrap items-center gap-4 rounded-lg border border-zanah/25 p-4">
