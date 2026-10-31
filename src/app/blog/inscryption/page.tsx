@@ -48,14 +48,12 @@ export default function Inscryption() {
       </nav>
       <div className="cabin-intro">
         <div className="cabin-watcher" aria-hidden="true"><i /><i /></div>
-        <p className="cabin-eyebrow">notes from the cabin</p>
         <h1>I fucking hate<br />the trader</h1>
         <div className="cabin-hand" aria-label="Geck and Wolf from my seventh archived run">
           <div className="cabin-table-slots" aria-hidden="true"><i /><i /><i /><i /></div>
           <SaveCard creature="geck" name="Geck" attack="1" health="1" rare />
           <SaveCard creature="wolf" name="Wolf" attack="6" health="4" />
         </div>
-        <p className="cabin-deck-caption">two cards from my seventh run</p>
       </div>
       <CabinRoute />
       <article className="cabin-manuscript">
