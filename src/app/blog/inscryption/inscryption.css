@@ -1,9 +1,10 @@
+@font-face{font-family:CabinDialogue;src:url('/blog/inscryption/PORTMANTEAU.ttf') format('truetype');font-display:swap}
 @font-face{font-family:Cabin;src:url('/blog/inscryption/HEAVYWEIGHT.ttf') format('truetype');font-display:swap}
 @font-face{font-family:CabinHand;src:url('/blog/inscryption/UMBRAGE.ttf') format('truetype');font-display:swap}
 body:has(.inscryption-page) .star-cursor,body:has(.inscryption-page) .star-trail{display:none!important}
 html body:has(.inscryption-page) *,html body:has(.inscryption-page) *::before,html body:has(.inscryption-page) *::after{cursor:auto!important}
 html body:has(.inscryption-page) a,html body:has(.inscryption-page) button,html body:has(.inscryption-page) summary{cursor:pointer!important}
-.inscryption-page{min-height:100vh;background:radial-gradient(ellipse 85% 650px at 50% 220px,#9d5c202b,transparent),linear-gradient(#0c0908b8,#0c090899),url('/blog/inscryption/woodPlanks_albedo.png') repeat;background-size:auto,auto,640px;color:#ddbd85;padding:0 24px 28px;font-family:Georgia,'Times New Roman',serif}
+.inscryption-page{min-height:100vh;background:radial-gradient(ellipse 85% 650px at 50% 220px,#9d5c202b,transparent),linear-gradient(#0c0908b8 0px,#0c090899 540px,#080706ed 1100px,#080706ed 100%),url('/blog/inscryption/woodPlanks_albedo.png') repeat;background-size:auto,auto,640px;color:#ddbd85;padding:0 24px 28px;font-family:Georgia,'Times New Roman',serif}
 .cabin-nav{max-width:1120px;margin:auto;display:flex;justify-content:space-between;gap:20px;padding:30px 0;color:#b19770;font:12px monospace;letter-spacing:.09em}
 .cabin-nav a:hover,.cabin-footer a:hover{color:#ffe2a9}
 .cabin-intro{text-align:center;padding:35px 0 30px;position:relative}
@@ -17,18 +18,16 @@ html body:has(.inscryption-page) a,html body:has(.inscryption-page) button,html 
 .cabin-sigils{position:absolute;top:144px;left:32px;display:flex;gap:7px}.cabin-sigils img{width:39px;height:39px}
 .cabin-attack,.cabin-health{position:absolute;bottom:12px;font:38px/1 CabinHand,serif}.cabin-attack{left:18px}.cabin-health{right:18px}
 .cabin-deck-caption{font:11px monospace;color:#a58b68;margin-top:18px}
-.cabin-manuscript{max-width:840px;margin:0 auto;padding:48px 84px 52px;background:linear-gradient(#e9d7b4bf,#e9d7b4bf),url('/blog/inscryption/paper_albedo.png') repeat;background-size:auto,512px;color:#30261c;box-shadow:0 0 0 1px #b9975e55,0 10px 65px #0009;position:relative;border-radius:1px}
-.cabin-preface{font:13px/1.65 Georgia,serif;border-bottom:1px solid #70533240;padding-bottom:25px;margin-bottom:32px;color:#68533b}
-.cabin-status{font:12px monospace;letter-spacing:.02em;margin-bottom:16px;color:#6c482b}
-.cabin-instructions{margin-top:8px;font-style:italic;max-width:530px}.cabin-instructions span{font-style:normal}
-.cabin-paragraph{font:19px/1.75 Georgia,'Times New Roman',serif;margin:0 0 26px;text-wrap:pretty}
-.cabin-paragraph:first-of-type::first-letter{float:left;font:68px/.86 Cabin,serif;margin:9px 9px 0 0;color:#654321}
-.cabin-link{text-decoration:underline;text-underline-offset:3px;text-decoration-color:#836b4d80}.cabin-link:hover{color:#8b431e}
-.cabin-figure{margin:38px -32px}.cabin-figure img{width:100%;height:auto;border:5px solid #2b2118;box-shadow:0 3px 12px #38200f33;filter:sepia(.08)}
-.cabin-caption{font:12px/1.6 Georgia,serif;margin:10px 5px;color:#6e573d}
-.cabin-colophon{border-top:1px solid #70533240;padding-top:25px;margin-top:38px;font:12px/1.7 Georgia,serif;color:#705c43}
+.cabin-manuscript{max-width:840px;margin:0 auto;padding:48px 76px 52px;position:relative;color:#d7b87c;background:radial-gradient(ellipse at 50% 0,#281b0d70,transparent 750px),#090807e8;box-shadow:0 0 70px 50px #090807a6}
+.cabin-preface{font:16px/1.6 CabinDialogue,Georgia,serif;padding-bottom:32px;margin-bottom:32px;color:#ac8c56;text-align:center;border-bottom:1px solid #a67a3230}
+.cabin-status{font:16px CabinHand,serif;letter-spacing:.06em;margin-bottom:16px;color:#c59a57}
+.cabin-paragraph{font:19px/1.8 CabinDialogue,Georgia,serif;margin:0 0 32px;text-wrap:pretty;text-shadow:0 0 15px #dc90151a}
+.cabin-link{text-decoration:underline;text-underline-offset:4px;text-decoration-color:#a88a505c}.cabin-link:hover{color:#ffe0a1}
+.cabin-figure{margin:48px -52px}.cabin-figure img{width:100%;height:auto;box-shadow:0 0 40px 12px #0008;filter:sepia(.12) saturate(.8);border:1px solid #9d753524}
+.cabin-caption{font:14px/1.6 CabinDialogue,Georgia,serif;margin:14px 6px;color:#af8f5c}
+.cabin-colophon{border-top:1px solid #a67a3230;padding-top:28px;margin-top:48px;font:14px/1.7 CabinDialogue,Georgia,serif;color:#af8f5c}
 .cabin-footer{max-width:840px;margin:28px auto 0;display:flex;justify-content:space-between;gap:20px;font:12px monospace;color:#a28b6d}
 .cabin-credit{margin-top:12px}
 @media(min-width:1200px){.cabin-intro{padding-top:45px}}
-@media(max-width:600px){.inscryption-page{padding:0 12px 22px}.cabin-nav{padding:22px 7px;font-size:10px;letter-spacing:0}.cabin-intro{padding-top:25px}.cabin-intro h1{font-size:58px}.cabin-hand{transform:scale(.85);height:200px;margin-top:24px;margin-bottom:-5px}.cabin-manuscript{padding:30px 25px 36px}.cabin-paragraph{font-size:17px;line-height:1.75;margin-bottom:23px}.cabin-figure{margin:30px -12px}.cabin-preface{font-size:12px}.cabin-status{font-size:10px}.cabin-footer{font-size:10px;padding:0 6px}}
+@media(max-width:600px){.inscryption-page{padding:0 12px 22px}.cabin-nav{padding:22px 7px;font-size:10px;letter-spacing:0}.cabin-intro{padding-top:25px}.cabin-intro h1{font-size:58px}.cabin-hand{transform:scale(.85);height:200px;margin-top:24px;margin-bottom:-5px}.cabin-manuscript{padding:30px 25px 36px}.cabin-paragraph{font-size:17px;line-height:1.8;margin-bottom:28px}.cabin-figure{margin:30px -12px}.cabin-preface{font-size:14px}.cabin-status{font-size:14px}.cabin-footer{font-size:10px;padding:0 6px}}
 
