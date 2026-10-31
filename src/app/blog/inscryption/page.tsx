@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment } from "react";
 import { paragraphs } from "./essay";
+import { MathParagraph } from "./math-paragraph";
 
 const linkClass = "underline underline-offset-4 decoration-zanah/30 hover:text-zanah transition-colors";
 
@@ -54,6 +55,9 @@ export default function Inscryption() {
           <p className="text-zanah/50 font-scp text-sm leading-relaxed">
             Spoilers for Inscryption&apos;s cabin, including the boons and deathcards.
           </p>
+          <p className="text-zanah/40 font-scp text-xs leading-relaxed mt-5">
+            Hover, tap, or focus an underlined sentence for the math, using cards from my save.
+          </p>
         </header>
 
         {paragraphs.map((paragraph, index) => (
@@ -63,7 +67,7 @@ export default function Inscryption() {
                 <>
                   This is what reminded me of <a href="https://gwern.net/backstop" className={linkClass}>Gwern&apos;s <em>Evolution as Backstop for Reinforcement Learning</em></a>, which <Link href="/blog/optimizing-for-reality" className={linkClass}>I wrote about before</Link>{paragraph.slice(paragraph.indexOf(": intermediate"))}
                 </>
-              ) : paragraph}
+              ) : <MathParagraph text={paragraph} index={index} />}
             </p>
             {illustrations[index] && (
               <figure className="my-12 sm:-mx-8">
@@ -89,6 +93,9 @@ export default function Inscryption() {
         ))}
 
         <aside className="border-t border-zanah/10 pt-8 mt-12 text-zanah/50 font-scp text-xs leading-relaxed">
+          <p className="mb-4">
+            Math examples use seven archived cabin runs and the persistent Ouroboros counter from my save, inspected October 31, 2026. Run numbers follow the save’s archive order. Calculations are worked scenarios, not battle replays; the raw save is not published. C(n,k) counts ways to choose k cards from n without replacement.
+          </p>
           <p>
             Reading: <a className={linkClass} href="https://gwern.net/backstop">Evolution as Backstop for Reinforcement Learning</a>, Gwern Branwen.
           </p>
