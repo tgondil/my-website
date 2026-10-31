@@ -1,0 +1,34 @@
+@font-face{font-family:Cabin;src:url('/blog/inscryption/HEAVYWEIGHT.ttf') format('truetype');font-display:swap}
+@font-face{font-family:CabinHand;src:url('/blog/inscryption/UMBRAGE.ttf') format('truetype');font-display:swap}
+body:has(.inscryption-page) .star-cursor,body:has(.inscryption-page) .star-trail{display:none!important}
+html body:has(.inscryption-page) *,html body:has(.inscryption-page) *::before,html body:has(.inscryption-page) *::after{cursor:auto!important}
+html body:has(.inscryption-page) a,html body:has(.inscryption-page) button,html body:has(.inscryption-page) summary{cursor:pointer!important}
+.inscryption-page{min-height:100vh;background:radial-gradient(ellipse 85% 650px at 50% 220px,#9d5c202b,transparent),linear-gradient(#0c0908b8,#0c090899),url('/blog/inscryption/woodPlanks_albedo.png') repeat;background-size:auto,auto,640px;color:#ddbd85;padding:0 24px 28px;font-family:Georgia,'Times New Roman',serif}
+.cabin-nav{max-width:1120px;margin:auto;display:flex;justify-content:space-between;gap:20px;padding:30px 0;color:#b19770;font:12px monospace;letter-spacing:.09em}
+.cabin-nav a:hover,.cabin-footer a:hover{color:#ffe2a9}
+.cabin-intro{text-align:center;padding:35px 0 30px;position:relative}
+.cabin-eyebrow{font:14px CabinHand,serif;letter-spacing:.18em;text-transform:uppercase;color:#a98b60;margin-bottom:18px}
+.cabin-intro h1{font:clamp(54px,8.2vw,98px)/.99 Cabin,Georgia,serif;letter-spacing:.005em;color:#e9c78a;text-shadow:0 3px 15px #000;max-width:920px;margin:auto}
+.cabin-hand{display:flex;justify-content:center;align-items:center;margin:32px auto 8px;height:225px;filter:drop-shadow(0 10px 12px #0009)}
+.cabin-card{position:relative;width:150px;height:228px;flex-shrink:0;background:url('/blog/inscryption/card_empty.png') center/100% 100%;color:#241608;image-rendering:pixelated;transform:rotate(9deg);margin-left:14px;font-family:CabinHand,serif}
+.cabin-card-rare{background-image:url('/blog/inscryption/card_empty_rare.png');transform:rotate(-10deg);z-index:1;margin-left:0}
+.cabin-card-name{position:absolute;top:15px;left:15px;font-size:24px;line-height:1;text-transform:uppercase}
+.cabin-portrait{position:absolute;top:38px;left:7px;width:136px;height:113px;object-fit:contain}
+.cabin-sigils{position:absolute;top:144px;left:32px;display:flex;gap:7px}.cabin-sigils img{width:39px;height:39px}
+.cabin-attack,.cabin-health{position:absolute;bottom:12px;font:38px/1 CabinHand,serif}.cabin-attack{left:18px}.cabin-health{right:18px}
+.cabin-deck-caption{font:11px monospace;color:#a58b68;margin-top:18px}
+.cabin-manuscript{max-width:840px;margin:0 auto;padding:48px 84px 52px;background:linear-gradient(#e9d7b4bf,#e9d7b4bf),url('/blog/inscryption/paper_albedo.png') repeat;background-size:auto,512px;color:#30261c;box-shadow:0 0 0 1px #b9975e55,0 10px 65px #0009;position:relative;border-radius:1px}
+.cabin-preface{font:13px/1.65 Georgia,serif;border-bottom:1px solid #70533240;padding-bottom:25px;margin-bottom:32px;color:#68533b}
+.cabin-status{font:12px monospace;letter-spacing:.02em;margin-bottom:16px;color:#6c482b}
+.cabin-instructions{margin-top:8px;font-style:italic;max-width:530px}.cabin-instructions span{font-style:normal}
+.cabin-paragraph{font:19px/1.75 Georgia,'Times New Roman',serif;margin:0 0 26px;text-wrap:pretty}
+.cabin-paragraph:first-of-type::first-letter{float:left;font:68px/.86 Cabin,serif;margin:9px 9px 0 0;color:#654321}
+.cabin-link{text-decoration:underline;text-underline-offset:3px;text-decoration-color:#836b4d80}.cabin-link:hover{color:#8b431e}
+.cabin-figure{margin:38px -32px}.cabin-figure img{width:100%;height:auto;border:5px solid #2b2118;box-shadow:0 3px 12px #38200f33;filter:sepia(.08)}
+.cabin-caption{font:12px/1.6 Georgia,serif;margin:10px 5px;color:#6e573d}
+.cabin-colophon{border-top:1px solid #70533240;padding-top:25px;margin-top:38px;font:12px/1.7 Georgia,serif;color:#705c43}
+.cabin-footer{max-width:840px;margin:28px auto 0;display:flex;justify-content:space-between;gap:20px;font:12px monospace;color:#a28b6d}
+.cabin-credit{margin-top:12px}
+@media(min-width:1200px){.cabin-intro{padding-top:45px}}
+@media(max-width:600px){.inscryption-page{padding:0 12px 22px}.cabin-nav{padding:22px 7px;font-size:10px;letter-spacing:0}.cabin-intro{padding-top:25px}.cabin-intro h1{font-size:58px}.cabin-hand{transform:scale(.85);height:200px;margin-top:24px;margin-bottom:-5px}.cabin-manuscript{padding:30px 25px 36px}.cabin-paragraph{font-size:17px;line-height:1.75;margin-bottom:23px}.cabin-figure{margin:30px -12px}.cabin-preface{font-size:12px}.cabin-status{font-size:10px}.cabin-footer{font-size:10px;padding:0 6px}}
+

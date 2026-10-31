@@ -1,9 +1,9 @@
 import Link from "next/link";
+import "./inscryption.css";
 import { Fragment } from "react";
 import { paragraphs } from "./essay";
-import { MathParagraph } from "./math-paragraph";
 
-const linkClass = "underline underline-offset-4 decoration-zanah/30 hover:text-zanah transition-colors";
+const linkClass = "cabin-link";
 
 const illustrations: Record<number, {
   src: string; alt: string; width: number; height: number;
@@ -37,40 +37,37 @@ const illustrations: Record<number, {
 
 export default function Inscryption() {
   return (
-    <main className="min-h-screen bg-black animate-fade-in">
-      <nav className="fixed top-0 left-0 right-0 z-50 px-8 sm:px-16 py-8 bg-gradient-to-b from-black via-black/80 to-transparent">
-        <Link href="/blog" className="text-zanah/50 font-scp text-sm hover:text-zanah transition-colors">
-          &larr; back
-        </Link>
+    <main className="inscryption-page">
+      <nav className="cabin-nav">
+        <Link href="/blog">&larr; leave the cabin</Link>
+        <span>INSCRYPTION / ACT I</span>
       </nav>
-
-      <article className="max-w-2xl mx-auto px-8 sm:px-12 pt-32 pb-16">
-        <header className="mb-12">
-          <p className="text-zanah/40 font-scp text-xs tracking-widest mb-6">
-            ongoing · started <time dateTime="2026-10-06">Oct 6, 2026</time>
-          </p>
-          <h1 className="dot-text text-3xl sm:text-4xl lg:text-5xl text-zanah leading-tight font-invis mb-6">
-            I fucking hate the trader
-          </h1>
-          <p className="text-zanah/50 font-scp text-sm leading-relaxed">
-            Spoilers for Inscryption&apos;s cabin, including the boons and deathcards.
-          </p>
-          <p className="text-zanah/40 font-scp text-xs leading-relaxed mt-5">
-            Hover, tap, or focus an underlined sentence for the math, using cards from my save.
-          </p>
+      <div className="cabin-intro">
+        <p className="cabin-eyebrow">notes from the cabin</p>
+        <h1>I fucking hate<br />the trader</h1>
+        <div className="cabin-hand" aria-label="Geck and Wolf from my seventh archived run">
+          <SaveCard creature="geck" name="Geck" attack="1" health="1" rare />
+          <SaveCard creature="wolf" name="Wolf" attack="6" health="4" />
+        </div>
+        <p className="cabin-deck-caption">two cards from my seventh run</p>
+      </div>
+      <article className="cabin-manuscript">
+        <header className="cabin-preface">
+          <p className="cabin-status">ongoing · started <time dateTime="2026-10-06">Oct 6, 2026</time></p>
+          <p>Spoilers for the cabin, including the boons and deathcards.</p>
         </header>
 
         {paragraphs.map((paragraph, index) => (
           <Fragment key={index}>
-            <p className="text-base sm:text-lg text-zanah/80 font-cv leading-relaxed mb-8">
+            <p className="cabin-paragraph">
               {index === 5 ? (
                 <>
                   This is what reminded me of <a href="https://gwern.net/backstop" className={linkClass}>Gwern&apos;s <em>Evolution as Backstop for Reinforcement Learning</em></a>, which <Link href="/blog/optimizing-for-reality" className={linkClass}>I wrote about before</Link>{paragraph.slice(paragraph.indexOf(": intermediate"))}
                 </>
-              ) : <MathParagraph text={paragraph} index={index} />}
+              ) : paragraph}
             </p>
             {illustrations[index] && (
-              <figure className="my-12 sm:-mx-8">
+              <figure className="cabin-figure">
                 <a href={illustrations[index].source} target="_blank" rel="noopener noreferrer" aria-label={`Image source: ${illustrations[index].credit}`}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -83,7 +80,7 @@ export default function Inscryption() {
                     decoding="async"
                   />
                 </a>
-                <figcaption className="mt-3 text-zanah/40 font-scp text-xs leading-relaxed">
+                <figcaption className="cabin-caption">
                   {illustrations[index].caption}{" "}
                   <a href={illustrations[index].source} className={linkClass} target="_blank" rel="noopener noreferrer">{illustrations[index].credit}</a>
                 </figcaption>
@@ -92,22 +89,30 @@ export default function Inscryption() {
           </Fragment>
         ))}
 
-        <aside className="border-t border-zanah/10 pt-8 mt-12 text-zanah/50 font-scp text-xs leading-relaxed">
-          <p className="mb-4">
-            Math examples use seven archived cabin runs and the persistent Ouroboros counter from my save, inspected October 31, 2026. Run numbers follow the save’s archive order. Calculations are worked scenarios, not battle replays; the raw save is not published. C(n,k) counts ways to choose k cards from n without replacement.
-          </p>
+        <aside className="cabin-colophon">
           <p>
             Reading: <a className={linkClass} href="https://gwern.net/backstop">Evolution as Backstop for Reinforcement Learning</a>, Gwern Branwen.
           </p>
+          <p className="cabin-credit">Game artwork and textures from Inscryption, by Daniel Mullins Games.</p>
         </aside>
       </article>
 
-      <footer className="px-8 sm:px-12 py-6">
-        <div className="max-w-xl mx-auto flex justify-between items-center text-zanah/30 font-scp text-xs">
-          <p>Tanay Gondil</p>
-          <a href="https://www.linkedin.com/in/tgondil/" target="_blank" rel="noopener noreferrer" className="hover:text-zanah transition-colors">linkedin</a>
-        </div>
-      </footer>
+      <footer className="cabin-footer"><Link href="/blog">&larr; back to the essays</Link><p>Tanay Gondil</p></footer>
     </main>
   );
+}
+
+function SaveCard({ creature, name, attack, health, rare = false }: { creature: string; name: string; attack: string; health: string; rare?: boolean }) {
+  return <div className={`cabin-card ${rare ? "cabin-card-rare" : ""}`}>
+    <span className="cabin-card-name">{name}</span>
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img className="cabin-portrait" src={`/blog/inscryption/portrait_${creature}.png`} alt="" />
+    {rare && <div className="cabin-sigils">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/blog/inscryption/ability_drawcopyondeath.png" alt="Unkillable" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/blog/inscryption/ability_splitstrike.png" alt="Bifurcated Strike" />
+    </div>}
+    <span className="cabin-attack">{attack}</span><span className="cabin-health">{health}</span>
+  </div>;
 }
