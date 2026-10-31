@@ -2,6 +2,8 @@ import Link from "next/link";
 import "./inscryption.css";
 import { Fragment } from "react";
 import { paragraphs } from "./essay";
+import { CabinRoute } from "./cabin-route";
+import { chapters } from "./cabin-chapters";
 
 const linkClass = "cabin-link";
 
@@ -38,27 +40,42 @@ const illustrations: Record<number, {
 export default function Inscryption() {
   return (
     <main className="inscryption-page">
+      <div className="cabin-room" aria-hidden="true" />
+      <div className="cabin-grain" aria-hidden="true" />
       <nav className="cabin-nav">
         <Link href="/blog">&larr; leave the cabin</Link>
         <span>INSCRYPTION / ACT I</span>
       </nav>
       <div className="cabin-intro">
+        <div className="cabin-watcher" aria-hidden="true"><i /><i /></div>
         <p className="cabin-eyebrow">notes from the cabin</p>
         <h1>I fucking hate<br />the trader</h1>
         <div className="cabin-hand" aria-label="Geck and Wolf from my seventh archived run">
+          <div className="cabin-table-slots" aria-hidden="true"><i /><i /><i /><i /></div>
           <SaveCard creature="geck" name="Geck" attack="1" health="1" rare />
           <SaveCard creature="wolf" name="Wolf" attack="6" health="4" />
         </div>
         <p className="cabin-deck-caption">two cards from my seventh run</p>
       </div>
+      <CabinRoute />
       <article className="cabin-manuscript">
         <header className="cabin-preface">
           <p className="cabin-status">ongoing · started <time dateTime="2026-10-06">Oct 6, 2026</time></p>
           <p>Spoilers for the cabin, including the boons and deathcards.</p>
         </header>
 
-        {paragraphs.map((paragraph, index) => (
+        {paragraphs.map((paragraph, index) => {
+          const chapter = chapters.find(chapter => chapter.paragraph === index);
+          return (
           <Fragment key={index}>
+            {chapter && (
+              <div id={chapter.id} className="cabin-encounter" aria-label={chapter.label}>
+                <span />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/blog/inscryption/${chapter.icon}.png`} alt="" width={49} height={49} />
+                <span />
+              </div>
+            )}
             <p className="cabin-paragraph">
               {index === 5 ? (
                 <>
@@ -66,6 +83,15 @@ export default function Inscryption() {
                 </>
               ) : paragraph}
             </p>
+            {index === 28 && <figure className="cabin-boons">
+              <div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/blog/inscryption/trial_ring.png" alt="The Trial of the Ring card" width={125} height={190} loading="lazy" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/blog/inscryption/boon_tutordraw.png" alt="The Magpie’s Eye boon, which lets me choose a card when drawing" width={125} height={190} loading="lazy" />
+              </div>
+              <figcaption className="cabin-caption">The Trial of the Ring and the Magpie’s Eye.</figcaption>
+            </figure>}
             {illustrations[index] && (
               <figure className="cabin-figure">
                 <a href={illustrations[index].source} target="_blank" rel="noopener noreferrer" aria-label={`Image source: ${illustrations[index].credit}`}>
@@ -87,13 +113,14 @@ export default function Inscryption() {
               </figure>
             )}
           </Fragment>
-        ))}
+          );
+        })}
 
         <aside className="cabin-colophon">
           <p>
             Reading: <a className={linkClass} href="https://gwern.net/backstop">Evolution as Backstop for Reinforcement Learning</a>, Gwern Branwen.
           </p>
-          <p className="cabin-credit">Game artwork and textures from Inscryption, by Daniel Mullins Games.</p>
+          <p className="cabin-credit">Game artwork and textures from Inscryption, by Daniel Mullins Games. Cabin imagery from the <a className={linkClass} href="https://store.steampowered.com/app/1092790/Inscryption/">official screenshots</a>.</p>
         </aside>
       </article>
 
