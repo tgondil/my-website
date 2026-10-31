@@ -5,7 +5,7 @@ const SITE = "https://tanaygondil.com";
 const posts = [
   {
     slug: "inscryption",
-    title: "I fucking hate the trader",
+    title: "Let your cards be eaten",
     description: "An ongoing essay on how I play Inscryption: farming teeth, burning cards, and preparing for eight bears. Started October 6, 2026.",
     date: "2026-10-06",
   },

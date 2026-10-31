@@ -43,7 +43,7 @@ export default function Blog() {
             <Link href="/blog/inscryption" className="group block">
               <article className="py-6 border-b border-zanah/10 hover:border-zanah/30 transition-all">
                 <h2 className="text-lg sm:text-xl text-zanah font-cv leading-snug group-hover:gradient transition-all">
-                  I fucking hate the trader
+                  Let your cards be eaten
                 </h2>
                 <p className="text-zanah/40 font-scp text-xs mt-3">
                   inscryption · ongoing · started <time dateTime="2026-10-06">oct 6, 2026</time>

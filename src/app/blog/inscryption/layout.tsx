@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const title = "I fucking hate the trader";
+const title = "Let your cards be eaten";
 const description = "How I play Inscryption: farming teeth, burning cards, building a Geck engine, and preparing for eight bears with scissors and five damage.";
 
 export const metadata: Metadata = {
