@@ -41,8 +41,8 @@ const illustrations: Record<number, {
 export default function InscryptionEssay({ draft = false }: { draft?: boolean }) {
   const text = draft ? draftParagraphs : paragraphs;
   const chapters = draft ? draftChapters : publishedChapters;
-  const pictures = draft ? { 19: illustrations[2], 2: illustrations[8], 11: illustrations[13] } as typeof illustrations : illustrations;
-  const sourceNotes: Record<number, number> = { 2: 0, 17: 1, 25: 3, 26: 2, 30: 4 };
+  const pictures = draft ? { 16: illustrations[2], 7: illustrations[8], 11: illustrations[13] } as typeof illustrations : illustrations;
+  const sourceNotes: Record<number, number> = { 6: 0, 18: 1, 25: 3, 24: 2, 26: 4 };
   return (
     <main className="inscryption-page">
       <div className="cabin-room" aria-hidden="true" />
@@ -88,7 +88,7 @@ export default function InscryptionEssay({ draft = false }: { draft?: boolean })
               ) : draft ? <DraftText text={paragraph} /> : paragraph}
               {draft && sourceNotes[index] !== undefined && <sup className="cabin-source-note"><a href={draftSources[sourceNotes[index]].href} aria-label={draftSources[sourceNotes[index]].label}>[{sourceNotes[index] + 1}]</a></sup>}
             </p>
-            {index === (draft ? 33 : 28) && <figure className="cabin-boons">
+            {index === 28 && <figure className="cabin-boons">
               <div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/blog/inscryption/trial_ring.png" alt="The Trial of the Ring card" width={125} height={190} loading="lazy" />
