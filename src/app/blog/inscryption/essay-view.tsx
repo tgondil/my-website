@@ -48,13 +48,13 @@ export default function InscryptionEssay({ draft = false }: { draft?: boolean })
       <div className="cabin-room" aria-hidden="true" />
       <div className="cabin-grain" aria-hidden="true" />
       <nav className="cabin-nav">
-        <Link href="/blog">&larr; leave the cabin</Link>
+        <Link href="/blog" target="_blank" rel="noopener noreferrer">&larr; leave the cabin</Link>
         <span>INSCRYPTION / ACT I</span>
       </nav>
       <div className="cabin-intro">
         <div className="cabin-watcher" aria-hidden="true"><i /><i /></div>
         <h1>Let your cards<br />be eaten</h1>
-        <div className="cabin-hand" aria-label="Geck and Wolf from my seventh archived run">
+        <div className="cabin-hand" aria-label="Geck and Wolf cards">
           <div className="cabin-table-slots" aria-hidden="true"><i /><i /><i /><i /></div>
           <SaveCard creature="geck" name="Geck" attack="1" health="1" rare />
           <SaveCard creature="wolf" name="Wolf" attack="6" health="4" />
@@ -63,7 +63,7 @@ export default function InscryptionEssay({ draft = false }: { draft?: boolean })
       <CabinRoute chapters={chapters} />
       <article className="cabin-manuscript">
         <header className="cabin-preface">
-          <p className="cabin-status">{draft ? <>strategy draft · <time dateTime="2026-11-06">Nov 6, 2026</time> · <Link href="/blog/inscryption">current essay</Link></> : <>ongoing · started <time dateTime="2026-10-06">Oct 6, 2026</time></>}</p>
+          <p className="cabin-status">{draft ? <>strategy draft · <time dateTime="2026-11-06">Nov 6, 2026</time> · <Link href="/blog/inscryption" target="_blank" rel="noopener noreferrer">current essay</Link></> : <>ongoing · started <time dateTime="2026-10-06">Oct 6, 2026</time></>}</p>
           <p>Spoilers for the cabin, including the boons and deathcards.</p>
         </header>
 
@@ -83,10 +83,10 @@ export default function InscryptionEssay({ draft = false }: { draft?: boolean })
             <p className="cabin-paragraph">
               {!draft && index === 5 ? (
                 <>
-                  This is what reminded me of <a href="https://gwern.net/backstop" className={linkClass}>Gwern&apos;s <em>Evolution as Backstop for Reinforcement Learning</em></a>, which <Link href="/blog/optimizing-for-reality" className={linkClass}>I wrote about before</Link>{paragraph.slice(paragraph.indexOf(": intermediate"))}
+                  This is what reminded me of <a href="https://gwern.net/backstop" className={linkClass} target="_blank" rel="noopener noreferrer">Gwern&apos;s <em>Evolution as Backstop for Reinforcement Learning</em></a>, which <Link href="/blog/optimizing-for-reality" className={linkClass} target="_blank" rel="noopener noreferrer">I wrote about before</Link>{paragraph.slice(paragraph.indexOf(": intermediate"))}
                 </>
               ) : draft ? <DraftText text={paragraph} /> : paragraph}
-              {draft && sourceNotes[index] !== undefined && <sup className="cabin-source-note"><a href={draftSources[sourceNotes[index]].href} aria-label={draftSources[sourceNotes[index]].label}>[{sourceNotes[index] + 1}]</a></sup>}
+              {draft && sourceNotes[index] !== undefined && <sup className="cabin-source-note"><a href={draftSources[sourceNotes[index]].href} aria-label={draftSources[sourceNotes[index]].label} target="_blank" rel="noopener noreferrer">[{sourceNotes[index] + 1}]</a></sup>}
             </p>
             {index === 28 && <figure className="cabin-boons">
               <div>
@@ -123,17 +123,17 @@ export default function InscryptionEssay({ draft = false }: { draft?: boolean })
 
         <aside className="cabin-colophon">
           {draft && <>
-            <p className="cabin-credit">Worked scenarios, not a replay of one run. Deck examples use the save inspected October 31, 2026; probabilities state their draw pool and assumptions. This draft concerns Act I, not Kaycee’s Mod.</p>
-            <details className="cabin-draft-sources"><summary>Mechanics &amp; sources</summary><ol>{draftSources.map((source, i) => <li key={source.href}>[{i + 1}] <a className={linkClass} href={source.href}>{source.label}</a></li>)}</ol></details>
+            <p className="cabin-credit">Examples concern the original cabin, Act I, rather than Kaycee’s Mod.</p>
+            <details className="cabin-draft-sources"><summary>Mechanics &amp; sources</summary><ol>{draftSources.map((source, i) => <li key={source.href}>[{i + 1}] <a className={linkClass} href={source.href} target="_blank" rel="noopener noreferrer">{source.label}</a></li>)}</ol></details>
           </>}
           <p>
-            Reading: <a className={linkClass} href="https://gwern.net/backstop">Evolution as Backstop for Reinforcement Learning</a>, Gwern Branwen.
+            Reading: <a className={linkClass} href="https://gwern.net/backstop" target="_blank" rel="noopener noreferrer">Evolution as Backstop for Reinforcement Learning</a>, Gwern Branwen.
           </p>
-          <p className="cabin-credit">Game artwork and textures from Inscryption, by Daniel Mullins Games. Cabin imagery from the <a className={linkClass} href="https://store.steampowered.com/app/1092790/Inscryption/">official screenshots</a>.</p>
+          <p className="cabin-credit">Game artwork and textures from Inscryption, by Daniel Mullins Games. Cabin imagery from the <a className={linkClass} href="https://store.steampowered.com/app/1092790/Inscryption/" target="_blank" rel="noopener noreferrer">official screenshots</a>.</p>
         </aside>
       </article>
 
-      <footer className="cabin-footer"><Link href="/blog">&larr; back to the essays</Link><p>Tanay Gondil</p></footer>
+      <footer className="cabin-footer"><Link href="/blog" target="_blank" rel="noopener noreferrer">&larr; back to the essays</Link><p>Tanay Gondil</p></footer>
     </main>
   );
 }
