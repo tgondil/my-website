@@ -93,3 +93,6 @@ html body:has(.inscryption-page) a,html body:has(.inscryption-page) button,html 
 @media(max-width:600px){.cabin-nav{font-size:14px}.cabin-status,.cabin-deck-caption{font-size:15px}.cabin-caption,.cabin-colophon{font-size:14px}}
 @media(max-width:1150px){.cabin-route li:first-child a span{left:0;transform:none;text-align:left}.cabin-route li:last-child a span{left:auto;right:0;transform:none;text-align:right}}
 @media(max-width:600px){.cabin-room{background-image:linear-gradient(#050504b3,#050504d9),linear-gradient(#0005,#0007 70%,#070706),url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1092790/ss_0191a69b0e94a9a7784f5b81e27f06379910645a.1920x1080.jpg?t=1777572925')}}
+
+.cabin-source-note{font:11px/1 monospace;vertical-align:super;margin-left:4px;color:#a88e65}.cabin-source-note a{text-decoration:underline}.cabin-draft-sources{margin:22px 0}.cabin-draft-sources summary{cursor:pointer}.cabin-draft-sources ol{margin-top:12px}.cabin-draft-sources li{margin-bottom:8px}
+.cabin-inline-calculation{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.65em;letter-spacing:-.02em;text-transform:none;overflow-wrap:anywhere;color:#e6c58c}

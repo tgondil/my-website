@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { chapters } from "./cabin-chapters";
+import { chapters as defaultChapters } from "./cabin-chapters";
 
-export function CabinRoute() {
+export function CabinRoute({ chapters = defaultChapters }: { chapters?: typeof defaultChapters }) {
   const [active, setActive] = useState(chapters[0].id);
   const nav = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -30,7 +30,7 @@ export function CabinRoute() {
       window.removeEventListener("resize", schedule);
       if (root) delete root.dataset.chapter;
     };
-  }, []);
+  }, [chapters]);
   return <nav ref={nav} className="cabin-route" aria-label="Route through the essay">
     <span className="cabin-route-title">the route</span>
     <ol>{chapters.map(chapter => <li key={chapter.id}>
